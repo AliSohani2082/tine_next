@@ -1,15 +1,15 @@
-import DatabaseForm from "./_components/databaseForm"
+import DatabaseForm from "./_components/databaseForm";
 
-type Props = {}
+type Props = {};
 
 const DashboardPage = (props: Props) => {
   return (
-    <div className='h-full flex justify-center items-center'>
+    <div className="h-full flex justify-center items-center">
       <div className="w-[600px] h-[600px]">
-        <DatabaseForm/>
+        <DatabaseForm />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DashboardPage
+export default DashboardPage;

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const headingFont = localFont({
-  src: "../../public/fonts/BMitra.woff",
+  src: "../../../public/fonts/BMitra.woff",
 });
 
 const textFont = Poppins({

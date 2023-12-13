@@ -13,7 +13,7 @@ const Navbar = () => {
   const databaseModal = useDatabaseModal();
 
   return (
-    <nav className="px-4 h-14 border-b shadow-lg3 flex items-center gap-x-4">
+    <nav className="px-4 h-14 border-4 shadow-lg3 flex items-center gap-x-4 p-2 rounded-xl m-3">
       <Searchbar />
       {/* <Button
         onClick={() => databaseModal.onOpen()}

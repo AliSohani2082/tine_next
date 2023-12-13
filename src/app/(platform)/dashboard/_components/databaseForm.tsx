@@ -1,23 +1,19 @@
-"use client"
+"use client";
 
-import React, { useRef } from 'react'
-import { CreateDatabase as createDatabaseValidation } from '@/lib/validation'
-import * as z from 'zod'
+import React, { useRef } from "react";
+import { CreateDatabase as createDatabaseValidation } from "@/lib/validation";
+import * as z from "zod";
 
-import StepperComponent from './Stepper'
-import { InformationForm } from '@/components/modals/database-modal'
+import StepperComponent from "./Stepper";
+import { InformationForm } from "@/components/modals/database-modal";
 
-
-type Props = {}
+type Props = {};
 
 const DummyComponent = () => {
-  return (
-    <div>placeholder</div>
-  )
-}
+  return <div>placeholder</div>;
+};
 
 const DatabaseForm = (props: Props) => {
-
   const formRef = useRef<{ submitForm: () => void } | null>(null);
 
   const onSubmit = async (values: z.infer<typeof createDatabaseValidation>) => {
@@ -33,7 +29,11 @@ const DatabaseForm = (props: Props) => {
           description: "description...",
           isOptional: false,
           content: <InformationForm ref={formRef} onSubmit={onSubmit} />,
-          onSubmit: () => formRef.current?.submitForm(),
+          onSubmit: () => {
+            const result = formRef.current?.submitForm();
+            console.log("result: ", result);
+          },
+          isNextActivated: true,
         },
         {
           stepNum: 1,
@@ -44,6 +44,16 @@ const DatabaseForm = (props: Props) => {
           onSubmit: () => {
             console.log("step2");
           },
+          isNextActivated: true,
+          additionalActions: [
+            {
+              title: "اسکن",
+              action: () => {
+                console.log("action triggeredd");
+              },
+              isActivate: true,
+            },
+          ],
         },
         {
           stepNum: 2,
@@ -54,10 +64,11 @@ const DatabaseForm = (props: Props) => {
           onSubmit: () => {
             console.log("step3");
           },
+          isNextActivated: true,
         },
       ]}
     />
-  )
-}
+  );
+};
 
-export default DatabaseForm
+export default DatabaseForm;

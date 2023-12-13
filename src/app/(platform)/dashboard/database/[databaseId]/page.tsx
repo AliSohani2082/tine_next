@@ -1,7 +1,9 @@
-import StepModal from "@/components/shared/StepperModal";
+import { TabsContent } from "@/components/ui/tabs";
 
 const OraganizationPage = ({ params }: { params: { databaseId: string } }) => {
-  return <div>this is database: {params.databaseId}</div>;
+  return (
+    <TabsContent value="general">database: {params.databaseId}</TabsContent>
+  );
 };
 
 export default OraganizationPage;

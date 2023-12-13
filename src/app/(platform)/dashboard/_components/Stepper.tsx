@@ -8,11 +8,11 @@ import StepLabel from "@mui/material/StepLabel";
 import { Button } from "@/components/ui/button";
 import Typography from "@mui/material/Typography";
 
-const steps = [
-  "Select campaign settings",
-  "Create an ad group",
-  "Create an ad",
-];
+type ActionButton = {
+  title: string;
+  isActivate: boolean;
+  action: () => void;
+};
 
 type Step = {
   stepNum: number;
@@ -20,7 +20,9 @@ type Step = {
   description: string;
   content: React.ReactNode;
   isOptional: boolean;
-  onSubmit: () => void;
+  onSubmit: () => void | boolean;
+  isNextActivated: boolean;
+  additionalActions?: ActionButton[];
 };
 
 type StepModalProps = {
@@ -40,6 +42,7 @@ const StepperComponent: React.FC<StepModalProps> = ({
       isOptional: true,
       content: <DummyComponent />,
       onSubmit: () => {},
+      isNextActivated: true,
     },
   ],
 }) => {
@@ -108,7 +111,7 @@ const StepperComponent: React.FC<StepModalProps> = ({
           } = {};
           if (step.isOptional) {
             labelProps.optional = (
-              <Typography variant="caption">( اختیاری)</Typography>
+              <Typography variant="caption">(اختیاری)</Typography>
             );
           }
           if (skipped.has(step.stepNum)) {
@@ -121,7 +124,7 @@ const StepperComponent: React.FC<StepModalProps> = ({
           );
         })}
       </Stepper>
-      <div className="w-full h-full">
+      <div className="w-full h-full mt-4">
         {activeStep === steps.length ? (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>
@@ -135,7 +138,7 @@ const StepperComponent: React.FC<StepModalProps> = ({
         ) : (
           <div className="flex flex-col justify-between h-full">
             {step.content}
-            <div className="flex flex-row justify-between ">
+            <div className="flex flex-row justify-between items-center">
               <Button
                 color="inherit"
                 onClick={activeStep === 0 ? handleFinish : handleBack}
@@ -148,28 +151,40 @@ const StepperComponent: React.FC<StepModalProps> = ({
                   رد
                 </Button>
               )}
-              <Button
-                onClick={async () => {
-                  try {
-                    const result = step.onSubmit();
-                    await result;
-                    console.log("hey");
-                    console.log(result);
-                    console.log(result);
-                    if (activeStep === steps.length - 1) {
-                      handleFinish();
-                    } else {
-                      handleNext();
-                      // TODO: fixe this bug. it should not go to the next page if the form had an error.
+              <div className="flex flex-row justify-center items-center gap-2">
+                {step.additionalActions?.map((action, index) => (
+                  <Button
+                    key={index}
+                    onClick={action.action}
+                    disabled={!action.isActivate}
+                  >
+                    {action.title}
+                  </Button>
+                ))}
+                <Button
+                  disabled={!step.isNextActivated}
+                  onClick={async () => {
+                    try {
+                      const result = step.onSubmit();
+                      await result;
+                      console.log("hey");
+                      console.log(result);
+                      console.log(result);
+                      if (activeStep === steps.length - 1) {
+                        handleFinish();
+                      } else {
+                        handleNext();
+                        // TODO: fixe this bug. it should not go to the next page if the form had an error.
+                      }
+                    } catch (error) {
+                      console.log("error: ", error);
+                      handleBack();
                     }
-                  } catch (error) {
-                    console.log("error: ", error);
-                    handleBack();
-                  }
-                }}
-              >
-                {activeStep === steps.length - 1 ? "پایان" : "بعدی"}
-              </Button>
+                  }}
+                >
+                  {activeStep === steps.length - 1 ? "پایان" : "بعدی"}
+                </Button>
+              </div>
             </div>
           </div>
         )}
