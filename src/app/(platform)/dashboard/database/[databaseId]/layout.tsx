@@ -3,16 +3,16 @@ import { usePathname } from "next/navigation";
 
 const pages = [
   {
-    title: "اطالاعت جامع",
-    to: "",
+    title: "لیست ها",
+    to: "lists",
   },
   {
     title: "گراف ها",
     to: "graphs",
   },
   {
-    title: "لیست ها",
-    to: "lists",
+    title: "اطلاعات جامع",
+    to: "",
   },
 ];
 

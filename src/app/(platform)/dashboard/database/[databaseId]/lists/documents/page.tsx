@@ -9,8 +9,8 @@ async function getData(): Promise<DocumentTable[]> {
   const documentsTable = documents.map((document: Document) => ({
     title: document.title,
     publisher: document.publisher.name,
-    author: `${document.author.firstName} ${document.author.lastName}`
-  }))
+    author: `${document.author.firstName} ${document.author.lastName}`,
+  }));
   return documentsTable;
 }
 

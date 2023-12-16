@@ -16,7 +16,7 @@ const ListTab: React.FC<ListTabProps> = ({ children, lists }) => {
   const pathname = usePathname();
   return (
     <>
-      <TagTabs baseUrl={pathname} lists={lists}>
+      <TagTabs lists={lists} baseUrl={`${pathname}`}>
         {children}
       </TagTabs>
     </>

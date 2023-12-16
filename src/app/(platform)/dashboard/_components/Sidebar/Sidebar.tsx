@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Database, Plus } from "lucide-react";
+import { Database, Filter, Plus, PlusIcon } from "lucide-react";
 import { useLocalStorage } from "usehooks-ts";
 import { Sidebar as ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import Image from "next/image";
@@ -22,6 +22,7 @@ import { useDatabase } from "@/hooks/use-databases";
 import { useDatabaseModal } from "@/hooks/use-database-modal";
 import { Separator } from "@/components/ui/separator";
 import { IDatabase, INewDatabase } from "@/types";
+import SidebarItem from "./SidebarItem";
 
 interface SidebarProps {
   storageKey?: string;
@@ -53,7 +54,11 @@ const Item: React.FC<SidebarItemProps> = ({
 const Sidebar: React.FC<SidebarProps> = ({
   storageKey = "t-sidebar-state",
 }) => {
-  const pathname = usePathname();
+  let pathname = usePathname();
+  const databaseId = pathname.startsWith("/dashboard/database")
+    ? pathname.split("/")[3]
+    : undefined;
+  console.log("databaseId: ", databaseId);
   const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState();
@@ -82,38 +87,30 @@ const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <div className="h-full w-[400px] bg-slate-700 text-white m-3 rounded-xl p-2 flex flex-col justify-start items-stretch">
-      <div>
+    <div className="h-full w-[400px] border-l-2 m-3 flex flex-col justify-start items-stretch">
+      <div className="flex justify-center items-center">
         <Link href="/">
-          <div className="flex flex-row justify-center gap-4 items-center mt-7">
+          <div className="flex flex-row justify-center gap-4 items-center">
+            <p className="pb-1 text-3xl">نام شرکت</p>
             <Image
               src="/assets/icons/logo.svg"
               alt="Logo"
               width={100}
               height={100}
             />
-            <p className="pb-1 text-3xl">نام شرکت</p>
           </div>
         </Link>
       </div>
-      <Separator className="my-7 w-full" />
-      <div className="flex flex-col justify-center items-center gap-2">
-        <Avatar className="w-20 h-20">
-          <AvatarImage src="/public/assets/images/profile.png" alt="@Avatar" />
-          <AvatarFallback className="text-gray-800">AS</AvatarFallback>
-        </Avatar>
-        <h1 className="font-bold text-2xl">علی سوهانی</h1>
-      </div>
-
+      <Separator className="my-4 w-full" />
       <Accordion
         type="multiple"
         defaultValue={defaultAccordionValue}
         className="space-y-2"
       >
         <AccordionItem value="databases">
-          <AccordionTrigger>
+          <AccordionTrigger className="h-14 group">
             <div className="font-medium text-xs flex items-center justify-end mb-1 w-full">
-              {pathname !== "/dashboard" && (
+              {/* {pathname !== "/dashboard" && (
                 <Button
                   onClick={() => databaseModal.onOpen()}
                   asChild
@@ -126,33 +123,34 @@ const Sidebar: React.FC<SidebarProps> = ({
                     <Plus className="h-4 w-4" />
                   </div>
                 </Button>
-              )}
-              <span className="pr-4 font-mono text-lg">پایگاه داده</span>
+              )} */}
+              <span className="pr-2 font-mono text-lg">پایگاه داده</span>
+              <Database className="m-4 text-primary group-hover:animate-pulse group-[data-state=open]:text-primary" />
             </div>
           </AccordionTrigger>
           <AccordionContent>
+            <SidebarItem
+              title="اضافه کردن دیتابیس"
+              to="/dashboard"
+              selected={true}
+              icon={<PlusIcon />}
+            />
             {databases.map((database: IDatabase) => (
-              <Button
-                onClick={() =>
-                  router.push(`${pathname}/database/${database.id}`)
-                }
+              <SidebarItem
                 key={database.id}
-                className="w-full font-normal pl-10 mb-1 flex flex-row justify-evenly h-14"
-                variant="ghost"
-              >
-                <span className="font-medium text-sm">{database.name}</span>
-                <div className="w-7 h-7 relative">
-                  <Database className="h-6 w-6 rounded-sm p-1" />
-                </div>
-              </Button>
+                title={database.name}
+                to={`/dashboard/database/${database.id}`}
+                selected={database.id === databaseId}
+              />
             ))}
           </AccordionContent>
         </AccordionItem>
         {pathname.split("/")[2] === "database" && (
           <AccordionItem value="filter">
-            <AccordionTrigger>
+            <AccordionTrigger className="h-14 group">
               <div className="font-medium text-xs flex items-center justify-end mb-1 w-full">
-                <span className="pr-4 font-mono text-lg">فیلتر</span>
+                <span className="pr-2 font-mono text-lg">فیلتر</span>
+                <Filter className="m-4 text-primary group-hover:animate-pulse group-[data-state=open]:text-primary" />
               </div>
             </AccordionTrigger>
             <AccordionContent></AccordionContent>

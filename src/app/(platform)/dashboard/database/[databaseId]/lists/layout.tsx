@@ -1,9 +1,6 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
 import React from "react";
-import ListsTabs from "./_components/ListTab";
-import ListTab from "./_components/ListTab";
 import TagTabs from "@/components/shared/TagTabs";
+import { TabsContent } from "@/components/ui/tabs";
 
 const lists: { title: string; to: string }[] = [
   {

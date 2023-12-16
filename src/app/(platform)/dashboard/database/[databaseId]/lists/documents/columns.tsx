@@ -12,9 +12,8 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from '@/components/ui/dropdownMenu'
+} from "@/components/ui/dropdownMenu";
 import { Button } from "@/components/ui/button";
-
 
 export type DocumentTable = {
   title: string;
@@ -38,7 +37,7 @@ export const columns: ColumnDef<DocumentTable>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const document = row.original
+      const document = row.original;
 
       return (
         <DropdownMenu>
@@ -54,22 +53,21 @@ export const columns: ColumnDef<DocumentTable>[] = [
               onClick={() => navigator.clipboard.writeText(document.title)}
               className="flex justify-between"
             >
-              <Copy className="mr-2 w-4 h-4"/>
+              <Copy className="mr-2 w-4 h-4" />
               <span>کپی نام مقاله</span>
-
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="flex justify-between">
-              <Eye className="mr-2 w-4 h-4"/>
+              <Eye className="mr-2 w-4 h-4" />
               <span>مشاهده مقاله</span>
             </DropdownMenuItem>
             <DropdownMenuItem className="flex justify-end">
-              <Filter className="mr-2 w-4 h-4"/>
+              <Filter className="mr-2 w-4 h-4" />
               <span>اضافه کردن به فیلتر ها</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
 ];
