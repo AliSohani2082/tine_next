@@ -1,7 +1,7 @@
 import { CountryTable, columns } from "./columns";
-import { DataTable } from "../data-table";
+import { DataTable } from "../_components/data-table";
 import { countries } from "../fakeData";
-import { Country} from "../types";
+import { Country } from "../types";
 
 async function getData(): Promise<CountryTable[]> {
   // Fetch data from your API here.

@@ -14,12 +14,31 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdownMenu";
 import { Button } from "@/components/ui/button";
+import { ActionMenu } from "../_components/action-menu";
 
 export type DocumentTable = {
   title: string;
   publisher: string;
   author: string;
 };
+
+const actions = [
+  {
+    label: "اطلاعات بیشتر",
+    icon: <Eye />,
+    onClick: (document: DocumentTable) => console.log("action done"),
+  },
+  {
+    label: "اضافه کردن به فیلتر",
+    icon: <Filter />,
+    onClick: (document: DocumentTable) => console.log("action done"),
+  },
+  {
+    label: "کپی کردن لینک",
+    icon: <Copy />,
+    onClick: (document: DocumentTable) => navigator.clipboard.writeText(document.title) 
+  }
+];
 
 export const columns: ColumnDef<DocumentTable>[] = [
   {
@@ -40,33 +59,7 @@ export const columns: ColumnDef<DocumentTable>[] = [
       const document = row.original;
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-[200px]">
-            {/* <DropdownMenuLabel>Actions</DropdownMenuLabel> */}
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(document.title)}
-              className="flex justify-between"
-            >
-              <Copy className="mr-2 w-6 h-6 text-primary" />
-              <span>کپی نام مقاله</span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="flex justify-between">
-              <Eye className="mr-2 w-6 h-6 text-primary" />
-              <span>مشاهده مقاله</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="flex justify-between">
-              <Filter className="mr-2 w-6 h-6 text-primary" />
-              <span>اضافه کردن به فیلتر ها</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <ActionMenu item={document} actions={actions}/>
       );
     },
   },

@@ -31,7 +31,7 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
-  searchItem
+  searchItem,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -53,7 +53,9 @@ export function DataTable<TData, TValue>({
       <div className="flex items-center py-4">
         <Input
           placeholder="جست و جو"
-          value={(table.getColumn(searchItem)?.getFilterValue() as string) ?? ""}
+          value={
+            (table.getColumn(searchItem)?.getFilterValue() as string) ?? ""
+          }
           onChange={(event) =>
             table.getColumn(searchItem)?.setFilterValue(event.target.value)
           }
@@ -62,7 +64,7 @@ export function DataTable<TData, TValue>({
       </div>
       <div className="rounded-md border">
         <Table>
-          <TableHeader>
+          <TableHeader className="border-b-primary border-b-4">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {

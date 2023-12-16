@@ -18,12 +18,17 @@ type TabsProps = {
 };
 
 const TagTabs = ({ children, baseUrl, lists }: TabsProps) => {
-  const [activeTab, setActiveTab] = useState<List>(lists[0]);
+  const [activeTab, setActiveTab] = useState<List | undefined>();
   const router = useRouter();
   let pathname = usePathname();
 
   useEffect(() => {
-    router.push(`${pathname}/${activeTab.to}`);
+    if(!activeTab){
+      setActiveTab(lists[0])
+      router.push(`${pathname}/${lists[0].to}`) 
+    } else {
+      router.push(`${pathname}/${activeTab.to}`);
+    }
   }, [activeTab, pathname, router]);
 
   const baseArray = baseUrl.split("/");
@@ -45,7 +50,7 @@ const TagTabs = ({ children, baseUrl, lists }: TabsProps) => {
             variant="primary"
             className={cn(
               "rounded-full px-4 py-2 m-2",
-              list.to === activeTab.to
+              list.to === activeTab?.to
                 ? "bg-primary"
                 : "bg-muted-foreground text-white"
             )}

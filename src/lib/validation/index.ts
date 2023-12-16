@@ -6,28 +6,28 @@ import { z } from "zod";
 
 export const email = z
   .string()
-  .email()
+  .email({ message: "ایمیل معتبر نیست" })
   .transform((str) => str.toLowerCase().trim());
 
 export const password = z
   .string()
-  .min(10)
-  .max(100)
+  .min(10, { message: "پسورد باید حداقل دارای ۱۰ کاراکتر باشد" })
+  .max(100, { message: "پسورد باید دارای حداکثر ۱۰۰ کاراکتر باشد" })
   .transform((str) => str.trim());
 
 export const Signup = z
   .object({
-    name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+    name: z.string().min(2, { message: "نام باید حداقل دارای ۲ کاراکتر باشد" }),
     username: z
       .string()
-      .min(2, { message: "Name must be at least 2 characters." }),
+      .min(2, { message: "نام باید حداقل دارای ۲ کاراکتر باشد" }),
     email: z.string().email(),
     password: password,
     passwordConfirmation: password,
   })
   .refine((data) => data.password === data.passwordConfirmation, {
-    message: "Passwords don't match",
-    path: ["passwordConfirmation"], // set the path of the error
+    message: "پسورد ها همخوانی ندارند",
+    path: ["passwordConfirmation"],
   });
 
 export const Login = z.object({
@@ -46,7 +46,7 @@ export const ResetPassword = z
     token: z.string(),
   })
   .refine((data) => data.password === data.passwordConfirmation, {
-    message: "Passwords don't match",
+    message: "پسورد ها همخوانی ندارند",
     path: ["passwordConfirmation"], // set the path of the error
   });
 
@@ -59,6 +59,6 @@ export const ChangePassword = z.object({
 // database
 // ============================================================
 export const CreateDatabase = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  query: z.string().min(2, { message: "Query must be at least 2 characters." }),
+  name: z.string().min(2, { message: "نام باید حداقل دارای ۲ کاراکتر باشد" }),
+  query: z.string().min(2, { message: "نام باید حداقل دارای ۲ کاراکتر باشد" }),
 });

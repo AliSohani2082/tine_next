@@ -7,7 +7,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 import StepperComponent from "./Stepper";
-import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
 import InformationBox from "@/components/shared/InformationBox";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -85,7 +92,6 @@ export const InformationForm = forwardRef(
 );
 
 InformationForm.displayName = "InformationForm";
-
 
 type Props = {};
 

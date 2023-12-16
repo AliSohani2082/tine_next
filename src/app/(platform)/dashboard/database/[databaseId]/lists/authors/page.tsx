@@ -1,6 +1,6 @@
 import { AuthorTable, columns } from "./columns";
-import { DataTable } from "../data-table";
-import { authors} from "../fakeData";
+import { DataTable } from "../_components/data-table";
+import { authors } from "../fakeData";
 import { Author } from "../types";
 
 async function getData(): Promise<AuthorTable[]> {

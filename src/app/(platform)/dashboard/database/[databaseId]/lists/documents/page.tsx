@@ -1,5 +1,5 @@
 import { DocumentTable, columns } from "./columns";
-import { DataTable } from "../data-table";
+import { DataTable } from "../_components/data-table";
 import { documents } from "../fakeData";
 import { Document } from "../types";
 import { Button } from "@/components/ui/button";

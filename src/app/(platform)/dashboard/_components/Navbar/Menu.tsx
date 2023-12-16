@@ -41,9 +41,9 @@ const Menu = () => {
     <TooltipProvider>
       <ul className="flex flex-row justify-center items-center gap-x-2">
         {items.map((item) => (
-          <Tooltip key={item.title}>
-            <TooltipTrigger asChild className="group">
-              <li>
+          <li key={item.title}>
+            <Tooltip>
+              <TooltipTrigger asChild className="group">
                 <Button
                   variant="outline"
                   size="icon"
@@ -54,12 +54,12 @@ const Menu = () => {
                 >
                   {item.icon}
                 </Button>
-              </li>
-            </TooltipTrigger>
-            <TooltipContent>
-              <span>{item.title}</span>
-            </TooltipContent>
-          </Tooltip>
+              </TooltipTrigger>
+              <TooltipContent>
+                <span>{item.title}</span>
+              </TooltipContent>
+            </Tooltip>
+          </li>
         ))}
       </ul>
     </TooltipProvider>
