@@ -1,5 +1,5 @@
 import { DocumentTable, columns } from "./columns";
-import { DataTable } from "./data-table";
+import { DataTable } from "../data-table";
 import { documents } from "../fakeData";
 import { Document } from "../types";
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,7 @@ export default async function DocumentPage() {
 
   return (
     <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={data} searchItem="title" />
     </div>
   );
 }

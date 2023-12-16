@@ -1,7 +1,23 @@
-import React from "react";
+import { CountryTable, columns } from "./columns";
+import { DataTable } from "../data-table";
+import { countries } from "../fakeData";
+import { Country} from "../types";
 
-const countriesPage = () => {
-  return <div>countriesPage</div>;
-};
+async function getData(): Promise<CountryTable[]> {
+  // Fetch data from your API here.
+  const countriesTable = countries.map((country: Country) => ({
+    name: country.name,
+    documentPublished: country.documentPublished,
+  }));
+  return countriesTable;
+}
 
-export default countriesPage;
+export default async function DocumentPage() {
+  const data = await getData();
+
+  return (
+    <div className="container mx-auto py-10">
+      <DataTable columns={columns} data={data} searchItem="name" />
+    </div>
+  );
+}

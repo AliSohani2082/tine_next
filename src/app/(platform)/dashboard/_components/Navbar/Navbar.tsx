@@ -24,8 +24,8 @@ const Navbar = () => {
       >
         <Plus className="h-4 w-4" />
       </Button> */}
-      <Menu />
       <Account />
+      <Menu />
       {/* <div className='ml-auto flex items-center gap-x-2'>
       <OrganizationSwitcher
         hidePersonal

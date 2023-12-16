@@ -2,8 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Document } from "../types";
-import { Copy, Eye, Filter, MoreHorizontal } from "lucide-react";
+import { Eye, Filter, MoreHorizontal } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -15,24 +14,14 @@ import {
 } from "@/components/ui/dropdownMenu";
 import { Button } from "@/components/ui/button";
 
-export type DocumentTable = {
-  title: string;
-  publisher: string;
-  author: string;
+export type AuthorTable = {
+  name: string;
 };
 
-export const columns: ColumnDef<DocumentTable>[] = [
+export const columns: ColumnDef<AuthorTable>[] = [
   {
-    accessorKey: "title",
-    header: "title",
-  },
-  {
-    accessorKey: "publisher",
-    header: "publisher",
-  },
-  {
-    accessorKey: "author",
-    header: "author",
+    accessorKey: "name",
+    header: "Full Name",
   },
   {
     id: "actions",
@@ -49,17 +38,9 @@ export const columns: ColumnDef<DocumentTable>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-[200px]">
             {/* <DropdownMenuLabel>Actions</DropdownMenuLabel> */}
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(document.title)}
-              className="flex justify-between"
-            >
-              <Copy className="mr-2 w-6 h-6 text-primary" />
-              <span>کپی نام مقاله</span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
             <DropdownMenuItem className="flex justify-between">
               <Eye className="mr-2 w-6 h-6 text-primary" />
-              <span>مشاهده مقاله</span>
+              <span>مشاهده جزيات</span>
             </DropdownMenuItem>
             <DropdownMenuItem className="flex justify-between">
               <Filter className="mr-2 w-6 h-6 text-primary" />

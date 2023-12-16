@@ -87,7 +87,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <div className="h-full w-[400px] border-l-2 m-3 flex flex-col justify-start items-stretch">
+    <div className="h-full w-[400px] border-l-2 m-3 flex shadow-lg flex-col justify-start items-stretch">
       <div className="flex justify-center items-center">
         <Link href="/">
           <div className="flex flex-row justify-center gap-4 items-center">

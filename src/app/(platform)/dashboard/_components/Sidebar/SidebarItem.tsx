@@ -61,7 +61,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
                 : "text-muted-foreground group-hover:text-primary"
             )}
           >
-            -
+            --
           </span>
         )}
       </Link>

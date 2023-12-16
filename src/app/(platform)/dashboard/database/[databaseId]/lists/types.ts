@@ -20,4 +20,5 @@ export type Publisher = {
 export type Country = {
   id: string;
   name: string;
+  documentPublished: number;
 };

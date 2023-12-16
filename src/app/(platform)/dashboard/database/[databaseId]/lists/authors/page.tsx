@@ -1,7 +1,22 @@
-import React from "react";
+import { AuthorTable, columns } from "./columns";
+import { DataTable } from "../data-table";
+import { authors} from "../fakeData";
+import { Author } from "../types";
 
-const authorsPage = () => {
-  return <div>authorsPage</div>;
-};
+async function getData(): Promise<AuthorTable[]> {
+  // Fetch data from your API here.
+  const authorTable = authors.map((author: Author) => ({
+    name: `${author.firstName} ${author.lastName}`,
+  }));
+  return authorTable;
+}
 
-export default authorsPage;
+export default async function DocumentPage() {
+  const data = await getData();
+
+  return (
+    <div className="container mx-auto py-10">
+      <DataTable columns={columns} data={data} searchItem="name" />
+    </div>
+  );
+}
