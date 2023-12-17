@@ -1,20 +1,10 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { Copy, Eye, Filter } from "lucide-react";
 
-import { Document } from "../types";
-import { Copy, Eye, Filter, MoreHorizontal } from "lucide-react";
-
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuLabel,
-} from "@/components/ui/dropdownMenu";
-import { Button } from "@/components/ui/button";
 import { ActionMenu } from "../_components/action-menu";
+import SortingButton from "../_components/sortingButton";
 
 export type DocumentTable = {
   title: string;
@@ -43,18 +33,24 @@ const actions = [
 export const columns: ColumnDef<DocumentTable>[] = [
   {
     accessorKey: "title",
-    header: "title",
+    id: "Title",
+    enableHiding: false,
+    header: ({ column }) => <SortingButton column={column} title="Title"/>,
   },
   {
     accessorKey: "publisher",
-    header: "publisher",
+    id: "Publisher",
+    header: ({ column }) => <SortingButton column={column} title="Publisher"/>,
   },
   {
     accessorKey: "author",
-    header: "author",
+    id: "Author",
+    header: ({ column }) => <SortingButton column={column} title="Author"/>,
   },
   {
-    id: "actions",
+    id: "Actions",
+    enableHiding: false,
+    enableColumnFilter: false,
     cell: ({ row }) => {
       const document = row.original;
 

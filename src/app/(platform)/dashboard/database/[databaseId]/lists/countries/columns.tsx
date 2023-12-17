@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { actionAsyncStorage } from "next/dist/client/components/action-async-storage.external";
 import { ReactElement, cloneElement } from "react";
 import { ActionMenu } from "../_components/action-menu";
+import SortingButton from "../_components/sortingButton";
 
 export type CountryTable = {
   name: string;
@@ -36,14 +37,19 @@ const actions = [
 export const columns: ColumnDef<CountryTable>[] = [
   {
     accessorKey: "name",
-    header: "title",
+    id: "Name",
+    enableHiding: false,
+    header: ({ column }) => <SortingButton column={column} title="Name" />,
   },
   {
     accessorKey: "documentPublished",
-    header: "number of publication",
+    id: "Published documents",
+    header: ({ column }) => <SortingButton column={column} title="Published Documents" />,
   },
   {
-    id: "actions",
+    id: "Actions",
+    enableHiding: false,
+    enableColumnFilter: false,
     cell: ({ row }) => {
       const country = row.original
 

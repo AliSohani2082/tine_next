@@ -5,7 +5,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="fixed flex flex-row items-stretch justify-stretch w-full h-full">
       <div className="flex w-full overflow-auto flex-col items-stretch justify-start">
-        <Navbar />
+        <Navbar/>
         {children}
       </div>
       <Sidebar />

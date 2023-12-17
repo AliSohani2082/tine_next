@@ -43,14 +43,14 @@ const Menu = () => {
         {items.map((item) => (
           <li key={item.title}>
             <Tooltip>
-              <TooltipTrigger asChild className="group">
+              <TooltipTrigger asChild className="hover:text-primary">
                 <Button
                   variant="outline"
                   size="icon"
                   onClick={() =>
                     item?.action ? item.action() : redirect(item.href)
                   }
-                  className="rounded-full flex justify-center items-center group-hover:text-primary"
+                  className="rounded-full flex justify-center items-center"
                 >
                   {item.icon}
                 </Button>
