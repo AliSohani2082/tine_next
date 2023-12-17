@@ -23,6 +23,7 @@ import { useDatabaseModal } from "@/hooks/use-database-modal";
 import { Separator } from "@/components/ui/separator";
 import { IDatabase, INewDatabase } from "@/types";
 import SidebarItem from "./SidebarItem";
+import SidebarAccordion from "./SidebarAccordion";
 
 interface SidebarProps {
   storageKey?: string;
@@ -107,44 +108,18 @@ const Sidebar: React.FC<SidebarProps> = ({
         defaultValue={defaultAccordionValue}
         className="space-y-2"
       >
-        <AccordionItem value="databases">
-          <AccordionTrigger className="h-14 group">
-            <div className="font-medium text-xs flex items-center justify-end mb-1 w-full">
-              {/* {pathname !== "/dashboard" && (
-                <Button
-                  onClick={() => databaseModal.onOpen()}
-                  asChild
-                  type="button"
-                  size="icon"
-                  variant="ghost"
-                  className="ml-auto"
-                >
-                  <div>
-                    <Plus className="h-4 w-4" />
-                  </div>
-                </Button>
-              )} */}
-              <span className="pr-2 font-mono text-lg">پایگاه داده</span>
-              <Database className="m-4 text-primary group-hover:animate-pulse group-[data-state=open]:text-primary" />
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <SidebarItem
-              title="اضافه کردن دیتابیس"
-              to="/dashboard"
-              selected={true}
-              icon={<PlusIcon />}
-            />
-            {databases.map((database: IDatabase) => (
-              <SidebarItem
-                key={database.id}
-                title={database.name}
-                to={`/dashboard/database/${database.id}`}
-                selected={database.id === databaseId}
-              />
-            ))}
-          </AccordionContent>
-        </AccordionItem>
+        <SidebarAccordion value="database" icon={<Database/>} title="دیتابیس ها" items={[
+          {
+            title: "ایجاد دیتابیس جدید",
+            to: "/dashboard",
+            selected: true,
+          },
+          ...databases?.map((database: IDatabase) => ({
+            title: database.name,
+            to: `/dashboard/database/${database.id}`,
+            selected: databaseId === database.id
+          })),
+        ]}/>
         {pathname.split("/")[2] === "database" && (
           <AccordionItem value="filter">
             <AccordionTrigger className="h-14 group">

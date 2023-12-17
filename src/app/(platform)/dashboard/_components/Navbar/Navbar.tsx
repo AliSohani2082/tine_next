@@ -3,15 +3,24 @@
 import { Plus } from "lucide-react";
 
 import React from "react";
+import { usePathname } from "next/navigation";
 import { Logo } from "@/components/shared/Logo";
 import { Button } from "@/components/ui/button";
 import Searchbar from "../Searchbar";
 import { useDatabaseModal } from "@/hooks/use-database-modal";
 import Account from "./Account";
 import Menu from "./Menu";
+import { DatabaseSelection } from "./DatabaseSelection";
 // import { OrganizationSwitcher, UserButton } from '@clerk/nextjs'
 
 const Navbar = () => {
+  
+  const pathname = usePathname()
+  let databaseId = undefined
+  if(pathname.startsWith("/dashboard/database/")){
+    databaseId = pathname.split("/")[3] 
+  }
+  
   const databaseModal = useDatabaseModal();
 
   return (
@@ -24,8 +33,11 @@ const Navbar = () => {
       >
         <Plus className="h-4 w-4" />
       </Button> */}
+      <div className="flex flex-row justify-center items-center gap-4">
+        <Menu/>
+        {/* <DatabaseSelection databaseId={databaseId}/> */}
+      </div>
       <Account />
-      <Menu />
       {/* <div className='ml-auto flex items-center gap-x-2'>
       <OrganizationSwitcher
         hidePersonal

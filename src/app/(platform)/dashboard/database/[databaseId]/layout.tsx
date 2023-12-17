@@ -1,4 +1,5 @@
 import PageTabs from "@/components/shared/pageTabs";
+import { useDatabase } from "@/hooks/use-databases";
 import { usePathname } from "next/navigation";
 
 const pages = [
@@ -23,8 +24,10 @@ const databaseIdLayout = ({
   children: React.ReactNode;
   params: { databaseId: string };
 }) => {
+
   return (
     <PageTabs
+      databaseId= { params.databaseId }
       pages={pages}
       baseUrl={`/dashboard/database/${params.databaseId}`}
     >

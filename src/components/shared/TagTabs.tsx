@@ -47,7 +47,6 @@ const TagTabs = ({ children, baseUrl, lists }: TabsProps) => {
           <Button
             key={list.to}
             onClick={() => setActiveTab(list)}
-            variant="primary"
             className={cn(
               "rounded-full px-4 py-2 m-2",
               list.to === activeTab?.to

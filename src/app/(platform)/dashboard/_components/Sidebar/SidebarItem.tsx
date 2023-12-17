@@ -1,9 +1,8 @@
 import Link from "next/link";
 import React, { ReactElement, cloneElement } from "react";
 import { cn } from "@/lib/utils";
-import { styled } from "@mui/material";
 
-type SidebarItemProps = {
+export type SidebarItemProps = {
   title: string;
   icon?: React.ReactNode;
   to: string;

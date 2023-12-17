@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { usePathname, useRouter } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useDatabase } from "@/hooks/use-databases";
 // import { Tabs, TabPanel, TabList, Tab } from 'react-tabs'
 
 type Page = {
@@ -12,15 +13,46 @@ type Page = {
 };
 
 type TabsProps = {
+  databaseId: string
   pages: Page[];
   baseUrl: string;
   children: React.ReactNode;
 };
 
-const PageTabs = ({ pages, baseUrl, children }: TabsProps) => {
+const PageTabs = ({ databaseId, pages, baseUrl, children }: TabsProps) => {
+  
+  const { databases } = useDatabase()
   const router = useRouter();
-  const [value, setValue] = useState<string>();
   let pathname = usePathname();
+  const [activeTab, setActiveTab] = useState<Page | undefined>();
+  
+  const pagesName = pages.map((page) => page.to)
+  type PagesName = typeof pagesName[number];
+  const [afterUrl, setAfterUrl] = useState<Record<PagesName, string>>({});
+
+  useEffect(() => {
+
+    const newAfterUrl = pathname.slice(baseUrl.length)
+    console.log("baseUrl", baseUrl)
+    console.log("newAfterUrl: ", newAfterUrl)
+    setAfterUrl({
+      ...afterUrl,
+      [activeTab?.to || pages[0].to]: newAfterUrl
+    })
+
+    console.log("called")
+    if(!activeTab){
+      setActiveTab(pages[0])
+      router.push(`${baseUrl}/${pages[0].to}/${afterUrl[pages[0].to]}`) 
+    } else {
+      router.push(`${baseUrl}/${activeTab.to}/${afterUrl[activeTab.to]}`);
+    }
+
+  }, [activeTab, pathname, router]);
+
+  if(!databases.some((db) => db.id === databaseId)){
+    return <div>Database not found</div>
+  }
 
   const baseUrlArray = baseUrl.split("/");
   const path = pathname.split("/");
@@ -41,7 +73,7 @@ const PageTabs = ({ pages, baseUrl, children }: TabsProps) => {
             key={page.to}
             value={page.to}
             onClick={() => {
-              setValue(page.to);
+              setActiveTab(page);
               router.push(`${pathname}/${page.to}`);
             }}
           >

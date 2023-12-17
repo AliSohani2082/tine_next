@@ -1,10 +1,11 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { Eye, Filter, ArrowUpDown } from "lucide-react";
 
-import { Eye, Filter } from "lucide-react";
 import { ActionMenu } from "../_components/action-menu";
-import { Author } from "../types";
+import { Button } from "@/components/ui/button";
+import SortingButton from "../_components/sortingButton";
 
 
 export type AuthorTable = {
@@ -27,13 +28,16 @@ const actions = [
 export const columns: ColumnDef<AuthorTable>[] = [
   {
     accessorKey: "name",
-    header: "Full Name",
+    id: "Full Name",
+    enableHiding: false,
+    header: ({ column }) => <SortingButton column={column} title="Full Name" />,
   },
   {
-    id: "actions",
+    id: "Actions",
+    enableHiding: false,
+    enableColumnFilter: false,
     cell: ({ row }) => {
       const author = row.original;
-
       return (
         <ActionMenu item={author} actions={actions}/>
       );
