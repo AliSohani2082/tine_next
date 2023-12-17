@@ -25,7 +25,6 @@ const DatabaseList = () => {
         </Button>
       ))}
       <Button
-        variant="primary"
         onClick={() => router.push(`${pathname}/create`)}
         className="h-16 flex justify-center items-center m-2 justify-self-end"
       >
