@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, cloneElement } from "react";
 
 import { usePathname, useRouter } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,6 +10,7 @@ import { useDatabase } from "@/hooks/use-databases";
 type Page = {
   title: string;
   to: string;
+  icon: React.ReactNode;
 };
 
 type TabsProps = {
@@ -33,20 +34,25 @@ const PageTabs = ({ databaseId, pages, baseUrl, children }: TabsProps) => {
   useEffect(() => {
 
     const newAfterUrl = pathname.slice(baseUrl.length)
-    console.log("baseUrl", baseUrl)
+    console.log("pathname", pathname)
     console.log("newAfterUrl: ", newAfterUrl)
-    setAfterUrl({
-      ...afterUrl,
-      [activeTab?.to || pages[0].to]: newAfterUrl
-    })
-
+    console.log("baseUrl", baseUrl)
     console.log("called")
     if(!activeTab){
+      setAfterUrl({
+        ...afterUrl,
+        [pages[0].to]: newAfterUrl
+      })
       setActiveTab(pages[0])
-      router.push(`${baseUrl}/${pages[0].to}/${afterUrl[pages[0].to]}`) 
+      router.push(`${baseUrl}/${pages[0].to}`) 
     } else {
-      router.push(`${baseUrl}/${activeTab.to}/${afterUrl[activeTab.to]}`);
+      setAfterUrl({
+        ...afterUrl,
+        [activeTab.to]: newAfterUrl
+      })  
+      router.push(`${baseUrl}/${activeTab.to}`);
     }
+    console.log("afterUrl", afterUrl)
 
   }, [activeTab, pathname, router]);
 
@@ -62,24 +68,29 @@ const PageTabs = ({ databaseId, pages, baseUrl, children }: TabsProps) => {
     pathname = baseUrl;
   }
 
+
   return (
     <Tabs
       className="w-full flex flex-col items-stretch justify-items-stretch"
       defaultValue={pages[0].to}
     >
-      <TabsList className="flex flex-wrap -mb-px">
-        {pages.map((page) => (
-          <TabsTrigger
-            key={page.to}
-            value={page.to}
-            onClick={() => {
-              setActiveTab(page);
-              router.push(`${pathname}/${page.to}`);
-            }}
-          >
-            <h1 className="font-bold text-2xl">{page.title}</h1>
-          </TabsTrigger>
-        ))}
+      <TabsList className="flex justify-center items-center">
+        {pages.map((page) => {
+          const newIcon = cloneElement(page.icon as React.ReactElement, { className: "w-5 h-5 ml-2" })
+          return (
+            <TabsTrigger
+              key={page.to}
+              value={page.to}
+              onClick={() => {
+                setActiveTab(page);
+                router.push(`${pathname}/${page.to}`);
+              }}
+            >
+              <h1 className="font-bold text-base">{page.title}</h1>
+              {newIcon}
+            </TabsTrigger>
+          )
+        })}
       </TabsList>
       <div className="w-full">{children}</div>
     </Tabs>
