@@ -108,17 +108,17 @@ const SigninForm = () => {
                 <Loader /> Loading...
               </div>
             ) : ( */}
-            Log in
+            <span>ورود</span>
             {/* )} */}
           </Button>
 
           <p className="text-small-regular text-light-2 text-center mt-2">
-            Don&apos;t have an account?
+            حساب کاربری ندارید؟{" "}
             <Link
               href="/sign-up"
-              className="text-primary-500 text-small-semibold ml-1"
+              className="text-primary-500 text-small-semibold ml-1 text-sky-700"
             >
-              Sign up
+              ثبت نام کنید
             </Link>
           </p>
         </form>
