@@ -33,14 +33,12 @@ const ReferralGraphLayout = ({
   params: { databaseId: string };
 }) => {
   return (
-    <TabsContent value="referral_graph">
-      <TagTabs
-        baseUrl={`/dashboard/database/${params.databaseId}/referral_graph`}
-        lists={lists}
-      >
-        {children}
-      </TagTabs>
-    </TabsContent>
+    <TagTabs
+      baseUrl={`/dashboard/database/${params.databaseId}/referral_graph`}
+      lists={lists}
+    >
+      {children}
+    </TagTabs>
   );
 };
 

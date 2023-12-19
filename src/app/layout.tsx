@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import localFont from "next/font/local";
+import { Inter } from "next/font/google"
 import { Noto_Naskh_Arabic } from "next/font/google";
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 
@@ -44,6 +45,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${persian.variable} font-mono`}>
         {children}
+        <SpeedInsights/>
       </body>
     </html>
   );

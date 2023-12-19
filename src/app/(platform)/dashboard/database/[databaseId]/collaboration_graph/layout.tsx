@@ -33,14 +33,12 @@ const CollaborationGraphLayout = ({
   params: { databaseId: string };
 }) => {
   return (
-    <TabsContent value="collaboration_graph">
-      <TagTabs
-        baseUrl={`/dashboard/database/${params.databaseId}/collaboration_graph`}
-        lists={lists}
-      >
-        {children}
-      </TagTabs>
-    </TabsContent>
+    <TagTabs
+      baseUrl={`/dashboard/database/${params.databaseId}/collaboration_graph`}
+      lists={lists}
+    >
+      {children}
+    </TagTabs>
   );
 };
 

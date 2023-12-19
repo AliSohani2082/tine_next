@@ -25,14 +25,12 @@ const ListsPage = ({
   params: { databaseId: string };
 }) => {
   return (
-    <TabsContent value="lists">
-      <TagTabs
-        baseUrl={`/dashboard/database/${params.databaseId}/lists`}
-        lists={lists}
-      >
-        {children}
-      </TagTabs>
-    </TabsContent>
+    <TagTabs
+      baseUrl={`/dashboard/database/${params.databaseId}/lists`}
+      lists={lists}
+    >
+      {children}
+    </TagTabs>
   );
 };
 

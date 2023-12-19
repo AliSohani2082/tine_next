@@ -32,14 +32,12 @@ const ReferentialGraphLayout = ({
   params: { databaseId: string };
 }) => {
   return (
-    <TabsContent value="referential_graph">
-      <TagTabs
-        baseUrl={`/dashboard/database/${params.databaseId}/referential_graph`}
-        lists={lists}
-      >
-        {children}
-      </TagTabs>
-    </TabsContent>
+    <TagTabs
+      baseUrl={`/dashboard/database/${params.databaseId}/referential_graph`}
+      lists={lists}
+    >
+      {children}
+    </TagTabs>
   );
 };
 

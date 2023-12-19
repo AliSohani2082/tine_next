@@ -8,9 +8,9 @@ const Co_ccurrenceGraphLayout = ({
   params: { databaseId: string };
 }) => {
   return (
-    <TabsContent value="co-occurrence_graph">
+    <div>
       {children}
-    </TabsContent>
+    </div>
   );
 };
 

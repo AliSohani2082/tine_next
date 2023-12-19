@@ -25,14 +25,12 @@ const BibliographicLayout = ({
   params: { databaseId: string };
 }) => {
   return (
-    <TabsContent value="bibliographic_graph">
-      <TagTabs
-        baseUrl={`/dashboard/database/${params.databaseId}/bibliographic_graph`}
-        lists={lists}
-      >
-        {children}
-      </TagTabs>
-    </TabsContent>
+    <TagTabs
+      baseUrl={`/dashboard/database/${params.databaseId}/bibliographic_graph`}
+      lists={lists}
+    >
+      {children}
+    </TagTabs>
   );
 };
 
