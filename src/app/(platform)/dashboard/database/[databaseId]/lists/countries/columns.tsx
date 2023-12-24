@@ -44,18 +44,18 @@ export const columns: ColumnDef<CountryTable>[] = [
   {
     accessorKey: "documentPublished",
     id: "Published documents",
-    header: ({ column }) => <SortingButton column={column} title="Published Documents" />,
+    header: ({ column }) => (
+      <SortingButton column={column} title="Published Documents" />
+    ),
   },
   {
     id: "Actions",
     enableHiding: false,
     enableColumnFilter: false,
     cell: ({ row }) => {
-      const country = row.original
+      const country = row.original;
 
-      return (
-        <ActionMenu item={country} actions={actions}/>
-      );
+      return <ActionMenu item={country} actions={actions} />;
     },
   },
 ];

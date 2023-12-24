@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { Button } from "@/components/ui/button";
 import Typography from "@mui/material/Typography";
+import { Card, CardHeader } from "@/components/ui/iconicCard";
+import { CardContent } from "@mui/material";
 
 type ActionButton = {
   title: string;
@@ -102,58 +103,64 @@ const StepperComponent: React.FC<StepModalProps> = ({
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-full w-full">
-      <Stepper sx={{ width: "100%" }} activeStep={activeStep}>
-        {steps.map((step) => {
-          const stepProps: { completed?: boolean } = {};
-          const labelProps: {
-            optional?: React.ReactNode;
-          } = {};
-          if (step.isOptional) {
-            labelProps.optional = (
-              <Typography variant="caption">(اختیاری)</Typography>
+    <Card className="flex flex-col justify-center items-center h-full w-full">
+      <CardHeader className="w-full h-full">
+        <Stepper sx={{ width: "100%", display: "flex", flexDirection: "row-reverse", }} activeStep={activeStep}>
+          {steps.map((step) => {
+            const stepProps: { completed?: boolean } = {};
+            const labelProps: {
+              optional?: React.ReactNode;
+            } = {};
+            if (step.isOptional) {
+              labelProps.optional = (
+                <span className="text-sm">(اختیاری)</span>
+              );
+            }
+            if (skipped.has(step.stepNum)) {
+              stepProps.completed = false;
+            }
+            return (
+              <Step key={step.stepNum} {...stepProps}>
+                <StepLabel {...labelProps} >
+                  <span className="font-mono">{step.title}</span>
+                </StepLabel>
+              </Step>
             );
-          }
-          if (skipped.has(step.stepNum)) {
-            stepProps.completed = false;
-          }
-          return (
-            <Step key={step.stepNum} {...stepProps}>
-              <StepLabel {...labelProps}>{step.title}</StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
-      <div className="w-full h-full mt-4">
+          })}
+        </Stepper>
+      </CardHeader>
+      <CardContent className="w-full h-full mt-4">
         {activeStep === steps.length ? (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>
               All steps completed - you&apos;re finished
             </Typography>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Box sx={{ flex: "1 1 auto" }} />
+            <div className="flex flex-row justify-between items-center pt-2">
               <Button onClick={handleReset}>Reset</Button>
-            </Box>
+            </div>
           </React.Fragment>
         ) : (
           <div className="flex flex-col justify-between h-full">
-            {step.content}
+            <div className="pb-4 w-full h-full">
+              {step.content}
+            </div>
             <div className="flex flex-row justify-between items-center">
               <Button
+                variant="outline"
                 color="inherit"
                 onClick={activeStep === 0 ? handleFinish : handleBack}
               >
                 {activeStep === 0 ? "لغو" : "بازگشت"}
               </Button>
-              <Box sx={{ flex: "1 1 auto" }} />
               {step.isOptional && (
-                <Button color="inherit" onClick={handleSkip}>
+                <Button variant="outline" color="inherit" onClick={handleSkip}>
                   رد
                 </Button>
               )}
               <div className="flex flex-row justify-center items-center gap-2">
                 {step.additionalActions?.map((action, index) => (
                   <Button
+                    variant="outline"
                     key={index}
                     onClick={action.action}
                     disabled={!action.isActivate}
@@ -188,8 +195,8 @@ const StepperComponent: React.FC<StepModalProps> = ({
             </div>
           </div>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

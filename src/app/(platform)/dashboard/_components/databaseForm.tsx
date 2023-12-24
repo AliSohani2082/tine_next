@@ -39,9 +39,8 @@ export const InformationForm = forwardRef(
     }));
 
     return (
-      <div className=" flex flex-col space-y-4">
-        <InformationBox> توضیحات مربوط به این بخش... </InformationBox>
-        <div>
+      <div className=" flex flex-row justify-around space-y-4 h-full">
+        <div className="w-full p-4">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -86,6 +85,7 @@ export const InformationForm = forwardRef(
             </form>
           </Form>
         </div>
+        <InformationBox> توضیحات مربوط به این بخش... </InformationBox>
       </div>
     );
   }

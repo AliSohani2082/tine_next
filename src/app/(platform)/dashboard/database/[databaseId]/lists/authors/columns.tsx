@@ -6,17 +6,26 @@ import { Eye, Filter, ArrowUpDown } from "lucide-react";
 import { ActionMenu } from "../_components/action-menu";
 import { Button } from "@/components/ui/button";
 import SortingButton from "../_components/sortingButton";
-
+import ShowMoreDrawer from "../_components/showMoreDrawer";
+import { Action } from "../_components/action-menu";
 
 export type AuthorTable = {
   name: string;
 };
 
-const actions = [
+const Content = () =>{
+  return (
+    <span className="h-[500px] flex justify-center items-center">Content</span>
+  )
+}
+
+const actions: Action<AuthorTable>[] = [
   {
     label: "اطلاعات بیشتر",
     icon: <Eye />,
     onClick: (author: AuthorTable) => console.log("action done"),
+    wraper: ShowMoreDrawer,
+    component: <Content/>
   },
   {
     label: "اضافه کردن به فیلتر",
@@ -38,9 +47,7 @@ export const columns: ColumnDef<AuthorTable>[] = [
     enableColumnFilter: false,
     cell: ({ row }) => {
       const author = row.original;
-      return (
-        <ActionMenu item={author} actions={actions}/>
-      );
+      return <ActionMenu item={author} actions={actions} />;
     },
   },
 ];

@@ -1,11 +1,9 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const BibliographicGraphPage = (props: Props) => {
-  return (
-    <div>BibliographicGraphPage</div>
-  )
-}
+  return <div>BibliographicGraphPage</div>;
+};
 
-export default BibliographicGraphPage
+export default BibliographicGraphPage;

@@ -26,8 +26,9 @@ const actions = [
   {
     label: "کپی کردن لینک",
     icon: <Copy />,
-    onClick: (document: DocumentTable) => navigator.clipboard.writeText(document.title) 
-  }
+    onClick: (document: DocumentTable) =>
+      navigator.clipboard.writeText(document.title),
+  },
 ];
 
 export const columns: ColumnDef<DocumentTable>[] = [
@@ -35,17 +36,17 @@ export const columns: ColumnDef<DocumentTable>[] = [
     accessorKey: "title",
     id: "Title",
     enableHiding: false,
-    header: ({ column }) => <SortingButton column={column} title="Title"/>,
+    header: ({ column }) => <SortingButton column={column} title="Title" />,
   },
   {
     accessorKey: "publisher",
     id: "Publisher",
-    header: ({ column }) => <SortingButton column={column} title="Publisher"/>,
+    header: ({ column }) => <SortingButton column={column} title="Publisher" />,
   },
   {
     accessorKey: "author",
     id: "Author",
-    header: ({ column }) => <SortingButton column={column} title="Author"/>,
+    header: ({ column }) => <SortingButton column={column} title="Author" />,
   },
   {
     id: "Actions",
@@ -54,9 +55,7 @@ export const columns: ColumnDef<DocumentTable>[] = [
     cell: ({ row }) => {
       const document = row.original;
 
-      return (
-        <ActionMenu item={document} actions={actions}/>
-      );
+      return <ActionMenu item={document} actions={actions} />;
     },
   },
 ];

@@ -5,21 +5,23 @@ import { z } from "zod";
 // ============================================================
 
 export const email = z
-  .string({required_error: "ایمیل نیاز است"})
+  .string({ required_error: "ایمیل نیاز است" })
   .email({ message: "ایمیل معتبر نیست" })
   .transform((str) => str.toLowerCase().trim());
 
 export const password = z
-  .string({required_error: "پسورد نیاز است"})
+  .string({ required_error: "پسورد نیاز است" })
   .min(10, { message: "پسورد باید حداقل دارای ۱۰ کاراکتر باشد" })
   .max(100, { message: "پسورد باید دارای حداکثر ۱۰۰ کاراکتر باشد" })
   .transform((str) => str.trim());
 
 export const Signup = z
   .object({
-    name: z.string({required_error: "نام نیاز است"}).min(2, { message: "نام باید حداقل دارای ۲ کاراکتر باشد" }),
+    name: z
+      .string({ required_error: "نام نیاز است" })
+      .min(2, { message: "نام باید حداقل دارای ۲ کاراکتر باشد" }),
     username: z
-    .string({required_error: "نام کاربری نیاز است"})
+      .string({ required_error: "نام کاربری نیاز است" })
       .min(2, { message: "نام باید حداقل دارای ۲ کاراکتر باشد" }),
     email: email,
     password: password,
@@ -60,5 +62,7 @@ export const ChangePassword = z.object({
 // ============================================================
 export const CreateDatabase = z.object({
   name: z.string().min(2, { message: "نام باید حداقل دارای ۲ کاراکتر باشد" }),
-  query: z.string().min(2, { message: "کوئری باید حداقل دارای ۲ کاراکتر باشد" }),
+  query: z
+    .string()
+    .min(2, { message: "کوئری باید حداقل دارای ۲ کاراکتر باشد" }),
 });

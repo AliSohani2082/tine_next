@@ -7,37 +7,37 @@ const pages = [
   {
     title: "لیست ها",
     to: "lists",
-    icon: <ClipboardList/>,
+    icon: <ClipboardList />,
   },
   {
     title: "گراف همکاری",
     to: "collaboration_graph",
-    icon: <Waypoints/>,
+    icon: <Waypoints />,
   },
   {
     title: "گراف همرخدادی",
     to: "co-occurrence_graph",
-    icon: <Waypoints/>,
+    icon: <Waypoints />,
   },
   {
     title: "گراف پیوندکتابشناختی",
     to: "bibliographic_graph",
-    icon: <Waypoints/>,
+    icon: <Waypoints />,
   },
   {
     title: "گراف هم ارجاعی",
     to: "referential_graph",
-    icon: <Waypoints/>,
+    icon: <Waypoints />,
   },
   {
     title: "گراف ارجاعات",
     to: "referral_graph",
-    icon: <Waypoints/>,
+    icon: <Waypoints />,
   },
   {
     title: "اطلاعات جامع",
     to: "",
-    icon: <Book/>
+    icon: <Book />,
   },
 ];
 
@@ -48,10 +48,9 @@ const databaseIdLayout = ({
   children: React.ReactNode;
   params: { databaseId: string };
 }) => {
-
   return (
     <PageTabs
-      databaseId= { params.databaseId }
+      databaseId={params.databaseId}
       pages={pages}
       baseUrl={`/dashboard/database/${params.databaseId}`}
     >

@@ -16,7 +16,7 @@ export default async function DocumentPage() {
 
   return (
     <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} searchItem="name" />
+      <DataTable columns={columns} data={data} title="نویسنده" />
     </div>
   );
 }

@@ -9,13 +9,17 @@ import {
 } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 
+export interface Action<DataT> {
+  label: string;
+  icon: React.ReactNode;
+  onClick: (item: DataT) => void;
+  wraper?: React.ComponentType<any>;
+  component?: React.ReactNode;
+}
+
 interface ActionMenuProps<DataT> {
   item: DataT;
-  actions: {
-    label: string;
-    icon: React.ReactNode
-    onClick: (item: DataT) => void;
-  }[];
+  actions: Action<DataT>[];
 }
 
 export function ActionMenu<DataT>({ actions, item }: ActionMenuProps<DataT>) {
@@ -28,24 +32,47 @@ export function ActionMenu<DataT>({ actions, item }: ActionMenuProps<DataT>) {
           });
           return (
             <li key={action.label}>
-              <Tooltip>
-                <TooltipTrigger asChild className="group">
-                  <Button
-                    onClick={() => action.onClick(item)}
-                    variant="outline"
-                    className="h-10 w-10 p-2"
-                  >
-                    {newIcon}
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <span>{action.label}</span>
-                </TooltipContent>
-              </Tooltip>
+              {action.wraper ? (
+                <action.wraper
+                  trigger={(
+                    <Tooltip>
+                      <TooltipTrigger asChild className="group">
+                        <Button
+                          onClick={() => action.onClick(item)}
+                          variant="outline"
+                          className="h-10 w-10 p-2"
+                        >
+                          {newIcon}
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <span>{action.label}</span>
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
+                >
+                  {action.component}
+                </action.wraper>
+              ):(
+                <Tooltip>
+                  <TooltipTrigger asChild className="group">
+                    <Button
+                      onClick={() => action.onClick(item)}
+                      variant="outline"
+                      className="h-10 w-10 p-2"
+                    >
+                      {newIcon}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <span>{action.label}</span>
+                  </TooltipContent>
+                </Tooltip>
+              )}
             </li>
           );
         })}
       </ul>
     </TooltipProvider>
   );
-};
+}

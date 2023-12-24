@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"
+import { Inter } from "next/font/google";
 import { Noto_Naskh_Arabic } from "next/font/google";
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 import { siteConfig } from "@/config/site";
+import Background from "./background";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,9 +44,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${persian.variable} font-mono`}>
+      <body
+        className={`${inter.variable} ${persian.variable} font-mono bg-background`}
+      >
         {children}
-        <SpeedInsights/>
+        <SpeedInsights />
       </body>
     </html>
   );

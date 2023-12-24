@@ -20,13 +20,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   if (icon) {
     StyledIcon = cloneElement(icon as ReactElement, {
       className:
-        (icon as ReactElement)?.props.className +
-        cn(
-          "h-6 w-6 rounded-sm m-4 flex items-center justify-center font-bold text-2xl",
-          selected
-            ? "font-medium group-hover:text-primary"
-            : "text-muted-foreground group-hover:text-primary"
-        ),
+        (icon as ReactElement)?.props.className + "h-6 w-6 rounded-sm m-4 flex items-center justify-center font-bold text-2xl"
     });
   }
 
@@ -35,7 +29,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       <Link
         href={to}
         className={cn(
-          "group inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground",
+          "group inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
           "w-full font-normal pl-10 mb-1 flex flex-row justify-end h-14 text-md active:text-sm"
         )}
       >
@@ -43,7 +37,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
           className={cn(
             "text-sm",
             selected
-              ? "font-medium text-foreground group-hover:text-muted-foreground"
+              ? "font-medium text-foreground"
               : "text-muted-foreground"
           )}
         >
@@ -53,12 +47,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
           StyledIcon
         ) : (
           <span
-            className={cn(
-              "h-6 w-6 rounded-sm p-1 m-4 flex items-center justify-center font-bold text-2xl",
-              selected
-                ? "font-medium text-foreground group-hover:text-primary"
-                : "text-muted-foreground group-hover:text-primary"
-            )}
+            className="h-6 w-6 rounded-sm m-2 flex items-center justify-center font-bold text-2xl"
           >
             --
           </span>

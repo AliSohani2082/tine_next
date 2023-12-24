@@ -108,28 +108,30 @@ const Sidebar: React.FC<SidebarProps> = ({
         defaultValue={defaultAccordionValue}
         className="space-y-2"
       >
-        <SidebarAccordion value="database" icon={<Database/>} title="دیتابیس ها" items={[
-          {
-            title: "ایجاد دیتابیس جدید",
-            to: "/dashboard",
-            selected: true,
-          },
-          ...databases?.map((database: IDatabase) => ({
-            title: database.name,
-            to: `/dashboard/database/${database.id}`,
-            selected: databaseId === database.id
-          })),
-        ]}/>
+        <SidebarAccordion
+          value="database"
+          icon={<Database />}
+          title="دیتابیس ها"
+          items={[
+            {
+              title: "ایجاد دیتابیس جدید",
+              to: "/dashboard",
+              selected: true,
+            },
+            ...databases?.map((database: IDatabase) => ({
+              title: database.name,
+              to: `/dashboard/database/${database.id}`,
+              selected: databaseId === database.id,
+            })),
+          ]}
+        />
         {pathname.split("/")[2] === "database" && (
-          <AccordionItem value="filter">
-            <AccordionTrigger className="h-14 group">
-              <div className="font-medium text-xs flex items-center justify-end mb-1 w-full">
-                <span className="pr-2 font-mono text-lg">فیلتر</span>
-                <Filter className="m-4 text-primary group-hover:animate-pulse group-[data-state=open]:text-primary" />
-              </div>
-            </AccordionTrigger>
-            <AccordionContent></AccordionContent>
-          </AccordionItem>
+          <SidebarAccordion
+            value="filter"
+            icon={<Filter />}
+            title="فیلتر ها"
+            items={[]}
+          />
         )}
       </Accordion>
     </div>

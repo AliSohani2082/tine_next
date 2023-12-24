@@ -14,13 +14,12 @@ import { DatabaseSelection } from "./DatabaseSelection";
 // import { OrganizationSwitcher, UserButton } from '@clerk/nextjs'
 
 const Navbar = () => {
-  
-  const pathname = usePathname()
-  let databaseId = undefined
-  if(pathname.startsWith("/dashboard/database/")){
-    databaseId = pathname.split("/")[3] 
+  const pathname = usePathname();
+  let databaseId = undefined;
+  if (pathname.startsWith("/dashboard/database/")) {
+    databaseId = pathname.split("/")[3];
   }
-  
+
   const databaseModal = useDatabaseModal();
 
   return (
@@ -34,7 +33,7 @@ const Navbar = () => {
         <Plus className="h-4 w-4" />
       </Button> */}
       <div className="flex flex-row justify-center items-center gap-4">
-        <Menu/>
+        <Menu />
         {/* <DatabaseSelection databaseId={databaseId}/> */}
       </div>
       <Account />

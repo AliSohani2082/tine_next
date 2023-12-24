@@ -20,19 +20,20 @@ type TabsProps = {
 };
 
 const TagTabs = ({ children, baseUrl, lists }: TabsProps) => {
-  const defaultTab = lists.find((list) => list.default) || lists[lists.length -1]
+  const defaultTab =
+    lists.find((list) => list.default) || lists[lists.length - 1];
   const [activeTab, setActiveTab] = useState<List | undefined>(defaultTab);
   const router = useRouter();
   let pathname = usePathname();
 
   useEffect(() => {
     router.push(`${baseUrl}/${defaultTab.to}`);
-  }, [])
+  }, []);
 
   // useEffect(() => {
   //   if(!activeTab){
   //     setActiveTab(lists[0])
-  //     // router.push(`${pathname}/${lists[0].to}`) 
+  //     // router.push(`${pathname}/${lists[0].to}`)
   //   } else {
   //     // router.push(`${pathname}/${activeTab.to}`);
   //   }
@@ -66,9 +67,7 @@ const TagTabs = ({ children, baseUrl, lists }: TabsProps) => {
           </Link>
         ))}
       </div>
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
     </div>
   );
 };

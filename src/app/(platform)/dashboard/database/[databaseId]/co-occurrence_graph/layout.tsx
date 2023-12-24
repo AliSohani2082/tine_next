@@ -7,11 +7,7 @@ const Co_ccurrenceGraphLayout = ({
   children: React.ReactNode;
   params: { databaseId: string };
 }) => {
-  return (
-    <div>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 };
 
 export default Co_ccurrenceGraphLayout;
