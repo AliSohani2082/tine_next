@@ -15,22 +15,37 @@ import { actionAsyncStorage } from "next/dist/client/components/action-async-sto
 import { ReactElement, cloneElement } from "react";
 import { ActionMenu } from "../_components/action-menu";
 import SortingButton from "../_components/sortingButton";
+import ShowMoreDrawer from "../_components/showMoreDrawer";
+import { toast } from "sonner";
 
 export type CountryTable = {
   name: string;
   documentPublished: number;
 };
 
+const Content = () =>{
+  return (
+    <span className="h-[500px] flex justify-center items-center">Content</span>
+  )
+}
+
 const actions = [
   {
     label: "اطلاعات بیشتر",
     icon: <Eye />,
     onClick: (country: CountryTable) => console.log("action done"),
+    wraper: ShowMoreDrawer,
+    component: <Content/>
   },
   {
     label: "اضافه کردن به فیلتر",
     icon: <Filter />,
-    onClick: (country: CountryTable) => console.log("action done"),
+    onClick: (country: CountryTable) => toast("آیتم مورد نظر با موفقیت به فیلتر ها اضافه شد", {
+      action: {
+        label: "Undo",
+        onClick: () => console.log("Undo"),
+      },
+    }),
   },
 ];
 

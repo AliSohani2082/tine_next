@@ -49,13 +49,17 @@ const databaseIdLayout = ({
   params: { databaseId: string };
 }) => {
   return (
-    <PageTabs
-      databaseId={params.databaseId}
-      pages={pages}
-      baseUrl={`/dashboard/database/${params.databaseId}`}
-    >
-      {children}
-    </PageTabs>
+    <div className="w-full h-full">
+      <PageTabs
+        databaseId={params.databaseId}
+        pages={pages}
+        baseUrl={`/dashboard/database/${params.databaseId}`}
+      >
+        <div className="overflow-auto">
+          {children}
+        </div>
+      </PageTabs>
+    </div>
   );
 };
 

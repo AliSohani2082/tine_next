@@ -1,13 +1,13 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Eye, Filter, ArrowUpDown } from "lucide-react";
+import { Eye, Filter } from "lucide-react";
 
 import { ActionMenu } from "../_components/action-menu";
-import { Button } from "@/components/ui/button";
 import SortingButton from "../_components/sortingButton";
 import ShowMoreDrawer from "../_components/showMoreDrawer";
 import { Action } from "../_components/action-menu";
+import { toast } from "sonner";
 
 export type AuthorTable = {
   name: string;
@@ -30,7 +30,12 @@ const actions: Action<AuthorTable>[] = [
   {
     label: "اضافه کردن به فیلتر",
     icon: <Filter />,
-    onClick: (author: AuthorTable) => console.log("action done"),
+    onClick: (author: AuthorTable) => toast("آیتم مورد نظر با موفقیت به فیلتر ها اضافه شد", {
+      action: {
+        label: "Undo",
+        onClick: () => console.log("Undo"),
+      },
+    }),
   },
 ];
 

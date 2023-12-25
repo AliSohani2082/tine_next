@@ -47,7 +47,10 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
           StyledIcon
         ) : (
           <span
-            className="h-6 w-6 rounded-sm m-2 flex items-center justify-center font-bold text-2xl"
+            className={cn(
+              "h-6 w-6 rounded-sm m-2 flex items-center justify-center font-bold text-2xl",
+              selected ? "font-medium text-foreground" : "text-muted-foreground"
+            )}
           >
             --
           </span>

@@ -12,7 +12,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-const items = [
+type MenuItem = {
+  title: string;
+  icon: React.ReactNode;
+  href: string;
+  action?: () => void;
+}
+
+const items: MenuItem[] = [
   {
     title: "پروفایل",
     icon: <User />,
@@ -23,11 +30,6 @@ const items = [
     title: "تنظیمات",
     icon: <Settings />,
     href: "/dashboard",
-  },
-  {
-    title: "تم",
-    icon: <Sun />,
-    action: () => console.log("Switches the theme"),
   },
   {
     title: "خروج",

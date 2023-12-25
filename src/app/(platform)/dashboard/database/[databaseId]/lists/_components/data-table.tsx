@@ -35,6 +35,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowDown, ArrowDownCircle, ArrowDownNarrowWide } from "lucide-react";
 import { set } from "zod";
 import { cn } from "@/lib/utils";
+import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationNext, PaginationEllipsis } from "@/components/ui/pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -80,7 +81,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <Card>
-      <CardHeader className="w-full text-3xl">
+      <CardHeader className="w-full text-3xl flex flex-row justify-end">
         {title}
       </CardHeader>
       <CardContent>
@@ -114,7 +115,7 @@ export function DataTable<TData, TValue>({
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            <div className="flex flex-row justify-center items-center gap-2">
+            <div className="flex flex-row justify-end items-center gap-2">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -122,7 +123,7 @@ export function DataTable<TData, TValue>({
                     variant="outline"
                   >
                     <span>{SearchBy}</span>
-                    <ArrowDownCircle className="ml-2" />
+                    {/* <ArrowDownCircle className="ml-2" /> */}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
@@ -132,6 +133,7 @@ export function DataTable<TData, TValue>({
                     .map((column) => (
                       <DropdownMenuCheckboxItem
                         key={column.id}
+                        dir="rtl"
                         className="capitalize"
                         checked={column.id === SearchBy}
                         onCheckedChange={() => {
@@ -146,7 +148,7 @@ export function DataTable<TData, TValue>({
                 </DropdownMenuContent>
               </DropdownMenu>
               <span className="ml-3">:</span>
-              <span className="font-bold mr-3 text-sm w-[200px]">
+              <span className="font-bold mr-3 text-sm w-[250px]">
                 جست و جو براساس{" "}
               </span>
               <Input
@@ -236,7 +238,8 @@ export function DataTable<TData, TValue>({
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   {[10, 50, 100, 200].map((item) => (
-                    <DropdownMenuItem
+                    <DropdownMenuCheckboxItem
+                      checked={pageSize === item}
                       key={item}
                       onClick={() => {
                         setPageSize(item);
@@ -247,11 +250,36 @@ export function DataTable<TData, TValue>({
                         <span>سطر</span>
                         <span>{item}</span>
                       </div>
-                    </DropdownMenuItem>
+                    </DropdownMenuCheckboxItem>
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
-              <Button
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious isActive={table.getState().pagination.pageIndex <= 0} onClick={() => table.previousPage()} />
+                  </PaginationItem>
+                  {table.getState().pagination.pageIndex === 0 && (
+                    <PaginationItem>
+                      <PaginationEllipsis/>
+                    </PaginationItem>
+                  )}
+                  {
+                    
+                  [table.getState().pagination.pageIndex - 1, table.getState().pagination.pageIndex, table.getState().pagination.pageIndex + 1].map((item) => (
+                    <PaginationItem key={item}>{item + 1}</PaginationItem>
+                  ))}
+                  {table.getPageCount() > table.getState().pagination.pageIndex && (
+                    <PaginationItem>
+                      <PaginationEllipsis/>
+                    </PaginationItem>
+                  )}
+                  <PaginationItem>
+                    <PaginationNext isActive={table.getState().pagination.pageIndex >= table.getPageCount() - 1 } onClick={() => table.nextPage()} />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+              {/* <Button
                 variant="outline"
                 size="sm"
                 onClick={() => table.previousPage()}
@@ -266,7 +294,7 @@ export function DataTable<TData, TValue>({
                 disabled={!table.getCanNextPage()}
               >
                 بعدی
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
