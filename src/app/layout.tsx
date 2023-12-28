@@ -3,10 +3,13 @@ import { Inter } from "next/font/google";
 import { Noto_Naskh_Arabic } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+import ThemeProvider from "@/providers/theme-provider";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 import Background from "./background";
 import { Toaster } from "@/components/ui/sonner";
+import { useTheme } from "@/hooks/use-theme";
+import { useEffect } from "react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,15 +46,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} ${persian.variable} font-mono bg-background`}
-      >
-        {children}
-        <SpeedInsights />
-        <Toaster/>
-      </body>
+      <ThemeProvider>
+        <body
+          className={`${inter.variable} ${persian.variable} font-mono bg-background`}
+        >
+          {children}
+          <SpeedInsights />
+          <Toaster/>
+        </body>
+      </ThemeProvider>
     </html>
   );
 }

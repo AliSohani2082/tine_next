@@ -23,7 +23,7 @@ const Navbar = () => {
   const databaseModal = useDatabaseModal();
 
   return (
-    <nav className="px-4 shadow-lg3 flex pt-3 items-center justify-between h-16 gap-x-4 p-2 rounded-xl m-3">
+    <nav className="px-4 shadow-lg3 bg-primary shadow-lg flex pt-3 items-center justify-between h-16 gap-x-4 p-2 rounded-xl m-3">
       {/* <Searchbar /> */}
       {/* <Button
         variant="primary"
