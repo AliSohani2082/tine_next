@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Settings, LogOut, User, Sun } from "lucide-react";
+import { Settings, LogOut, User, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/router";
 import { redirect, usePathname } from "next/navigation";
@@ -11,34 +11,42 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useTheme } from "next-themes";
 
 type MenuItem = {
   title: string;
   icon: React.ReactNode;
-  href: string;
+  href?: string;
   action?: () => void;
 }
 
-const items: MenuItem[] = [
-  {
-    title: "پروفایل",
-    icon: <User />,
-    href: "/dashboard",
-  },
-
-  {
-    title: "تنظیمات",
-    icon: <Settings />,
-    href: "/dashboard",
-  },
-  {
-    title: "خروج",
-    icon: <LogOut />,
-    href: "/dashboard",
-  },
-];
-
 const Menu = () => {
+
+  const { setTheme, theme } = useTheme();
+
+  const items: MenuItem[] = [
+    {
+      title: "پروفایل",
+      icon: <User />,
+      href: "/dashboard",
+    },
+    {
+      title: "تم",
+      icon: theme === "dark" ? <Moon/> : <Sun />,
+      action: () => setTheme(theme === "dark"? "light" : "dark"),
+    },
+    {
+      title: "تنظیمات",
+      icon: <Settings />,
+      href: "/dashboard",
+    },
+    {
+      title: "خروج",
+      icon: <LogOut />,
+      href: "/dashboard",
+    },
+  ];
+
   return (
     <TooltipProvider>
       <ul className="flex flex-row justify-center items-center gap-x-2">
@@ -50,7 +58,7 @@ const Menu = () => {
                   variant="outline"
                   size="icon"
                   onClick={() =>
-                    item?.action ? item.action() : redirect(item.href)
+                    item?.action ? item?.action() : redirect(item?.href?? "")
                   }
                   className="rounded-full flex justify-center items-center"
                 >

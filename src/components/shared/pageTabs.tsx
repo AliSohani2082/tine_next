@@ -39,11 +39,11 @@ const PageTabs = ({ databaseId, pages, baseUrl, children }: TabsProps) => {
   }, []);
 
   return (
-    <Tabs
-      className="w-full flex flex-col items-stretch justify-items-stretch"
+    <div
+      className="h-full w-full flex flex-col justify-stretch items-stretch"
       defaultValue={pages[0].to}
     >
-      <TabsList className="flex justify-end items-center">
+      <div className="flex flex-row justify-end items-center">
         {pages.map((page) => {
           const newIcon = cloneElement(page.icon as React.ReactElement, {
             className: "w-5 h-5 ml-2",
@@ -62,11 +62,11 @@ const PageTabs = ({ databaseId, pages, baseUrl, children }: TabsProps) => {
             </TabsTrigger>
           );
         })}
-      </TabsList>
-      <TabsContent className="w-full hover:overflow-auto">
+      </div>
+      <div className="flex-1 h-full overflow-hidden">
         {children}
-      </TabsContent>
-    </Tabs>
+      </div>
+    </div>
   );
 };
 

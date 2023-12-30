@@ -25,17 +25,17 @@ const ListsPage = ({
   params: { databaseId: string };
 }) => {
   return (
-    <div className="overflow-auto">
+    <>
 
       <TagTabs
         baseUrl={`/dashboard/database/${params.databaseId}/lists`}
         lists={lists}
       >
-        <div className="overflow-auto">
+        {/* <div> */}
           {children}
-        </div>
+        {/* </div>/ */}
       </TagTabs>
-    </div>
+    </>
   );
 };
 

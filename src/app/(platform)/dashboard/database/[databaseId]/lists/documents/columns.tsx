@@ -16,7 +16,7 @@ export type DocumentTable = {
 
 const Content = () =>{
   return (
-    <span className="h-[500px] flex justify-center items-center">Content</span>
+    <span className="h-[250px] flex justify-center items-center">Content</span>
   )
 }
 

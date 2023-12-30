@@ -49,7 +49,12 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <ThemeProvider>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
         <body
           className={`${inter.variable} ${persian.variable} font-mono bg-background`}
         >

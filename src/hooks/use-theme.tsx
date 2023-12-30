@@ -14,6 +14,11 @@ export const useTheme = create<useTheme>((set) => ({
       const result = `${colors[0]} ${colors[1]}% ${colors[2]}%`
       state.primary = result
       console.log("result",colord(`hsl(${colors[0]}, ${colors[1]}% , ${colors[2]}%)`).toRgbString())
+
+
+
+
+
       return { primary: state.primary };
     }),
 }));

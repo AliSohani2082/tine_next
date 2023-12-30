@@ -12,7 +12,7 @@ const ShowMoreDrawer: React.FC<ShowMoreDrawerProps> = ({ children, trigger }) =>
       <DrawerTrigger>
         {trigger}
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className="w-[1550px]">
         {children}
       </DrawerContent>
     </Drawer>

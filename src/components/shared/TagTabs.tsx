@@ -49,7 +49,7 @@ const TagTabs = ({ children, baseUrl, lists }: TabsProps) => {
   // }
 
   return (
-    <div className="flex flex-col justify-start items-stretch w-full">
+    <div className="flex flex-col justify-stretch items-stretch overflow-hidden h-full w-full">
       <div className="flex flex-row justify-end items-center border-b-2">
         {lists.map((list) => (
           <Link
@@ -57,17 +57,17 @@ const TagTabs = ({ children, baseUrl, lists }: TabsProps) => {
             key={list.to}
             onClick={() => setActiveTab(list)}
             className={cn(
-              "rounded-full px-4 py-2 m-2 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:opacity-80",
+              "rounded-full px-4 py-2 m-2 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring shadow-mds focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:opacity-80",
               list.to === activeTab?.to
-                ? "bg-primary-foreground"
-                : "bg-muted-foreground text-white"
+                ? "bg-primary"
+                : "bg-primary-foreground text-muted-foreground border border-muted-foreground"
             )}
           >
             {list.title}
           </Link>
         ))}
       </div>
-      <div>{children}</div>
+      <div className="flex-1 overflow-auto h-full">{children}</div>
     </div>
   );
 };
