@@ -2,52 +2,13 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Eye, Filter, MoreHorizontal } from "lucide-react";
-
-import {
-  Tooltip,
-  TooltipProvider,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/ui/tooltip";
-import { Button } from "@/components/ui/button";
-import { actionAsyncStorage } from "next/dist/client/components/action-async-storage.external";
-import { ReactElement, cloneElement } from "react";
-import { ActionMenu } from "../_components/action-menu";
+import { ActionMenu, BaseItem } from "../_components/action-menu";
 import SortingButton from "../_components/sortingButton";
-import ShowMoreDrawer from "../_components/showMoreDrawer";
-import { toast } from "sonner";
 
-export type CountryTable = {
+export interface CountryTable extends BaseItem {
   name: string;
   documentPublished: number;
-};
-
-const Content = () =>{
-  return (
-    <span className="h-[250px] flex justify-center items-center">Content</span>
-  )
 }
-
-const actions = [
-  {
-    label: "اطلاعات بیشتر",
-    icon: <Eye />,
-    onClick: (country: CountryTable) => console.log("action done"),
-    wraper: ShowMoreDrawer,
-    component: <Content/>
-  },
-  {
-    label: "اضافه کردن به فیلتر",
-    icon: <Filter />,
-    onClick: (country: CountryTable) => toast("آیتم مورد نظر با موفقیت به فیلتر ها اضافه شد", {
-      action: {
-        label: "Undo",
-        onClick: () => console.log("Undo"),
-      },
-    }),
-  },
-];
 
 export const columns: ColumnDef<CountryTable>[] = [
   {
@@ -70,7 +31,7 @@ export const columns: ColumnDef<CountryTable>[] = [
     cell: ({ row }) => {
       const country = row.original;
 
-      return <ActionMenu item={country} actions={actions} />;
+      return <ActionMenu item={country} type="country" />;
     },
   },
 ];

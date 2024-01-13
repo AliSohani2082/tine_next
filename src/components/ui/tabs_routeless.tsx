@@ -34,7 +34,8 @@ const TabsTrigger = React.forwardRef<
     ref={ref}
     className={cn(
       `inline-flex items-center justify-center whitespace-nowrap rounded-none p-4 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none border-transparent border-b-2 disabled:opacity-50 disabled:text-gray-400 disabled:cursor-not-allowed ${
-        isActive && "border-t-1 border-r-1 border-l-1 border-b-0 text-primary shadow-sm"
+        isActive &&
+        "border-t-1 border-r-1 border-l-1 border-b-0 text-primary shadow-sm"
       }`,
       className
     )}

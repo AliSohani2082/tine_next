@@ -60,9 +60,15 @@ export const ChangePassword = z.object({
 // ============================================================
 // database
 // ============================================================
-export const CreateDatabase = z.object({
-  name: z.string().min(2, { message: "نام باید حداقل دارای ۲ کاراکتر باشد" }),
+
+export const Query = z.object({
   query: z
     .string()
     .min(2, { message: "کوئری باید حداقل دارای ۲ کاراکتر باشد" }),
 });
+export const CreateDatabase = z.object({
+  name: z.string().min(2, { message: "نام باید حداقل دارای ۲ کاراکتر باشد" }),
+  // query: z
+  //   .string()
+  //   .min(2, { message: "کوئری باید حداقل دارای ۲ کاراکتر باشد" }),
+}).merge(Query);

@@ -26,14 +26,11 @@ const ListsPage = ({
 }) => {
   return (
     <>
-
       <TagTabs
         baseUrl={`/dashboard/database/${params.databaseId}/lists`}
         lists={lists}
       >
-        {/* <div> */}
-          {children}
-        {/* </div>/ */}
+        {children}
       </TagTabs>
     </>
   );

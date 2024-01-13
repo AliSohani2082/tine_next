@@ -1,77 +1,36 @@
 "use client";
 
-import React, { ReactElement, cloneElement } from "react";
-import {
-  TooltipProvider,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Button } from "@/components/ui/button";
+import React from "react";
 
-export interface Action<DataT> {
-  label: string;
-  icon: React.ReactNode;
-  onClick: (item: DataT) => void;
-  wraper?: React.ComponentType<any>;
-  component?: React.ReactNode;
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { FilterType } from "@/types/items";
+import { FilterAction } from "./filter_action";
+import { MoreAction } from "./more_action";
+import { ActionItem, ActionItemProp } from "./action_item";
+
+export interface BaseItem {
+  id: string;
 }
 
 interface ActionMenuProps<DataT> {
+  type: FilterType;
   item: DataT;
-  actions: Action<DataT>[];
+  aditionalActions?: ActionItemProp<DataT extends BaseItem ? DataT : never>[];
 }
 
-export function ActionMenu<DataT>({ actions, item }: ActionMenuProps<DataT>) {
+export function ActionMenu<DataT>({
+  aditionalActions,
+  item,
+  type,
+}: ActionMenuProps<DataT extends BaseItem ? DataT : never>) {
   return (
     <TooltipProvider>
       <ul className="flex felx-row justify-center items-center gap-2">
-        {actions.map((action) => {
-          const newIcon = cloneElement(action.icon as ReactElement, {
-            className: "h-5 w-5 group-hover:text-primary",
-          });
-          return (
-            <li key={action.label}>
-              {action.wraper ? (
-                <action.wraper
-                  trigger={(
-                    <Tooltip>
-                      <TooltipTrigger asChild className="group">
-                        <Button
-                          onClick={() => action.onClick(item)}
-                          variant="outline"
-                          className="h-10 w-10 p-2"
-                        >
-                          {newIcon}
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <span>{action.label}</span>
-                      </TooltipContent>
-                    </Tooltip>
-                  )}
-                >
-                  {action.component}
-                </action.wraper>
-              ):(
-                <Tooltip>
-                  <TooltipTrigger asChild className="group">
-                    <Button
-                      onClick={() => action.onClick(item)}
-                      variant="outline"
-                      className="h-10 w-10 p-2"
-                    >
-                      {newIcon}
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <span>{action.label}</span>
-                  </TooltipContent>
-                </Tooltip>
-              )}
-            </li>
-          );
-        })}
+        <MoreAction item={item} type={type} />
+        <FilterAction item={item} type={type} />
+        {aditionalActions?.map((action, index) => (
+          <ActionItem key={index} {...action} />
+        ))}
       </ul>
     </TooltipProvider>
   );

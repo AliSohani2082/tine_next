@@ -1,11 +1,12 @@
 import { CountryTable, columns } from "./columns";
 import { DataTable } from "../_components/data-table";
-import { countries } from "../fakeData";
-import { Country } from "../types";
+import { countries } from "@/data/tableData";
+import { Country } from "@/types/items";
 
 async function getData(): Promise<CountryTable[]> {
   // Fetch data from your API here.
   const countriesTable = countries.map((country: Country) => ({
+    id: country.id,
     name: country.name,
     documentPublished: country.documentPublished,
   }));

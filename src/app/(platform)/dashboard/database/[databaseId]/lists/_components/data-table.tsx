@@ -35,7 +35,14 @@ import { Input } from "@/components/ui/input";
 import { ArrowDown, ArrowDownCircle, ArrowDownNarrowWide } from "lucide-react";
 import { set } from "zod";
 import { cn } from "@/lib/utils";
-import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationNext, PaginationEllipsis } from "@/components/ui/pagination";
+import {
+  PaginationContent,
+  PaginationItem,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationEllipsis,
+} from "@/components/ui/pagination";
+import Pagination from "./pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -195,7 +202,9 @@ export function DataTable<TData, TValue>({
                           key={cell.id}
                           className={cn(
                             "p-2 px-10",
-                            cell.id.split('_')[1] === "Actions" ? "flex flex-row justify-end" : ""
+                            cell.id.split("_")[1] === "Actions"
+                              ? "flex flex-row justify-end"
+                              : ""
                           )}
                         >
                           {flexRender(
@@ -219,83 +228,66 @@ export function DataTable<TData, TValue>({
               </TableBody>
             </Table>
           </div>
-          <div className="flex justify-between items-center">
-            <div className="flex justify-start gap-1 pl-2">
-              <span>{table.getPageCount()}</span>
-              <span>از</span>
-              <span>{table.getState().pagination.pageIndex}</span>
-              <span>صفحه</span>
-            </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Button variant="outline">
+          <div className="flex items-center justify-end space-x-2 py-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Button variant="outline">
+                  <div className="flex flex-row justify-center gap-2">
+                    <span>سطر</span>
+                    <span>{pageSize}</span>
+                  </div>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                {[10, 50, 100, 200].map((item) => (
+                  <DropdownMenuCheckboxItem
+                    checked={pageSize === item}
+                    key={item}
+                    onClick={() => {
+                      setPageSize(item);
+                      table.setPageSize(item);
+                    }}
+                  >
                     <div className="flex flex-row justify-center gap-2">
                       <span>سطر</span>
-                      <span>{pageSize}</span>
+                      <span>{item}</span>
                     </div>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  {[10, 50, 100, 200].map((item) => (
-                    <DropdownMenuCheckboxItem
-                      checked={pageSize === item}
-                      key={item}
-                      onClick={() => {
-                        setPageSize(item);
-                        table.setPageSize(item);
-                      }}
-                    >
-                      <div className="flex flex-row justify-center gap-2">
-                        <span>سطر</span>
-                        <span>{item}</span>
-                      </div>
-                    </DropdownMenuCheckboxItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <Pagination>
-                <PaginationContent>
+                  </DropdownMenuCheckboxItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Pagination
+              active={table.getState().pagination.pageIndex}
+              setActive={(page) => table.setPageIndex(page)}
+              total={table.getPageCount() - 1}
+              onNext={() => table.nextPage()}
+              onPrev={() => table.previousPage()}
+            />
+            {/* <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious isActive={table.getState().pagination.pageIndex <= 0} onClick={() => table.previousPage()} />
+                </PaginationItem>
+                {table.getState().pagination.pageIndex === 0 && (
                   <PaginationItem>
-                    <PaginationPrevious isActive={table.getState().pagination.pageIndex <= 0} onClick={() => table.previousPage()} />
+                    <PaginationEllipsis/>
                   </PaginationItem>
-                  {table.getState().pagination.pageIndex === 0 && (
-                    <PaginationItem>
-                      <PaginationEllipsis/>
-                    </PaginationItem>
-                  )}
-                  {
-                    
-                  [table.getState().pagination.pageIndex - 1, table.getState().pagination.pageIndex, table.getState().pagination.pageIndex + 1].map((item) => (
-                    <PaginationItem key={item}>{item + 1}</PaginationItem>
-                  ))}
-                  {table.getPageCount() > table.getState().pagination.pageIndex && (
-                    <PaginationItem>
-                      <PaginationEllipsis/>
-                    </PaginationItem>
-                  )}
+                )}
+                {
+                  
+                [table.getState().pagination.pageIndex - 1, table.getState().pagination.pageIndex, table.getState().pagination.pageIndex + 1].map((item) => (
+                  <PaginationItem key={item}>{item + 1}</PaginationItem>
+                ))}
+                {table.getPageCount() > table.getState().pagination.pageIndex && (
                   <PaginationItem>
-                    <PaginationNext isActive={table.getState().pagination.pageIndex >= table.getPageCount() - 1 } onClick={() => table.nextPage()} />
+                    <PaginationEllipsis/>
                   </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-              {/* <Button
-                variant="outline"
-                size="sm"
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
-              >
-                قبلی
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
-              >
-                بعدی
-              </Button> */}
-            </div>
+                )}
+                <PaginationItem>
+                  <PaginationNext isActive={table.getState().pagination.pageIndex >= table.getPageCount() - 1 } onClick={() => table.nextPage()} />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination> */}
           </div>
         </div>
       </CardContent>

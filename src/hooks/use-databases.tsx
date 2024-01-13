@@ -1,13 +1,13 @@
 import { IDatabase } from "@/types";
 import { create } from "zustand";
 
-interface useDatabases {
+interface useDatabasesProps {
   databases: IDatabase[];
   add: (database: IDatabase) => void;
   remove: (id: string) => void;
 }
 
-export const useDatabase = create<useDatabases>((set) => ({
+export const useDatabase = create<useDatabasesProps>((set) => ({
   databases: [
     {
       id: "1",

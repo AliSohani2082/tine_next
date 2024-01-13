@@ -1,8 +1,8 @@
-import * as React from "react"
-import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
+import * as React from "react";
+import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 
-import { cn } from "@/lib/utils"
-import { ButtonProps, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils";
+import { ButtonProps, buttonVariants } from "@/components/ui/button";
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
@@ -11,7 +11,7 @@ const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
     className={cn("mx-auto flex w-full justify-center", className)}
     {...props}
   />
-)
+);
 
 const PaginationContent = React.forwardRef<
   HTMLUListElement,
@@ -22,21 +22,21 @@ const PaginationContent = React.forwardRef<
     className={cn("flex flex-row items-center gap-1", className)}
     {...props}
   />
-))
-PaginationContent.displayName = "PaginationContent"
+));
+PaginationContent.displayName = "PaginationContent";
 
 const PaginationItem = React.forwardRef<
   HTMLLIElement,
   React.ComponentProps<"li">
 >(({ className, ...props }, ref) => (
   <li ref={ref} className={cn("", className)} {...props} />
-))
-PaginationItem.displayName = "PaginationItem"
+));
+PaginationItem.displayName = "PaginationItem";
 
 type PaginationLinkProps = {
-  isActive?: boolean
+  isActive?: boolean;
 } & Pick<ButtonProps, "size"> &
-  React.ComponentProps<"a">
+  React.ComponentProps<"a">;
 
 const PaginationLink = ({
   className,
@@ -57,8 +57,8 @@ const PaginationLink = ({
       {...props}
     />
   </PaginationItem>
-)
-PaginationLink.displayName = "PaginationLink"
+);
+PaginationLink.displayName = "PaginationLink";
 
 const PaginationPrevious = ({
   className,
@@ -67,14 +67,17 @@ const PaginationPrevious = ({
   <PaginationLink
     aria-label="Go to previous page"
     size="default"
-    className={cn("gap-1 pl-2.5", className)}
+    className={cn(
+      "gap-1 pl-2.5 bg-primary text-primary-foreground hover:opacity-80 hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer",
+      className
+    )}
     {...props}
   >
     <ChevronLeft className="h-4 w-4" />
     <span>قبلی</span>
   </PaginationLink>
-)
-PaginationPrevious.displayName = "PaginationPrevious"
+);
+PaginationPrevious.displayName = "PaginationPrevious";
 
 const PaginationNext = ({
   className,
@@ -83,13 +86,16 @@ const PaginationNext = ({
   <PaginationLink
     aria-label="Go to next page"
     size="default"
-    className={cn("gap-1 pr-2.5 bg-primary text-white", className)}
+    className={cn(
+      "gap-1 pr-2.5 bg-primary text-primary-foreground hover:opacity-80 hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer",
+      className
+    )}
     {...props}
   >
     <span>بعدی</span>
     <ChevronRight className="h-4 w-4" />
   </PaginationLink>
-)
+);
 
 const PaginationEllipsis = ({
   className,
@@ -103,7 +109,7 @@ const PaginationEllipsis = ({
     <MoreHorizontal className="h-4 w-4" />
     <span className="sr-only">More pages</span>
   </span>
-)
+);
 
 export {
   Pagination,
@@ -113,4 +119,4 @@ export {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-}
+};

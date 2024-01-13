@@ -1,11 +1,12 @@
 import { AuthorTable, columns } from "./columns";
 import { DataTable } from "../_components/data-table";
-import { authors } from "../fakeData";
-import { Author } from "../types";
+import { authors } from "@/data/tableData";
+import { Author } from "@/types/items";
 
 async function getData(): Promise<AuthorTable[]> {
   // Fetch data from your API here.
   const authorTable = authors.map((author: Author) => ({
+    id: author.id,
     name: `${author.firstName} ${author.lastName}`,
   }));
   return authorTable;

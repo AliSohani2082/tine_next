@@ -46,7 +46,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en">
       <ThemeProvider
@@ -60,7 +59,7 @@ export default function RootLayout({
         >
           {children}
           <SpeedInsights />
-          <Toaster/>
+          <Toaster />
         </body>
       </ThemeProvider>
     </html>

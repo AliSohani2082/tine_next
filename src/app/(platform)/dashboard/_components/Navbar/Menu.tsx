@@ -18,10 +18,9 @@ type MenuItem = {
   icon: React.ReactNode;
   href?: string;
   action?: () => void;
-}
+};
 
 const Menu = () => {
-
   const { setTheme, theme } = useTheme();
 
   const items: MenuItem[] = [
@@ -32,8 +31,8 @@ const Menu = () => {
     },
     {
       title: "تم",
-      icon: theme === "dark" ? <Moon/> : <Sun />,
-      action: () => setTheme(theme === "dark"? "light" : "dark"),
+      icon: theme === "dark" ? <Moon /> : <Sun />,
+      action: () => setTheme(theme === "dark" ? "light" : "dark"),
     },
     {
       title: "تنظیمات",
@@ -58,7 +57,7 @@ const Menu = () => {
                   variant="outline"
                   size="icon"
                   onClick={() =>
-                    item?.action ? item?.action() : redirect(item?.href?? "")
+                    item?.action ? item?.action() : redirect(item?.href ?? "")
                   }
                   className="rounded-full flex justify-center items-center"
                 >

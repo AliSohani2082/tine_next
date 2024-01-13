@@ -11,7 +11,7 @@ import { CardContent } from "@mui/material";
 
 type ActionButton = {
   title: string;
-  isActivate: boolean;
+  isActive: boolean;
   action: () => void;
 };
 
@@ -103,25 +103,26 @@ const StepperComponent: React.FC<StepModalProps> = ({
   };
 
   return (
-    <Card className="flex flex-col justify-center items-center h-full w-full">
-      <CardHeader className="w-full h-full">
-        <Stepper sx={{ width: "100%", display: "flex", flexDirection: "row-reverse", }} activeStep={activeStep}>
+    <Card className="flex flex-col justify-stretch items-center h-full w-full">
+      <CardHeader className="w-full mt-3">
+        <Stepper
+          sx={{ width: "100%", display: "flex", flexDirection: "row-reverse" }}
+          activeStep={activeStep}
+        >
           {steps.map((step) => {
             const stepProps: { completed?: boolean } = {};
             const labelProps: {
               optional?: React.ReactNode;
             } = {};
             if (step.isOptional) {
-              labelProps.optional = (
-                <span className="text-sm">(اختیاری)</span>
-              );
+              labelProps.optional = <span className="text-sm">(اختیاری)</span>;
             }
             if (skipped.has(step.stepNum)) {
               stepProps.completed = false;
             }
             return (
               <Step key={step.stepNum} {...stepProps}>
-                <StepLabel {...labelProps} >
+                <StepLabel {...labelProps}>
                   <span className="font-mono">{step.title}</span>
                 </StepLabel>
               </Step>
@@ -141,9 +142,7 @@ const StepperComponent: React.FC<StepModalProps> = ({
           </React.Fragment>
         ) : (
           <div className="flex flex-col justify-between h-full">
-            <div className="pb-4 w-full h-full">
-              {step.content}
-            </div>
+            <div className="pb-4 w-full h-full">{step.content}</div>
             <div className="flex flex-row justify-between items-center">
               <Button
                 variant="outline"
@@ -163,7 +162,7 @@ const StepperComponent: React.FC<StepModalProps> = ({
                     variant="outline"
                     key={index}
                     onClick={action.action}
-                    disabled={!action.isActivate}
+                    disabled={!action.isActive}
                   >
                     {action.title}
                   </Button>

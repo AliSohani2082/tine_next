@@ -1,5 +1,5 @@
 import React from "react";
-import DatabaseForm from "../../dashboard/_components/databaseForm";
+import DatabaseForm from "../../dashboard/_components/DatabaseForm/databaseForm";
 import { CardContent } from "@/components/ui/card";
 
 const CreatePage = () => {

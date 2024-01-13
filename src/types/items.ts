@@ -1,3 +1,5 @@
+export type FilterType = "country" | "document" | "author";
+
 export type Author = {
   id: string;
   firstName: string;

@@ -1,12 +1,11 @@
-"use client";
+"use client"
 
-import React, { useRef, forwardRef, useImperativeHandle } from "react";
-import { CreateDatabase as createDatabaseValidation } from "@/lib/validation";
+import { forwardRef, useImperativeHandle } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import * as z from 'zod'
 
-import StepperComponent from "./Stepper";
+import { CreateDatabase as createDatabaseValidation } from "@/lib/validation";
 import {
   Form,
   FormField,
@@ -18,14 +17,19 @@ import {
 import InformationBox from "@/components/shared/InformationBox";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-// import { InformationForm } from "@/components/modals/database-modal";
+import { Info } from "lucide-react";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hovercard";
 
-export const InformationForm = forwardRef(
+const InformationForm = forwardRef(
   (
     {
       onSubmit,
     }: { onSubmit: (values: z.infer<typeof createDatabaseValidation>) => void },
-    ref: React.Ref<{ submitForm: () => void }>
+    ref: React.Ref<{ submitCreateForm: () => void }>
   ) => {
     const form = useForm<z.infer<typeof createDatabaseValidation>>({
       resolver: zodResolver(createDatabaseValidation),
@@ -35,11 +39,11 @@ export const InformationForm = forwardRef(
     });
 
     useImperativeHandle(ref, () => ({
-      submitForm: () => form.handleSubmit(onSubmit)(),
+      submitCreateForm: () => form.handleSubmit(onSubmit)(),
     }));
 
     return (
-      <div className=" flex flex-row justify-around space-y-4 h-full">
+      <div className=" flex flex-row justify-around items-stretch space-y-4 h-full">
         <div className="w-full p-4">
           <Form {...form}>
             <form
@@ -69,7 +73,19 @@ export const InformationForm = forwardRef(
                 name="query"
                 render={({ field }) => (
                   <FormItem className="flex flex-col items-end">
-                    <FormLabel>کوئری</FormLabel>
+                    <div className="flex flex-row justify-center items-center gap-2">
+                      <FormLabel>کوئری</FormLabel>
+                      <HoverCard>
+                        <HoverCardTrigger>
+                          <Info className="text-muted-foreground w-6 h-6" />
+                        </HoverCardTrigger>
+                        <HoverCardContent>
+                          <div className="w-[100px] h-[100px] flex flex-row justify-center items-start">
+                            توضیحات مربوط به این بخش...
+                          </div>
+                        </HoverCardContent>
+                      </HoverCard>
+                    </div>
                     <FormControl>
                       <Textarea
                         // disabled={loading}
@@ -85,7 +101,9 @@ export const InformationForm = forwardRef(
             </form>
           </Form>
         </div>
-        <InformationBox> توضیحات مربوط به این بخش... </InformationBox>
+        {/* <div className="w-[300px] h-full">
+          <InformationBox classname="h-full"> توضیحات مربوط به این بخش... </InformationBox>
+        </div> */}
       </div>
     );
   }
@@ -93,68 +111,4 @@ export const InformationForm = forwardRef(
 
 InformationForm.displayName = "InformationForm";
 
-type Props = {};
-
-const DummyComponent = () => {
-  return <div>placeholder</div>;
-};
-
-const DatabaseForm = (props: Props) => {
-  const formRef = useRef<{ submitForm: () => void } | null>(null);
-
-  const onSubmit = async (values: z.infer<typeof createDatabaseValidation>) => {
-    console.log(values);
-  };
-
-  return (
-    <StepperComponent
-      steps={[
-        {
-          stepNum: 0,
-          title: "مشخصات اولیه",
-          description: "description...",
-          isOptional: false,
-          content: <InformationForm ref={formRef} onSubmit={onSubmit} />,
-          onSubmit: () => {
-            const result = formRef.current?.submitForm();
-            console.log("result: ", result);
-          },
-          isNextActivated: true,
-        },
-        {
-          stepNum: 1,
-          title: "سرچ مقالات",
-          description: "idk...",
-          isOptional: false,
-          content: <DummyComponent />,
-          onSubmit: () => {
-            console.log("step2");
-          },
-          isNextActivated: true,
-          additionalActions: [
-            {
-              title: "اسکن",
-              action: () => {
-                console.log("action triggeredd");
-              },
-              isActivate: true,
-            },
-          ],
-        },
-        {
-          stepNum: 2,
-          title: "تایید نهایی",
-          description: "idk...2",
-          isOptional: false,
-          content: <DummyComponent />,
-          onSubmit: () => {
-            console.log("step3");
-          },
-          isNextActivated: true,
-        },
-      ]}
-    />
-  );
-};
-
-export default DatabaseForm;
+export default InformationForm

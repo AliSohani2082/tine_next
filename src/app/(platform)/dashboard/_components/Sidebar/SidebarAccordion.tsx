@@ -1,4 +1,4 @@
-import React, { ReactElement, cloneElement } from "react";
+import React, { Children, ReactElement, cloneElement } from "react";
 
 import {
   AccordionItem,
@@ -12,30 +12,31 @@ type SidebarAccordionProps = {
   value: string;
   title: string;
   icon: React.ReactNode;
-  items: SidebarItemProps[];
+  children: React.ReactNode;
 };
 
 const SidebarAccordion: React.FC<SidebarAccordionProps> = ({
   value,
   title,
   icon,
-  items,
+  children,
 }) => {
-  const newIcon = cloneElement(icon as ReactElement, { className: "m-4 h-6 w-6" });
+  const newIcon = cloneElement(icon as ReactElement, {
+    className: "m-4 h-6 w-6",
+  });
 
   return (
-    <AccordionItem value={value}>
-      <AccordionTrigger className="group h-14 flex flex-row-reverse pl-4">
+    <AccordionItem
+      value={value}
+      className="group m-4 data-[state=open]:border-2 data-[state=open]:rounded-xl data-[state=open]:m-3 data-[state=open]:border-primary transition h-full"
+    >
+      <AccordionTrigger className="h-14 flex flex-row-reverse pl-4">
         <div className="font-medium text-xs transition group-data-[state=open]:text-primary flex items-center justify-end mb-1 w-full">
           <span className="pr-2 font-mono text-lg">{title}</span>
           {newIcon}
         </div>
       </AccordionTrigger>
-      <AccordionContent>
-        {items.map((item: SidebarItemProps) => (
-          <SidebarItem key={item.title} {...item} />
-        ))}
-      </AccordionContent>
+      <AccordionContent>{children}</AccordionContent>
     </AccordionItem>
   );
 };

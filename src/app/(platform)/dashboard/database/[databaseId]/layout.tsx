@@ -55,7 +55,7 @@ const databaseIdLayout = ({
         pages={pages}
         baseUrl={`/dashboard/database/${params.databaseId}`}
       >
-          {children}
+        {children}
       </PageTabs>
     </div>
   );

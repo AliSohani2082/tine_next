@@ -63,9 +63,7 @@ const PageTabs = ({ databaseId, pages, baseUrl, children }: TabsProps) => {
           );
         })}
       </div>
-      <div className="flex-1 h-full overflow-hidden">
-        {children}
-      </div>
+      <div className="flex-1 h-full overflow-hidden">{children}</div>
     </div>
   );
 };

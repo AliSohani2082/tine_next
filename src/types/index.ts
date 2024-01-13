@@ -1,3 +1,5 @@
+import { FilterType } from "@/types/items";
+
 export type INavLink = {
   imgURL: string;
   route: string;
@@ -39,6 +41,12 @@ export type IUser = {
 export type IDatabase = {
   id: string;
   name: string;
+};
+
+export type IFilter = {
+  id: string;
+  type: FilterType;
+  dataId: string;
 };
 
 export type INewUser = {
