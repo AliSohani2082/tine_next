@@ -32,16 +32,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdownMenu";
 import { Input } from "@/components/ui/input";
-import { ArrowDown, ArrowDownCircle, ArrowDownNarrowWide } from "lucide-react";
-import { set } from "zod";
 import { cn } from "@/lib/utils";
-import {
-  PaginationContent,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationNext,
-  PaginationEllipsis,
-} from "@/components/ui/pagination";
 import Pagination from "./pagination";
 
 interface DataTableProps<TData, TValue> {
@@ -259,35 +250,10 @@ export function DataTable<TData, TValue>({
             <Pagination
               active={table.getState().pagination.pageIndex}
               setActive={(page) => table.setPageIndex(page)}
-              total={table.getPageCount() - 1}
+              total={table.getPageCount()}
               onNext={() => table.nextPage()}
               onPrev={() => table.previousPage()}
             />
-            {/* <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious isActive={table.getState().pagination.pageIndex <= 0} onClick={() => table.previousPage()} />
-                </PaginationItem>
-                {table.getState().pagination.pageIndex === 0 && (
-                  <PaginationItem>
-                    <PaginationEllipsis/>
-                  </PaginationItem>
-                )}
-                {
-                  
-                [table.getState().pagination.pageIndex - 1, table.getState().pagination.pageIndex, table.getState().pagination.pageIndex + 1].map((item) => (
-                  <PaginationItem key={item}>{item + 1}</PaginationItem>
-                ))}
-                {table.getPageCount() > table.getState().pagination.pageIndex && (
-                  <PaginationItem>
-                    <PaginationEllipsis/>
-                  </PaginationItem>
-                )}
-                <PaginationItem>
-                  <PaginationNext isActive={table.getState().pagination.pageIndex >= table.getPageCount() - 1 } onClick={() => table.nextPage()} />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination> */}
           </div>
         </div>
       </CardContent>

@@ -33,6 +33,7 @@ import { CommandItem } from 'cmdk';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import FoundItem from './FoundItem';
 import { FinderRef } from './databaseForm';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs_routeless';
 
 const results: {
   type: FilterType,

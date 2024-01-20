@@ -82,7 +82,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         <div className="flex justify-center items-center mt-3">
           <Link href="/">
             <div className="flex flex-row justify-center gap-4 items-center">
-              <p className="pb-1 text-3xl">نام شرکت</p>
+              <p className="pb-1 text-3xl">علم سنجی</p>
               <Image
                 src="/assets/icons/logo.svg"
                 alt="Logo"
@@ -96,7 +96,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         <Accordion
           type="multiple"
           defaultValue={defaultAccordionValue}
-          className="space-y-2 flex-1 overflow-auto flex flex-col border-4 border-green-300"
+          className="space-y-2 flex-1 overflow-auto flex flex-col"
         >
           <SidebarAccordion
             value="database"
