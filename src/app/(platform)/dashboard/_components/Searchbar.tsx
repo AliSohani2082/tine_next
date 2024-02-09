@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
 
 const Searchbar = () => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.push(`/search/${searchTerm}`);
   };

@@ -33,7 +33,8 @@ import {
 } from "@/components/ui/dropdownMenu";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import Pagination from "./pagination";
+import { Pagination } from "./pagination";
+import { View } from "./view";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -85,34 +86,7 @@ export function DataTable<TData, TValue>({
       <CardContent>
         <div>
           <div className="flex flex-row justify-between items-center gap-2 w-full py-4">
-            <div>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="ml-auto">
-                    ستون ها
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  {table
-                    .getAllColumns()
-                    .filter((column) => column.getCanHide())
-                    .map((column) => {
-                      return (
-                        <DropdownMenuCheckboxItem
-                          key={column.id}
-                          className="capitalize"
-                          checked={column.getIsVisible()}
-                          onCheckedChange={(value) =>
-                            column.toggleVisibility(!!value)
-                          }
-                        >
-                          {column.id}
-                        </DropdownMenuCheckboxItem>
-                      );
-                    })}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            <View table={table}/>
             <div className="flex flex-row justify-end items-center gap-2">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -219,40 +193,9 @@ export function DataTable<TData, TValue>({
               </TableBody>
             </Table>
           </div>
-          <div className="flex items-center justify-end space-x-2 py-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <Button variant="outline">
-                  <div className="flex flex-row justify-center gap-2">
-                    <span>سطر</span>
-                    <span>{pageSize}</span>
-                  </div>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                {[10, 50, 100, 200].map((item) => (
-                  <DropdownMenuCheckboxItem
-                    checked={pageSize === item}
-                    key={item}
-                    onClick={() => {
-                      setPageSize(item);
-                      table.setPageSize(item);
-                    }}
-                  >
-                    <div className="flex flex-row justify-center gap-2">
-                      <span>سطر</span>
-                      <span>{item}</span>
-                    </div>
-                  </DropdownMenuCheckboxItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+          <div className="flex items-center justify-end space-x-2 py-4 w-full">
             <Pagination
-              active={table.getState().pagination.pageIndex}
-              setActive={(page) => table.setPageIndex(page)}
-              total={table.getPageCount()}
-              onNext={() => table.nextPage()}
-              onPrev={() => table.previousPage()}
+              table={table}
             />
           </div>
         </div>
