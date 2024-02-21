@@ -1,34 +1,34 @@
-"use client";
+'use client'
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 
-import { Button } from "@/components/ui/button";
-import { usePathname, useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { Button } from '@/components/ui/button'
+import { usePathname, useRouter } from 'next/navigation'
+import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 type List = {
-  title: string;
-  to: string;
-  default?: boolean;
-};
+  title: string
+  to: string
+  default?: boolean
+}
 
 type TabsProps = {
-  children: React.ReactNode;
-  baseUrl: string;
-  lists: List[];
-};
+  children: React.ReactNode
+  baseUrl: string
+  lists: List[]
+}
 
 const TagTabs = ({ children, baseUrl, lists }: TabsProps) => {
   const defaultTab =
-    lists.find((list) => list.default) || lists[lists.length - 1];
-  const [activeTab, setActiveTab] = useState<List | undefined>(defaultTab);
-  const router = useRouter();
-  let pathname = usePathname();
+    lists.find((list) => list.default) || lists[lists.length - 1]
+  const [activeTab, setActiveTab] = useState<List | undefined>(defaultTab)
+  const router = useRouter()
+  let pathname = usePathname()
 
   useEffect(() => {
-    router.push(`${baseUrl}/${defaultTab.to}`);
-  }, []);
+    router.push(`${baseUrl}/${defaultTab.to}`)
+  }, [])
 
   // useEffect(() => {
   //   if(!activeTab){
@@ -57,10 +57,10 @@ const TagTabs = ({ children, baseUrl, lists }: TabsProps) => {
             key={list.to}
             onClick={() => setActiveTab(list)}
             className={cn(
-              "rounded-full px-4 py-2 m-2 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring shadow-mds focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:opacity-80",
+              'rounded-full px-4 py-2 m-2 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring shadow-mds focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:opacity-80',
               list.to === activeTab?.to
-                ? "bg-primary"
-                : "bg-primary-foreground text-muted-foreground border border-muted-foreground"
+                ? 'bg-primary'
+                : 'bg-primary-foreground text-muted-foreground border border-muted-foreground'
             )}
           >
             {list.title}
@@ -69,7 +69,7 @@ const TagTabs = ({ children, baseUrl, lists }: TabsProps) => {
       </div>
       <div className="flex-1 overflow-auto h-full">{children}</div>
     </div>
-  );
-};
+  )
+}
 
-export default TagTabs;
+export default TagTabs

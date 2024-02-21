@@ -1,21 +1,21 @@
-"use client";
+'use client'
 
-import React from "react";
+import React from 'react'
 
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { FilterType } from "@/types/items";
-import { FilterAction } from "./filter_action";
-import { MoreAction } from "./more_action";
-import { ActionItem, ActionItemProp } from "./action_item";
+import { TooltipProvider } from '@/components/ui/tooltip'
+import { FilterType } from '@/types/items'
+import { FilterAction } from './filter_action'
+import { MoreAction } from './more_action'
+import { ActionItem, ActionItemProp } from './action_item'
 
 export interface BaseItem {
-  id: string;
+  id: string
 }
 
 interface ActionMenuProps<DataT> {
-  type: FilterType;
-  item: DataT;
-  aditionalActions?: ActionItemProp<DataT extends BaseItem ? DataT : never>[];
+  type: FilterType
+  item: DataT
+  aditionalActions?: ActionItemProp<DataT extends BaseItem ? DataT : never>[]
 }
 
 export function ActionMenu<DataT>({
@@ -33,5 +33,5 @@ export function ActionMenu<DataT>({
         ))}
       </ul>
     </TooltipProvider>
-  );
+  )
 }

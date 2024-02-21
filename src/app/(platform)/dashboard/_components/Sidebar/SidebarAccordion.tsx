@@ -1,19 +1,19 @@
-import React, { Children, ReactElement, cloneElement } from "react";
+import React, { Children, ReactElement, cloneElement } from 'react'
 
 import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/accordion";
-import { SidebarItemProps } from "./SidebarItem";
-import SidebarItem from "./SidebarItem";
+} from '@/components/ui/accordion'
+import { SidebarItemProps } from './SidebarItem'
+import SidebarItem from './SidebarItem'
 
 type SidebarAccordionProps = {
-  value: string;
-  title: string;
-  icon: React.ReactNode;
-  children: React.ReactNode;
-};
+  value: string
+  title: string
+  icon: React.ReactNode
+  children: React.ReactNode
+}
 
 const SidebarAccordion: React.FC<SidebarAccordionProps> = ({
   value,
@@ -22,8 +22,8 @@ const SidebarAccordion: React.FC<SidebarAccordionProps> = ({
   children,
 }) => {
   const newIcon = cloneElement(icon as ReactElement, {
-    className: "m-4 h-6 w-6",
-  });
+    className: 'm-4 h-6 w-6',
+  })
 
   return (
     <AccordionItem
@@ -38,7 +38,7 @@ const SidebarAccordion: React.FC<SidebarAccordionProps> = ({
       </AccordionTrigger>
       <AccordionContent>{children}</AccordionContent>
     </AccordionItem>
-  );
-};
+  )
+}
 
-export default SidebarAccordion;
+export default SidebarAccordion

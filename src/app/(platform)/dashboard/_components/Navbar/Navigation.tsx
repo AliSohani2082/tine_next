@@ -1,5 +1,5 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react'
+import Link from 'next/link'
 
 import {
   NavigationMenu,
@@ -9,71 +9,71 @@ import {
   NavigationMenuLink,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import { cn } from "@/lib/utils";
-import { GitGraph } from "lucide-react";
+} from '@/components/ui/navigation-menu'
+import { cn } from '@/lib/utils'
+import { GitGraph } from 'lucide-react'
 
 type SingleNavigationItem = {
-  title: string;
-  href: string;
-  description: string;
-};
+  title: string
+  href: string
+  description: string
+}
 type DropdownNavigationItem = {
-  title: string;
-  items: SingleNavigationItem[];
-};
+  title: string
+  items: SingleNavigationItem[]
+}
 
 const components: (SingleNavigationItem | DropdownNavigationItem)[] = [
   {
-    title: "لیست ها",
-    href: "lists",
-    description: "لیست تمام آیتم های دیتابیس را مشاهده میکنید.",
+    title: 'لیست ها',
+    href: 'lists',
+    description: 'لیست تمام آیتم های دیتابیس را مشاهده میکنید.',
   },
   {
-    title: "گراف ها",
+    title: 'گراف ها',
     items: [
       {
-        title: "گراف همکاری",
-        href: "collaboration_graph",
+        title: 'گراف همکاری',
+        href: 'collaboration_graph',
         description:
-          "گراف همکاری برای مشاهده گروه های همکاری از آیتم های دیتابیس را مشاهده میکنید.",
+          'گراف همکاری برای مشاهده گروه های همکاری از آیتم های دیتابیس را مشاهده میکنید.',
       },
       {
-        title: "گراف همرخدادی",
-        href: "co-occurrence_graph",
-        description: "گراف همرخدادی برای مشاهده گروه های هم",
+        title: 'گراف همرخدادی',
+        href: 'co-occurrence_graph',
+        description: 'گراف همرخدادی برای مشاهده گروه های هم',
       },
       {
-        title: "گراف پیوندکتابشناختی",
-        href: "bibliographic_graph",
+        title: 'گراف پیوندکتابشناختی',
+        href: 'bibliographic_graph',
         description:
-          "گراف پیوندکتابشناختی برای مشاهده گراف همکاری از آیتم های دیتابیس را مشاهده می",
+          'گراف پیوندکتابشناختی برای مشاهده گراف همکاری از آیتم های دیتابیس را مشاهده می',
       },
       {
-        title: "گراف هم ارجاعی",
-        href: "referential_graph",
+        title: 'گراف هم ارجاعی',
+        href: 'referential_graph',
         description:
-          "گراف هم ارجاعی برای مشاهده گروه های ه ارجاعی از آیتم های دیتابیس را مشاهده میکنید",
+          'گراف هم ارجاعی برای مشاهده گروه های ه ارجاعی از آیتم های دیتابیس را مشاهده میکنید',
       },
       {
-        title: "گراف ارجاعات",
-        href: "referral_graph",
+        title: 'گراف ارجاعات',
+        href: 'referral_graph',
         description:
-          "گراف ارجاعات برای مشاهده گروه های اارجاعات از آیتم های دیتابیس را مشاهده میکنید",
+          'گراف ارجاعات برای مشاهده گروه های اارجاعات از آیتم های دیتابیس را مشاهده میکنید',
       },
     ],
   },
   {
-    title: "اطلاعات جامع",
-    href: "",
+    title: 'اطلاعات جامع',
+    href: '',
     description:
-      "اطلاعات جامع برای مشاهده اطلاعات جاممع از آیتم های دیتابیس را مشاهده میکنید",
+      'اطلاعات جامع برای مشاهده اطلاعات جاممع از آیتم های دیتابیس را مشاهده میکنید',
   },
-];
+]
 
 const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
+  React.ElementRef<'a'>,
+  React.ComponentPropsWithoutRef<'a'>
 >(({ className, title, children, ...props }, ref) => {
   return (
     <li>
@@ -81,7 +81,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "flex flex-col justify-center items-end select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            'flex flex-col justify-center items-end select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
             className
           )}
           {...props}
@@ -96,20 +96,20 @@ const ListItem = React.forwardRef<
         </a>
       </NavigationMenuLink>
     </li>
-  );
-});
-ListItem.displayName = "ListItem";
+  )
+})
+ListItem.displayName = 'ListItem'
 
 type NavigationProps = {
-  databaseId: string;
-};
+  databaseId: string
+}
 
 const Navigation: React.FC<NavigationProps> = ({ databaseId }) => {
   return (
     <NavigationMenu>
       <NavigationMenuList>
         {components.map((component, index) => {
-          if ("items" in component) {
+          if ('items' in component) {
             return (
               <NavigationMenuItem key={index} title={component.title}>
                 <NavigationMenuTrigger>{component.title}</NavigationMenuTrigger>
@@ -127,7 +127,7 @@ const Navigation: React.FC<NavigationProps> = ({ databaseId }) => {
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
-            );
+            )
           } else {
             return (
               <NavigationMenuItem key={index}>
@@ -141,12 +141,12 @@ const Navigation: React.FC<NavigationProps> = ({ databaseId }) => {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
-            );
+            )
           }
         })}
       </NavigationMenuList>
     </NavigationMenu>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation

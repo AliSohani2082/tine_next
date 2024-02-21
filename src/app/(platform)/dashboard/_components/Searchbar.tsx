@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Search } from "lucide-react";
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Search } from 'lucide-react'
 
 const Searchbar = () => {
-  const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter()
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    router.push(`/search/${searchTerm}`);
-  };
+    e.preventDefault()
+    router.push(`/search/${searchTerm}`)
+  }
 
   return (
     <form
@@ -31,13 +31,13 @@ const Searchbar = () => {
           type="search"
           value={searchTerm}
           onChange={(e) => {
-            setSearchTerm(e.target.value);
+            setSearchTerm(e.target.value)
           }}
           className="flex-1 bg-transparent border-none outline-none focus:outline-none placeholder-gray-500 text-base p-4"
         />
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default Searchbar;
+export default Searchbar

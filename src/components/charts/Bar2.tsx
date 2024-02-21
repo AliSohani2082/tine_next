@@ -1,7 +1,17 @@
 'use client'
 
-import React from 'react';
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React from 'react'
+import {
+  BarChart,
+  Bar,
+  Rectangle,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts'
 
 const data = [
   {
@@ -46,15 +56,40 @@ const data = [
     pv: 4300,
     amt: 2100,
   },
-];
+]
+
+const paperType: {
+  [key: string]: number
+} = {
+  Article: 21406,
+  Book: 21,
+  'Book chapter': 223,
+  'Book Chapter': 43,
+  'Conference paper': 329,
+  'Conference Paper': 471,
+  'Data paper': 135,
+  'Data Paper': 12,
+  Editorial: 231,
+  // "Erratum": 71,
+  Letter: 151,
+  // "Note": 125,
+  // "Retracted": 1,
+  // "Review": 2116,
+  // "Short survey": 68,
+  // "Short Survey": 28
+}
+
+const paperData = Object.keys(paperType).map((key) => ({
+  name: key,
+  number: paperType[key],
+}))
 
 const Bar2 = () => {
-
   return (
     <BarChart
-      width={500}
+      width={1000}
       height={300}
-      data={data}
+      data={paperData}
       margin={{
         top: 5,
         right: 30,
@@ -67,10 +102,13 @@ const Bar2 = () => {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey="pv" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-      <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+      <Bar
+        dataKey="number"
+        fill="#82ca9d"
+        activeBar={<Rectangle fill="gold" stroke="purple" />}
+      />
     </BarChart>
-  );
+  )
 }
 
-export default Bar2;
+export default Bar2

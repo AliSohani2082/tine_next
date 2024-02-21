@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
-type Props = {};
+type Props = {}
 
 const CollaborationGraphPage = (props: Props) => {
-  return <div>CollaborationGraphPage</div>;
-};
+  return <div>CollaborationGraphPage</div>
+}
 
-export default CollaborationGraphPage;
+export default CollaborationGraphPage

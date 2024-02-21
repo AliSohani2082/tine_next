@@ -1,50 +1,50 @@
-"use client";
+'use client'
 
-import React from "react";
-import { Settings, LogOut, User, Sun, Moon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/router";
-import { redirect, usePathname } from "next/navigation";
+import React from 'react'
+import { Settings, LogOut, User, Sun, Moon } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/router'
+import { redirect, usePathname } from 'next/navigation'
 import {
   TooltipProvider,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { useTheme } from "next-themes";
+} from '@/components/ui/tooltip'
+import { useTheme } from 'next-themes'
 
 type MenuItem = {
-  title: string;
-  icon: React.ReactNode;
-  href?: string;
-  action?: () => void;
-};
+  title: string
+  icon: React.ReactNode
+  href?: string
+  action?: () => void
+}
 
 const Menu = () => {
-  const { setTheme, theme } = useTheme();
+  const { setTheme, theme } = useTheme()
 
   const items: MenuItem[] = [
     {
-      title: "پروفایل",
+      title: 'پروفایل',
       icon: <User />,
-      href: "/dashboard",
+      href: '/dashboard',
     },
     {
-      title: "تم",
-      icon: theme === "dark" ? <Moon /> : <Sun />,
-      action: () => setTheme(theme === "dark" ? "light" : "dark"),
+      title: 'تم',
+      icon: theme === 'dark' ? <Moon /> : <Sun />,
+      action: () => setTheme(theme === 'dark' ? 'light' : 'dark'),
     },
     {
-      title: "تنظیمات",
+      title: 'تنظیمات',
       icon: <Settings />,
-      href: "/dashboard",
+      href: '/dashboard',
     },
     {
-      title: "خروج",
+      title: 'خروج',
       icon: <LogOut />,
-      href: "/dashboard",
+      href: '/dashboard',
     },
-  ];
+  ]
 
   return (
     <TooltipProvider>
@@ -57,7 +57,7 @@ const Menu = () => {
                   variant="outline"
                   size="icon"
                   onClick={() =>
-                    item?.action ? item?.action() : redirect(item?.href ?? "")
+                    item?.action ? item?.action() : redirect(item?.href ?? '')
                   }
                   className="rounded-full flex justify-center items-center"
                 >
@@ -72,7 +72,7 @@ const Menu = () => {
         ))}
       </ul>
     </TooltipProvider>
-  );
-};
+  )
+}
 
-export default Menu;
+export default Menu

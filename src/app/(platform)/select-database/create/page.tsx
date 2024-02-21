@@ -1,6 +1,6 @@
-import React from "react";
-import DatabaseForm from "../../dashboard/_components/DatabaseForm/databaseForm";
-import { CardContent } from "@/components/ui/card";
+import React from 'react'
+import DatabaseForm from '../../dashboard/_components/DatabaseForm/databaseForm'
+import { CardContent } from '@/components/ui/card'
 
 const CreatePage = () => {
   return (
@@ -9,7 +9,7 @@ const CreatePage = () => {
         <DatabaseForm />
       </CardContent>
     </>
-  );
-};
+  )
+}
 
-export default CreatePage;
+export default CreatePage

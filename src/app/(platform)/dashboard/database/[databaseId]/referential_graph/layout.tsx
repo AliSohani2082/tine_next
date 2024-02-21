@@ -1,35 +1,35 @@
-import React from "react";
-import TagTabs from "@/components/shared/TagTabs";
-import { TabsContent } from "@/components/ui/tabs";
+import React from 'react'
+import TagTabs from '@/components/shared/TagTabs'
+import { TabsContent } from '@/components/ui/tabs'
 
 const lists: { title: string; to: string }[] = [
   {
-    title: "اسناد",
-    to: "documents",
+    title: 'اسناد',
+    to: 'documents',
   },
   {
-    title: "نویسنده",
-    to: "authors",
+    title: 'نویسنده',
+    to: 'authors',
   },
   {
-    title: "سازمان",
-    to: "organizations",
+    title: 'سازمان',
+    to: 'organizations',
   },
   {
-    title: "کشور",
-    to: "countries",
+    title: 'کشور',
+    to: 'countries',
   },
   {
-    title: "مجله",
-    to: "journals",
+    title: 'مجله',
+    to: 'journals',
   },
-];
+]
 const ReferentialGraphLayout = ({
   params,
   children,
 }: {
-  children: React.ReactNode;
-  params: { databaseId: string };
+  children: React.ReactNode
+  params: { databaseId: string }
 }) => {
   return (
     <TagTabs
@@ -38,7 +38,7 @@ const ReferentialGraphLayout = ({
     >
       {children}
     </TagTabs>
-  );
-};
+  )
+}
 
-export default ReferentialGraphLayout;
+export default ReferentialGraphLayout

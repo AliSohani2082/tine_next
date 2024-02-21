@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
-import { forwardRef, useImperativeHandle } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { forwardRef, useImperativeHandle } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 
-import { CreateDatabase as createDatabaseValidation } from "@/lib/validation";
+import { CreateDatabase as createDatabaseValidation } from '@/lib/validation'
 import {
   Form,
   FormField,
@@ -13,16 +13,16 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/ui/form";
-import InformationBox from "@/components/shared/InformationBox";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Info } from "lucide-react";
+} from '@/components/ui/form'
+import InformationBox from '@/components/shared/InformationBox'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Info } from 'lucide-react'
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hovercard";
+} from '@/components/ui/hovercard'
 
 const InformationForm = forwardRef(
   (
@@ -34,13 +34,13 @@ const InformationForm = forwardRef(
     const form = useForm<z.infer<typeof createDatabaseValidation>>({
       resolver: zodResolver(createDatabaseValidation),
       defaultValues: {
-        name: "",
+        name: '',
       },
-    });
+    })
 
     useImperativeHandle(ref, () => ({
       submitCreateForm: () => form.handleSubmit(onSubmit)(),
-    }));
+    }))
 
     return (
       <div className=" flex flex-row justify-around items-stretch space-y-4 h-full">
@@ -105,10 +105,10 @@ const InformationForm = forwardRef(
           <InformationBox classname="h-full"> توضیحات مربوط به این بخش... </InformationBox>
         </div> */}
       </div>
-    );
+    )
   }
-);
+)
 
-InformationForm.displayName = "InformationForm";
+InformationForm.displayName = 'InformationForm'
 
 export default InformationForm

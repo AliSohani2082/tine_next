@@ -1,15 +1,15 @@
-"use client";
+'use client'
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from 'next/navigation'
 
-import { useDatabase } from "@/hooks/use-databases";
-import { Button } from "@/components/ui/button";
-import { Database, Plus } from "lucide-react";
+import { useDatabase } from '@/hooks/use-databases'
+import { Button } from '@/components/ui/button'
+import { Database, Plus } from 'lucide-react'
 
 const DatabaseList = () => {
-  const { databases } = useDatabase();
-  const router = useRouter();
-  const pathname = usePathname();
+  const { databases } = useDatabase()
+  const router = useRouter()
+  const pathname = usePathname()
 
   return (
     <>
@@ -31,7 +31,7 @@ const DatabaseList = () => {
         <Plus />
       </Button>
     </>
-  );
-};
+  )
+}
 
-export default DatabaseList;
+export default DatabaseList

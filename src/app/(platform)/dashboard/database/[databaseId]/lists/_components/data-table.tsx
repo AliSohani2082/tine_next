@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import * as React from "react";
+import * as React from 'react'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -12,7 +12,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table'
 
 import {
   Table,
@@ -21,25 +21,25 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardContent } from "@/components/ui/iconicCard";
+} from '@/components/ui/table'
+import { Button } from '@/components/ui/button'
+import { Card, CardHeader, CardContent } from '@/components/ui/iconicCard'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuItem,
-} from "@/components/ui/dropdownMenu";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
-import { Pagination } from "./pagination";
-import { View } from "./view";
+} from '@/components/ui/dropdownMenu'
+import { Input } from '@/components/ui/input'
+import { cn } from '@/lib/utils'
+import { Pagination } from './pagination'
+import { View } from './view'
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-  title: string;
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
+  title: string
 }
 
 export function DataTable<TData, TValue>({
@@ -49,11 +49,11 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
-  );
-  const [pageSize, setPageSize] = React.useState(10);
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  )
+  const [pageSize, setPageSize] = React.useState(10)
+  const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
+    React.useState<VisibilityState>({})
 
   const tableOption = {
     data,
@@ -70,13 +70,13 @@ export function DataTable<TData, TValue>({
       columnFilters,
       columnVisibility,
     },
-  };
+  }
 
-  const table = useReactTable(tableOption);
+  const table = useReactTable(tableOption)
 
   const [SearchBy, SetSearchBy] = React.useState(
     table.getAllFlatColumns()[0].id
-  );
+  )
 
   return (
     <Card>
@@ -86,7 +86,7 @@ export function DataTable<TData, TValue>({
       <CardContent>
         <div>
           <div className="flex flex-row justify-between items-center gap-2 w-full py-4">
-            <View table={table}/>
+            <View table={table} />
             <div className="flex flex-row justify-end items-center gap-2">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -109,9 +109,9 @@ export function DataTable<TData, TValue>({
                         className="capitalize"
                         checked={column.id === SearchBy}
                         onCheckedChange={() => {
-                          SetSearchBy(column.id);
-                          table.getColumn(column.id)?.setFilterValue("");
-                          setColumnFilters([]);
+                          SetSearchBy(column.id)
+                          table.getColumn(column.id)?.setFilterValue('')
+                          setColumnFilters([])
                         }}
                       >
                         {column.id}
@@ -121,12 +121,12 @@ export function DataTable<TData, TValue>({
               </DropdownMenu>
               <span className="ml-3">:</span>
               <span className="font-bold mr-3 text-sm w-[250px]">
-                جست و جو براساس{" "}
+                جست و جو براساس{' '}
               </span>
               <Input
                 placeholder="جست و جو"
                 value={
-                  (table.getColumn(SearchBy)?.getFilterValue() as string) ?? ""
+                  (table.getColumn(SearchBy)?.getFilterValue() as string) ?? ''
                 }
                 onChange={(event) =>
                   table.getColumn(SearchBy)?.setFilterValue(event.target.value)
@@ -150,7 +150,7 @@ export function DataTable<TData, TValue>({
                                 header.getContext()
                               )}
                         </TableHead>
-                      );
+                      )
                     })}
                   </TableRow>
                 ))}
@@ -160,16 +160,16 @@ export function DataTable<TData, TValue>({
                   table.getRowModel().rows.map((row) => (
                     <TableRow
                       key={row.id}
-                      data-state={row.getIsSelected() && "selected"}
+                      data-state={row.getIsSelected() && 'selected'}
                     >
                       {row.getVisibleCells().map((cell) => (
                         <TableCell
                           key={cell.id}
                           className={cn(
-                            "p-2 px-10",
-                            cell.id.split("_")[1] === "Actions"
-                              ? "flex flex-row justify-end"
-                              : ""
+                            'p-2 px-10',
+                            cell.id.split('_')[1] === 'Actions'
+                              ? 'flex flex-row justify-end'
+                              : ''
                           )}
                         >
                           {flexRender(
@@ -194,12 +194,10 @@ export function DataTable<TData, TValue>({
             </Table>
           </div>
           <div className="flex items-center justify-end space-x-2 py-4 w-full">
-            <Pagination
-              table={table}
-            />
+            <Pagination table={table} />
           </div>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

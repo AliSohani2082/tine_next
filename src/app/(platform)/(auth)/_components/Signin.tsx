@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import * as z from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 import {
   Form,
@@ -13,20 +13,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import Loader from "@/components/shared/Loader";
-import { useToast } from "@/components/ui/use-toast";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import Loader from '@/components/shared/Loader'
+import { useToast } from '@/components/ui/use-toast'
 
-import { Login as SigninValidation } from "@/lib/validation";
+import { Login as SigninValidation } from '@/lib/validation'
 // import { useSignInAccount } from '@/lib/react-query/queries';
 // import { useUserContext } from '@/context/AuthContext';
 
 const SigninForm = () => {
-  const { toast } = useToast();
-  const router = useRouter();
+  const { toast } = useToast()
+  const router = useRouter()
   // const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
   // Query
@@ -35,10 +35,10 @@ const SigninForm = () => {
   const form = useForm<z.infer<typeof SigninValidation>>({
     resolver: zodResolver(SigninValidation),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
-  });
+  })
 
   const handleSignin = async (user: z.infer<typeof SigninValidation>) => {
     // const session = await signInAccount(user);
@@ -54,7 +54,7 @@ const SigninForm = () => {
     //   toast({ title: 'Login failed. Please try again.' });
     //   return;
     // }
-  };
+  }
 
   return (
     <Form {...form}>
@@ -113,7 +113,7 @@ const SigninForm = () => {
           </Button>
 
           <p className="text-small-regular text-light-2 text-center mt-2">
-            حساب کاربری ندارید؟{" "}
+            حساب کاربری ندارید؟{' '}
             <Link
               href="/sign-up"
               className="text-primary-500 text-small-semibold ml-1 text-sky-700"
@@ -124,7 +124,7 @@ const SigninForm = () => {
         </form>
       </div>
     </Form>
-  );
-};
+  )
+}
 
-export default SigninForm;
+export default SigninForm

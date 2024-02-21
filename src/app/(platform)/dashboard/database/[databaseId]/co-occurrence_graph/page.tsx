@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
-type Props = {};
+type Props = {}
 
 const CoOccurrenceGraphPage = (props: Props) => {
-  return <div>CoOccurrenceGraphPage</div>;
-};
+  return <div>CoOccurrenceGraphPage</div>
+}
 
-export default CoOccurrenceGraphPage;
+export default CoOccurrenceGraphPage

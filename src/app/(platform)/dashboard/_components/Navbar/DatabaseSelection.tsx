@@ -1,37 +1,37 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import { ChevronsUpDown, Database, Plus } from "lucide-react";
-import { redirect } from "next/navigation";
+import * as React from 'react'
+import { ChevronsUpDown, Database, Plus } from 'lucide-react'
+import { redirect } from 'next/navigation'
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "@/components/ui/command";
+} from '@/components/ui/command'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { useDatabase } from "@/hooks/use-databases";
-import { IDatabase } from "@/types";
+} from '@/components/ui/popover'
+import { useDatabase } from '@/hooks/use-databases'
+import { IDatabase } from '@/types'
 
 export function DatabaseSelection({
   databaseId,
 }: {
-  databaseId: string | undefined;
+  databaseId: string | undefined
 }) {
-  const { databases } = useDatabase();
+  const { databases } = useDatabase()
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState<IDatabase | undefined>(
     databaseId ? databases.find((db) => db.id === databaseId) : undefined
-  );
+  )
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -43,7 +43,7 @@ export function DatabaseSelection({
           className="w-[200px] h-[50px] justify-between"
         >
           <Database className="mr-2 h-6 w-6 text-primary" />
-          {value ? value.name : "یک دیتابیس انتخاب کنید"}
+          {value ? value.name : 'یک دیتابیس انتخاب کنید'}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -56,13 +56,13 @@ export function DatabaseSelection({
               value="ایجاد دیتابیس جدید"
               className="flex items-center justify-end py-4 cursor-pointer group"
               onSelect={() => {
-                redirect("/dashboard");
+                redirect('/dashboard')
               }}
             >
               <span>ایجاد دیتابیس جدید</span>
               <Plus
                 className={cn(
-                  "mr-2 h-6 w-6 mx-4 text-muted-foreground group-hover:text-primary"
+                  'mr-2 h-6 w-6 mx-4 text-muted-foreground group-hover:text-primary'
                 )}
               />
             </CommandItem>
@@ -74,15 +74,15 @@ export function DatabaseSelection({
                   value={database.name}
                   className="flex items-center justify-end py-4 group"
                   onSelect={(currentValue) => {
-                    setOpen(false);
-                    setValue(databases.find((db) => db.name === currentValue));
-                    redirect(`/daashboard/database/${databaseId}`);
+                    setOpen(false)
+                    setValue(databases.find((db) => db.name === currentValue))
+                    redirect(`/daashboard/database/${databaseId}`)
                   }}
                 >
                   {database.name}
                   <Database
                     className={cn(
-                      "mr-2 h-6 w-6 mx-4 text-muted-foreground group-hover:text-primary"
+                      'mr-2 h-6 w-6 mx-4 text-muted-foreground group-hover:text-primary'
                     )}
                   />
                 </CommandItem>
@@ -91,5 +91,5 @@ export function DatabaseSelection({
         </Command>
       </PopoverContent>
     </Popover>
-  );
+  )
 }

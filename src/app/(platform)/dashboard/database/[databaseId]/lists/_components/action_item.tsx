@@ -1,26 +1,26 @@
-"use client";
+'use client'
 
-import { cloneElement } from "react";
+import { cloneElement } from 'react'
 
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@/components/ui/tooltip";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/tooltip'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 export interface BaseItem {
-  id: string;
+  id: string
 }
 
 type CoreActionItemProp<DataT> = {
-  isActive: boolean;
-  item: DataT;
-  label: string;
-  icon: React.ReactNode;
-  onClick?: (item: DataT) => void;
-};
+  isActive: boolean
+  item: DataT
+  label: string
+  icon: React.ReactNode
+  onClick?: (item: DataT) => void
+}
 
 function CoreActionItem<DataT>({
   isActive,
@@ -30,15 +30,15 @@ function CoreActionItem<DataT>({
   onClick,
 }: CoreActionItemProp<DataT extends BaseItem ? DataT : never>) {
   const newIcon = cloneElement(icon as React.ReactElement, {
-    className: cn("h-5 w-5", isActive ? "text-muted" : "text-primary"),
-  });
+    className: cn('h-5 w-5', isActive ? 'text-muted' : 'text-primary'),
+  })
 
   return (
     <Tooltip>
       <TooltipTrigger asChild className="group">
         <Button
           onClick={() => onClick && onClick(item)}
-          variant={isActive ? "reverseOutline" : "outline"}
+          variant={isActive ? 'reverseOutline' : 'outline'}
           className="h-10 w-10 p-2"
         >
           {newIcon}
@@ -48,20 +48,20 @@ function CoreActionItem<DataT>({
         <span>{label}</span>
       </TooltipContent>
     </Tooltip>
-  );
+  )
 }
 
 export type ActionItemProp<DataT> = {
-  item: DataT;
-  isActive: boolean;
-  label: string;
-  icon: React.ReactNode;
-  onClick?: (item: DataT) => void;
+  item: DataT
+  isActive: boolean
+  label: string
+  icon: React.ReactNode
+  onClick?: (item: DataT) => void
   wraper?: {
-    component: React.ReactNode;
-    wrap: React.ComponentType<any>;
-  };
-};
+    component: React.ReactNode
+    wrap: React.ComponentType<any>
+  }
+}
 
 export function ActionItem<DataT>({
   isActive,
@@ -79,7 +79,7 @@ export function ActionItem<DataT>({
       onClick={onClick}
       isActive={isActive}
     />
-  );
+  )
   return (
     <>
       {wraper ? (
@@ -88,5 +88,5 @@ export function ActionItem<DataT>({
         coreAction
       )}
     </>
-  );
+  )
 }

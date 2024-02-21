@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
-type Props = {};
+type Props = {}
 
 const AuthorsPage = (props: Props) => {
-  return <div>AuthorsPage</div>;
-};
+  return <div>AuthorsPage</div>
+}
 
-export default AuthorsPage;
+export default AuthorsPage

@@ -1,5 +1,5 @@
-import React from "react";
-import { useRouter } from "next/navigation";
+import React from 'react'
+import { useRouter } from 'next/navigation'
 
 import {
   Card,
@@ -7,13 +7,13 @@ import {
   CardTitle,
   CardContent,
   CardHeader,
-} from "@/components/ui/card";
-import { useDatabase } from "@/hooks/use-databases";
-import { Button } from "@/components/ui/button";
-import { Database } from "lucide-react";
-import DatabaseList from "./_components/databaseList";
+} from '@/components/ui/card'
+import { useDatabase } from '@/hooks/use-databases'
+import { Button } from '@/components/ui/button'
+import { Database } from 'lucide-react'
+import DatabaseList from './_components/databaseList'
 
-type Props = {};
+type Props = {}
 
 const SelectDatabasePage = (props: Props) => {
   return (
@@ -30,7 +30,7 @@ const SelectDatabasePage = (props: Props) => {
         <DatabaseList />
       </CardContent>
     </>
-  );
-};
+  )
+}
 
-export default SelectDatabasePage;
+export default SelectDatabasePage

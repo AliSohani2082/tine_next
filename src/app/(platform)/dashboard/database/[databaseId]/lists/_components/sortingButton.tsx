@@ -1,15 +1,15 @@
-import { ArrowDown, ArrowUp, ArrowUpDown, EyeOff } from "lucide-react"
-import { Column } from "@tanstack/react-table"
+import { ArrowDown, ArrowUp, ArrowUpDown, EyeOff } from 'lucide-react'
+import { Column } from '@tanstack/react-table'
 
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdownMenu"
-import { Button } from "@/components/ui/button"
+} from '@/components/ui/dropdownMenu'
+import { Button } from '@/components/ui/button'
 
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -27,7 +27,7 @@ export default function SortingButton<TData, TValue>({
   }
 
   return (
-    <div className={cn("flex items-center space-x-2", className)}>
+    <div className={cn('flex items-center space-x-2', className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -36,9 +36,9 @@ export default function SortingButton<TData, TValue>({
             className="-ml-3 h-8 data-[state=open]:bg-accent"
           >
             <span>{title}</span>
-            {column.getIsSorted() === "desc" ? (
+            {column.getIsSorted() === 'desc' ? (
               <ArrowDown className="ml-2 h-4 w-4" />
-            ) : column.getIsSorted() === "asc" ? (
+            ) : column.getIsSorted() === 'asc' ? (
               <ArrowUp className="ml-2 h-4 w-4" />
             ) : (
               <ArrowUpDown className="ml-2 h-4 w-4" />

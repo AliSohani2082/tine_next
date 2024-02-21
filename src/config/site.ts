@@ -1,4 +1,4 @@
 export const siteConfig = {
-  name: "Tine",
-  description: "This is a platform to analize articles",
-};
+  name: 'Tine',
+  description: 'This is a platform to analize articles',
+}

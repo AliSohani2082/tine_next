@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
+import * as z from 'zod'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 
 import {
   Form,
@@ -13,33 +13,33 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import Loader from "@/components/shared/Loader";
-import { useToast } from "@/components/ui/use-toast";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import Loader from '@/components/shared/Loader'
+import { useToast } from '@/components/ui/use-toast'
 
 // import {
 //   useCreateUserAccount,
 //   useSignInAccount,
 // } from '@/lib/react-query/queries';
-import { Signup as SignupValidation } from "@/lib/validation";
+import { Signup as SignupValidation } from '@/lib/validation'
 // import { useUserContext } from '@/context/AuthContext';
 
 const SignupForm = () => {
-  const { toast } = useToast();
-  const router = useRouter();
+  const { toast } = useToast()
+  const router = useRouter()
   // const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
     defaultValues: {
-      name: "",
-      username: "",
-      email: "",
-      password: "",
+      name: '',
+      username: '',
+      email: '',
+      password: '',
     },
-  });
+  })
 
   // Queries
   // const { mutateAsync: createUserAccount, isPending: isCreatingAccount } =
@@ -75,7 +75,7 @@ const SignupForm = () => {
     // } catch (error) {
     //   console.log({ error });
     // }
-  };
+  }
 
   return (
     <Form {...form}>
@@ -173,7 +173,7 @@ const SignupForm = () => {
           </Button>
 
           <p className="text-small-regular text-light-2 text-center mt-2">
-            حساب کاربری دارید؟{" "}
+            حساب کاربری دارید؟{' '}
             <Link
               href="/sign-in"
               className="text-primary-500 text-small-semibold ml-1 text-sky-700"
@@ -184,7 +184,7 @@ const SignupForm = () => {
         </form>
       </div>
     </Form>
-  );
-};
+  )
+}
 
-export default SignupForm;
+export default SignupForm

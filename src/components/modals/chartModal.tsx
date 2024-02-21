@@ -1,7 +1,12 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '../ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from '../ui/dialog'
 import { X } from 'lucide-react'
 import { Button } from '../ui/button'
 
@@ -12,7 +17,12 @@ type ChartModalProps = {
   children: React.ReactNode
 }
 
-const ChartModal: React.FC<ChartModalProps> = ({ onClose, isOpen, loading = false, children }) => {
+const ChartModal: React.FC<ChartModalProps> = ({
+  onClose,
+  isOpen,
+  loading = false,
+  children,
+}) => {
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
@@ -21,19 +31,17 @@ const ChartModal: React.FC<ChartModalProps> = ({ onClose, isOpen, loading = fals
 
   const onChange = (open: boolean) => {
     if (!open) {
-      onClose();
+      onClose()
     }
-  };
-  
-  if(!isMounted) {
-    return null;
+  }
+
+  if (!isMounted) {
+    return null
   }
 
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
-      <DialogContent>
-        {children}
-      </DialogContent>
+      <DialogContent>{children}</DialogContent>
     </Dialog>
   )
 }

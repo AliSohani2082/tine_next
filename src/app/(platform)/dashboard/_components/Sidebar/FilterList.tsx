@@ -1,23 +1,23 @@
-import React from "react";
-import { Book, X, Globe2, Filter, User } from "lucide-react";
+import React from 'react'
+import { Book, X, Globe2, Filter, User } from 'lucide-react'
 
-import SidebarAccordion from "./SidebarAccordion";
+import SidebarAccordion from './SidebarAccordion'
 import {
   Command,
   CommandInput,
   CommandEmpty,
   CommandGroup,
   CommandItem,
-} from "@/components/ui/command";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { useFilters } from "@/hooks/use-filter";
-import { authors, documents, countries } from "@/data/tableData";
-import FilterItem from "./FilterItem";
+} from '@/components/ui/command'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { useFilters } from '@/hooks/use-filter'
+import { authors, documents, countries } from '@/data/tableData'
+import FilterItem from './FilterItem'
 
-type FiltersProps = {};
+type FiltersProps = {}
 
 const FilterList = (props: FiltersProps) => {
-  const { filters, remove: removeFilter } = useFilters();
+  const { filters, remove: removeFilter } = useFilters()
   return (
     <SidebarAccordion value="filter" icon={<Filter />} title="فیلتر ها">
       <Command className="rounded-lg border shadow-md overflow-auto">
@@ -48,34 +48,34 @@ const FilterList = (props: FiltersProps) => {
         <CommandGroup className="flex flex-col justify-start items-stretch w-full h-full">
           <ScrollArea>
             {filters.map((filter) => {
-              var data;
-              if (filter.type === "author") {
+              var data
+              if (filter.type === 'author') {
                 const author = authors.find(
                   (author) => author.id === filter.dataId
-                );
-                if (author === undefined) return null;
+                )
+                if (author === undefined) return null
                 data = author && {
-                  title: author.firstName + " " + author.lastName,
+                  title: author.firstName + ' ' + author.lastName,
                   icon: <User />,
-                };
-              } else if (filter.type === "document") {
+                }
+              } else if (filter.type === 'document') {
                 const document = documents.find(
                   (document) => document.id === filter.dataId
-                );
-                if (document === undefined) return null;
+                )
+                if (document === undefined) return null
                 data = document && {
                   title: document.title,
                   icon: <Book />,
-                };
-              } else if (filter.type === "country") {
+                }
+              } else if (filter.type === 'country') {
                 const country = countries.find(
                   (country) => country.id === filter.dataId
-                );
-                if (country === undefined) return null;
+                )
+                if (country === undefined) return null
                 data = {
                   title: country.name,
                   icon: <Globe2 />,
-                };
+                }
               }
               if (data)
                 return (
@@ -85,13 +85,13 @@ const FilterList = (props: FiltersProps) => {
                     removeFilter={removeFilter}
                     key={filter.id}
                   />
-                );
+                )
             })}
           </ScrollArea>
         </CommandGroup>
       </Command>
     </SidebarAccordion>
-  );
-};
+  )
+}
 
-export default FilterList;
+export default FilterList

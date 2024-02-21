@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
-type Props = {};
+type Props = {}
 
 const ReferralGraphPage = (props: Props) => {
-  return <div>ReferralGraphPage</div>;
-};
+  return <div>ReferralGraphPage</div>
+}
 
-export default ReferralGraphPage;
+export default ReferralGraphPage

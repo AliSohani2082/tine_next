@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
-type Props = {};
+type Props = {}
 
 const OrganizationsPage = (props: Props) => {
-  return <div>OrganizationsPage</div>;
-};
+  return <div>OrganizationsPage</div>
+}
 
-export default OrganizationsPage;
+export default OrganizationsPage

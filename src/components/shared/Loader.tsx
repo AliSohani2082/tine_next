@@ -8,6 +8,6 @@ const Loader = () => (
       className="animate-spin"
     />
   </div>
-);
+)
 
-export default Loader;
+export default Loader

@@ -1,60 +1,60 @@
-"use client";
+'use client'
 
-import React, { useState, useEffect } from "react";
-import { toast } from "sonner";
-import { X } from "lucide-react";
+import React, { useState, useEffect } from 'react'
+import { toast } from 'sonner'
+import { X } from 'lucide-react'
 
-import { CommandItem } from "@/components/ui/command";
-import { Button } from "@/components/ui/button";
-import { IFilter } from "@/types";
-import { cn } from "@/lib/utils";
-import { useDownSlider } from "@/hooks/use-downSlider";
+import { CommandItem } from '@/components/ui/command'
+import { Button } from '@/components/ui/button'
+import { IFilter } from '@/types'
+import { cn } from '@/lib/utils'
+import { useDownSlider } from '@/hooks/use-downSlider'
 
 type FilterItemProps = {
-  filter: IFilter;
+  filter: IFilter
   data: {
-    title: string;
-    icon: React.ReactNode;
-  };
-  removeFilter: (id: string) => void;
-};
+    title: string
+    icon: React.ReactNode
+  }
+  removeFilter: (id: string) => void
+}
 
 const FilterItem: React.FC<FilterItemProps> = ({
   filter,
   data,
   removeFilter,
 }) => {
-  const { onOpen, onClose, isOpen, item: sliderItem } = useDownSlider();
-  const [isActive, setIsActive] = useState(false);
+  const { onOpen, onClose, isOpen, item: sliderItem } = useDownSlider()
+  const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
     setIsActive(
       isOpen &&
         filter.dataId === sliderItem?.id &&
         filter.type === sliderItem?.type
-    );
-  }, [isOpen, sliderItem, filter]);
+    )
+  }, [isOpen, sliderItem, filter])
 
   return (
     <CommandItem
       key={filter.id}
       className={cn(
-        "border-2 rounded-md  h-10 p-0 px-2 m-1",
-        isActive ? "bg-primary text-muted" : ""
+        'border-2 rounded-md  h-10 p-0 px-2 m-1',
+        isActive ? 'bg-primary text-muted' : ''
       )}
     >
       <div
         className="w-full h-full flex flex-row justify-start items-center"
         onClick={() => {
           if (isActive) {
-            setIsActive(false);
-            onClose();
+            setIsActive(false)
+            onClose()
           } else {
-            setIsActive(true);
+            setIsActive(true)
             onOpen({
               id: filter.dataId,
               type: filter.type,
-            });
+            })
           }
         }}
       >
@@ -66,14 +66,14 @@ const FilterItem: React.FC<FilterItemProps> = ({
       <Button
         variant="ghost"
         onClick={() => {
-          removeFilter(filter.id);
-          toast.success("فیلتر با موفقیت حذف شد");
+          removeFilter(filter.id)
+          toast.success('فیلتر با موفقیت حذف شد')
         }}
       >
         <X />
       </Button>
     </CommandItem>
-  );
-};
+  )
+}
 
-export default FilterItem;
+export default FilterItem

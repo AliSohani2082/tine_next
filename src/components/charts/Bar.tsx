@@ -1,69 +1,90 @@
 'use client'
 
-import ResizableBox from "@/components/ui/resizableBox";
-import useDemoConfig from "../useDemoConfig";
-import React from "react";
-import { AxisOptions } from "react-charts";
+import React, { useState, useEffect } from 'react'
+import { Bar } from 'react-chartjs-2'
+import { Chart as ChartJS } from 'chart.js/auto' // Import required types from Chart.js
 
-import { Bar as Barr, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
-
-const Bar = () => {
-  const { data, randomizeData } = useDemoConfig({
-    series: 3,
-    dataType: "ordinal",
-  });
-
-  const primaryAxis = React.useMemo<
-    AxisOptions<typeof data[number]["data"][number]>
-  >(
-    () => ({
-      getValue: (datum: any) => datum.primary,
-    }),
-    []
-  );
-
-  const secondaryAxes = React.useMemo<
-    AxisOptions<typeof data[number]["data"][number]>[]
-  >(
-    () => [
-      {
-        getValue: (datum: any) => datum.secondary,
-      },
-    ],
-    []
-  );
-
-  return (
-    <>
-      <button onClick={randomizeData}>Randomize Data</button>
-      <br />
-      <br />
-      <ResizableBox>
-        <BarChart data={data}>
-          <XAxis
-            dataKey="name"
-            stroke="#888888"
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-          />
-          <YAxis
-            stroke="#888888"
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-            tickFormatter={(value) => `$${value}`}
-          />
-          <Barr
-            dataKey="total"
-            fill="currentColor"
-            radius={[4, 4, 0, 0]}
-            className="fill-primary"
-          />
-        </BarChart>
-      </ResizableBox>
-    </>
-  );
+// Type definitions for data and options
+interface BarChartData {
+  labels: string[]
+  datasets: {
+    label: string
+    data: number[]
+    backgroundColor?: string[]
+    borderColor?: string[]
+  }[]
 }
 
-export default Bar;
+interface BarChartOptions {
+  responsive: boolean
+  maintainAspectRatio: boolean
+  title?: {
+    display: boolean
+    text: string
+    fontSize: number
+  }
+  legend?: {
+    display: boolean
+    position: 'top' | 'bottom' | 'left' | 'right'
+    labels: {
+      fontSize: number
+    }
+  }
+  scales?: {
+    xAxes?: {
+      // Optional x-axis options
+      ticks: {
+        beginAtZero: boolean // Optional property
+      }
+    }
+    yAxes: [
+      {
+        // Ensure type compatibility with TimeScaleTickOptions:
+        ticks: {
+          beginAtZero: true
+          // Add a placeholder for other TimeScaleTickOptions if needed:
+          // ...otherTimeScaleTickOptions,
+        }
+      }
+    ]
+  }
+}
+
+const BarChartComponent: React.FC<BarChartData & BarChartOptions> = ({
+  labels,
+  datasets,
+  responsive = true,
+  maintainAspectRatio = false,
+  title,
+  legend,
+  scales,
+  ...rest
+}) => {
+  const [chartData, setChartData] = useState<BarChartData>({
+    labels,
+    datasets,
+  })
+
+  useEffect(() => {
+    setChartData({
+      labels,
+      datasets,
+    })
+  }, [labels, datasets])
+
+  return (
+    <Bar
+      data={chartData}
+      options={{
+        responsive,
+        maintainAspectRatio,
+        // title,
+        // legend,
+        // scales,
+        ...rest, // Allow passing additional options
+      }}
+    />
+  )
+}
+
+export default BarChartComponent

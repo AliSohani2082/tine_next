@@ -1,10 +1,10 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react'
+import Image from 'next/image'
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
 interface AuthPageProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const AuthLayout: React.FC<AuthPageProps> = ({ children }) => {
@@ -25,7 +25,7 @@ const AuthLayout: React.FC<AuthPageProps> = ({ children }) => {
         {children}
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default AuthLayout;
+export default AuthLayout

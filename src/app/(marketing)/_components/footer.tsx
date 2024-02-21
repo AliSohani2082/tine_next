@@ -1,5 +1,5 @@
-import { Logo } from "@/components/shared/Logo";
-import { Button } from "@/components/ui/button";
+import { Logo } from '@/components/shared/Logo'
+import { Button } from '@/components/ui/button'
 
 export const Footer = () => {
   return (
@@ -16,5 +16,5 @@ export const Footer = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

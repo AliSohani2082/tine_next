@@ -1,4 +1,4 @@
-import { FeatureCollection } from "geojson";
+import { FeatureCollection } from 'geojson'
 
 export const numData: { code: string; value: number; name: string }[] = [
   {
@@ -1231,7 +1231,7 @@ export const numData: { code: string; value: number; name: string }[] = [
     code: 'TWN',
     value: 23588932,
   },
-];
+]
 
 export const geoData: FeatureCollection = {
   type: 'FeatureCollection',
@@ -14441,4 +14441,4 @@ export const geoData: FeatureCollection = {
       id: 'ZWE',
     },
   ],
-};
+}

@@ -1,16 +1,16 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { LogOut, Settings } from "lucide-react";
+import Link from 'next/link'
+import { LogOut, Settings } from 'lucide-react'
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdownMenu";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+} from '@/components/ui/dropdownMenu'
+import { Button } from '@/components/ui/button'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 
 const Account = () => {
   return (
@@ -37,7 +37,7 @@ const Account = () => {
     //     ))}
     //   </DropdownMenuContent>
     // </DropdownMenu>
-  );
-};
+  )
+}
 
-export default Account;
+export default Account
