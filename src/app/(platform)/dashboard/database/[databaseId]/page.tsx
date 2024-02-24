@@ -10,6 +10,7 @@ import { cn, farsiNumber } from '@/lib/utils'
 import { Book, Globe2, User } from 'lucide-react'
 import countryData from 'public/country-paper.json'
 import papaerTypes from 'public/paper-type.json'
+import numbers from 'public/numbers.json'
 
 const infoCards: {
   title: string
@@ -20,19 +21,19 @@ const infoCards: {
   {
     title: 'مقالات',
     icon: <Book size={40} />,
-    number: 200,
+    number: numbers["articles"],
     color: 'text-blue-400',
   },
   {
     title: 'نویسندگان',
     icon: <User size={40} />,
-    number: 50,
+    number: numbers["authors"],
     color: 'text-green-400',
   },
   {
     title: 'کشور ها',
     icon: <Globe2 size={40} />,
-    number: 41,
+    number: numbers["documents"],
     color: 'text-red-400',
   },
 ]
@@ -48,7 +49,7 @@ const pieChartLabels = Object.keys(papaerTypes);
 const OraganizationPage = ({ params }: { params: { databaseId: string } }) => {
   return (
     <div className="flex w-full h-full px-16 overflow-auto flex-col">
-      <div className="w-full flex py-10 justify-around items-center">
+      <div className="w-full flex py-5 justify-around items-center">
         {infoCards.map((infoCard) => (
           <Card key={infoCard.title}>
             <CardContent className="flex p-4 px-10 flex-col justify-center items-center">
@@ -57,35 +58,26 @@ const OraganizationPage = ({ params }: { params: { databaseId: string } }) => {
                 {infoCard.icon}
               </div>
               <span className={cn('text-3xl mt-3', infoCard.color)}>
-                #{farsiNumber(infoCard.number)}
+                #{infoCard.number}
               </span>
             </CardContent>
           </Card>
         ))}
       </div>
       <div className="flex flex-col m-4 gap-4">
-        <div className="flex flex-row gap-4">
-          <ChartCard className='h-80 w-1/2'>
+        <div className="flex flex-row justify-stretch items-stretch gap-4">
+          <ChartCard className='w-3/4'>
+            {/* <div>1</div> */}
             <LineChart data={lineChartData} labels={lineChartLabels}/>
           </ChartCard>
           <ChartCard className="flex-1">
+            {/* <div>2</div> */}
             <PieChart data={pieChartData} labels={pieChartLabels}/>
           </ChartCard>
         </div>
         <div className="flex flex-row gap-4">
-          {/* <ChartCard>
-            <Bar
-              responsive
-              maintainAspectRatio
-              labels={["chart"]}
-              datasets={[{
-                label: "chart",
-                data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                backgroundColor: ["#007bff", "#dc3545", "#ffc107", "#17a2b8", "#28a745", "#6c757d", "#343a40", "#f4623a", "#f4623a", "#f4623a"],
-              }]}
-            />
-          </ChartCard> */}
           <ChartCard className="w-full">
+            {/* <div>3</div> */}
             <Map data={countryData} width={400} height={180} />
           </ChartCard>
         </div>

@@ -39,18 +39,11 @@ const CustomChart: React.FC<ChartProps> = ({ data, labels }) => {
             responsive: true,
             plugins: {
               legend: {
-                position: 'top',
+                display: false
               },
               title: {
-                display: true,
-                text: 'Pie Chart Example',
+                display: false,
               },
-              // tooltips: {
-              //   enabled: false,
-              //   custom: (tooltipModel) => {
-              //     setTooltipModel(tooltipModel);
-              //   },
-              // },
             },
           },
         });
@@ -66,7 +59,7 @@ const CustomChart: React.FC<ChartProps> = ({ data, labels }) => {
 
   return (
     <div>
-      <canvas ref={chartRef} />
+      <canvas ref={chartRef} className='font-mono' />
       {tooltipModel && <Tooltip tooltipModel={tooltipModel} />}
     </div>
   );

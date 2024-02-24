@@ -35,6 +35,16 @@ const pages = [
     icon: <Waypoints />,
   },
   {
+    title: 'گراف مقالات',
+    to: 'word_tree',
+    icon: <Waypoints />,
+  },
+  {
+    title: 'گراف سلسله مراتب',
+    to: 'hierarchical',
+    icon: <Waypoints />,
+  },
+  {
     title: 'اطلاعات جامع',
     to: '',
     icon: <Book />,

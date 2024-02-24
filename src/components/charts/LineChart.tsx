@@ -58,7 +58,7 @@ const LineChart: React.FC<LineChartProps> = ({ data, labels }) => {
     };
   }, [data, labels]);
 
-  return <canvas ref={chartRef} />;
+  return <canvas ref={chartRef} className='w-full h-full' />;
 };
 
 export default LineChart;

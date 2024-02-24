@@ -72,17 +72,16 @@ const WorldMap: React.FC<WorldMapProps> = ({ data, width, height }) => {
 
   const handleZoomIn = () => {
     if (position.zoom >= 4) return
-    setPosition((prev) => ({ ...prev, zoom: prev.zoom + 0.5 }))
+    setPosition((prev) => ({ ...prev, zoom: prev.zoom + 1 }))
   }
 
   const handleZoomOut = () => {
-    if (position.zoom <= 1){
-      return setPosition((prev) => ({ ...prev, zoom: prev.zoom - 0.5 }))
-    }
+    if (position.zoom <= 1) return 
+    setPosition((prev) => ({ ...prev, zoom: prev.zoom - 1 }))
   }
 
   const handleCenter = () => {
-    setPosition({ zoom: 1.75, coordinates: [81, 13] })
+    setPosition({ zoom: 1, coordinates: [1, 1] })
   }
 
   const handleMoveEnd = (position: {
@@ -94,11 +93,12 @@ const WorldMap: React.FC<WorldMapProps> = ({ data, width, height }) => {
 
   const id = useId()
   return (
-    <div className='relative'>
+    <div className='relative h-[600px] overflow-clip'>
       {/* Map 🗺️ */}
       <ComposableMap
-        width={width}
-        height={height}
+        // width={width}
+        height={600}
+        className='overflow-hidden'
         projection="geoMercator"
       >
         <ZoomableGroup

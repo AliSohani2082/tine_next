@@ -8,8 +8,6 @@ import './globals.css'
 import { siteConfig } from '@/config/site'
 import Background from './background'
 import { Toaster } from '@/components/ui/sonner'
-import { useTheme } from '@/hooks/use-theme'
-import { useEffect } from 'react'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -48,12 +46,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ThemeProvider
+      {/* <ThemeProvider
         attribute="class"
         defaultTheme="system"
         enableSystem
         disableTransitionOnChange
-      >
+      > */}
         <body
           className={`${inter.variable} ${persian.variable} font-mono bg-background`}
         >
@@ -61,7 +59,7 @@ export default function RootLayout({
           <SpeedInsights />
           <Toaster />
         </body>
-      </ThemeProvider>
+      {/* </ThemeProvider> */}
     </html>
   )
 }

@@ -34,8 +34,9 @@ const PageTabs = ({ databaseId, pages, baseUrl, children }: TabsProps) => {
   type PagesName = (typeof pagesName)[number]
   const [afterUrl, setAfterUrl] = useState<Record<PagesName, string>>()
   useEffect(() => {
-    console.log('first time rendering.')
-    router.push(`${baseUrl}/${defaultPage.to}`)
+    if (pathname.startsWith(baseUrl)) {
+      setActiveTab(pages.find((p) => pathname.slice(baseUrl.length).split('/')[1] === p.to) || defaultPage)
+    }
   }, [])
 
   return (
