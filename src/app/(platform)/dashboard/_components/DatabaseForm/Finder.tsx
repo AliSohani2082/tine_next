@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import React, {
   useState,
@@ -39,7 +39,7 @@ import { documents } from '@/data/dataAdaptor'
 import { Document } from '@/types/items'
 import { TooltipProvider } from '@/components/ui/tooltip'
 
-type State = "starter" | "loading" | "done"
+type State = 'starter' | 'loading' | 'done'
 
 const results: Document[] = documents.slice(1, 3)
 const filters = {
@@ -88,7 +88,9 @@ const Finder = () => {
         <Card className="h-full">
           {state !== 'starter' ? (
             <>
-              <CardHeader className='text-xl py-2 flex justify-end w-full text-right'>نتایج جستجو</CardHeader>
+              <CardHeader className="text-xl py-2 flex justify-end w-full text-right">
+                نتایج جستجو
+              </CardHeader>
               <CardContent className="flex h-[500px] flex-row justify-between items-center w-full px-2">
                 <div className="flex flex-col justify-stretch items-stretch w-full h-full overflow-hidden">
                   <div className="flex flex-row justify-center items-center gap-2 my-2 mr-2">
@@ -97,7 +99,10 @@ const Finder = () => {
                         key={key}
                         className="rounded-full px-4 py-2 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring shadow-mds focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border hover:opacity-80 bg-primary-foreground text-muted-foreground border-muted-foreground"
                       >
-                        {key}: {state === 'done'? value : (
+                        {key}:{' '}
+                        {state === 'done' ? (
+                          value
+                        ) : (
                           <Lottie
                             options={{ animationData: dots, loop: true }}
                             width={80}
@@ -107,10 +112,10 @@ const Finder = () => {
                       </Button>
                     ))}
                   </div>
-                  <div className='mb-4 flex-1 flex'>
+                  <div className="mb-4 flex-1 flex">
                     {state !== 'loading' && (
                       <TooltipProvider>
-                        <ScrollArea className='flex-1 overflow-auto w-full h-full flex flex-col justify-between items-center'>
+                        <ScrollArea className="flex-1 overflow-auto w-full h-full flex flex-col justify-between items-center">
                           {results.map((item, index) => (
                             <FoundItem key={index} data={item} />
                           ))}
@@ -132,7 +137,6 @@ const Finder = () => {
         </Card>
       </div>
       {state === 'loading' ? (
-        
         <div className="flex flex-col px-5 justify-center items-center w-[50%]">
           <Lottie
             options={{ animationData: search, loop: true }}
@@ -195,7 +199,7 @@ const Finder = () => {
                     </FormItem>
                   )}
                 />
-                <div className='flex flex-row justify-end items-center gap-2 w-full'>
+                <div className="flex flex-row justify-end items-center gap-2 w-full">
                   <Button
                     variant="outline"
                     onClick={() => onScan(form.getValues())}
@@ -204,8 +208,8 @@ const Finder = () => {
                   </Button>
                   <Button
                     variant="default"
-                    type='submit'
-                    disabled={state !== "done"}
+                    type="submit"
+                    disabled={state !== 'done'}
                   >
                     ایجاد
                   </Button>

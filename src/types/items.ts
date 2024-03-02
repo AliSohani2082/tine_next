@@ -6,25 +6,28 @@ export type Author = {
   organization: string
 }
 
+export type PublicationStage = 'Final' | 'Article in Press'
+export type DocumentType =
+  | 'Article'
+  | 'Book'
+  | 'Book Chapter'
+  | 'Conference Paper'
+  | 'Data Paper'
+  | 'Editorial'
+  | 'Erratum'
+  | 'Letter'
+  | 'Note'
+  | 'Retracted'
+  | 'Review'
+  | 'Short Survey'
+
 export type Document = {
   id: string
   doi_index: string
   title: string
   abstract: string
-  publication_stage: 'Final' | 'Article in Press'
-  document_type:
-    | 'Article'
-    | 'Book'
-    | 'Book Chapter'
-    | 'Conference Paper'
-    | 'Data Paper'
-    | 'Editorial'
-    | 'Erratum'
-    | 'Letter'
-    | 'Note'
-    | 'Retracted'
-    | 'Review'
-    | 'Short Survey'
+  publication_stage: PublicationStage
+  document_type: DocumentType
   keywords: string[]
   authors: Author[]
   citation_count: number

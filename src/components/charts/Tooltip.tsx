@@ -15,7 +15,8 @@ const Tooltip = <TType extends keyof ChartTypeRegistry>({
   const { body } = tooltipModel
 
   return (
-    <div className='bg-gray-200 dark:bg-gray-900 text-black dark:text-gray-200'
+    <div
+      className="bg-gray-200 dark:bg-gray-900 text-black dark:text-gray-200"
       style={{
         padding: '10px',
         borderRadius: '5px',

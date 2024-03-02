@@ -52,13 +52,13 @@ export default function RootLayout({
         enableSystem
         disableTransitionOnChange
       >
-      <body
-        className={`${inter.variable} ${persian.variable} font-mono bg-background`}
-      >
-        {children}
-        <SpeedInsights />
-        <Toaster />
-      </body>
+        <body
+          className={`${inter.variable} ${persian.variable} font-mono bg-background`}
+        >
+          {children}
+          <SpeedInsights />
+          <Toaster />
+        </body>
       </ThemeProvider>
     </html>
   )
