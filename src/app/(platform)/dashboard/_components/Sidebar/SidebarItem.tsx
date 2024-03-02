@@ -54,10 +54,8 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       <Link
         href={to}
         className={cn(
-          'w-full group flex flex-row items-center justify-between whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
-          `w-full font-normal pl-2 mb-1 h-14 text-md active:text-sm ${
-            !id && 'justify-end'
-          }`
+          'w-full group flex flex-row items-center justify-between whitespace-nowrap rounded-xl hover:bg-muted transition ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 pl-2 mb-1 h-14 text-3xl active:text-sm',
+          !id && 'justify-end'
         )}
       >
         {id && (
@@ -68,7 +66,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
         <div className="flex flex-row justify-center items-center">
           <span
             className={cn(
-              'text-sm',
+              'text-base',
               selected ? 'font-medium text-foreground' : 'text-muted-foreground'
             )}
           >

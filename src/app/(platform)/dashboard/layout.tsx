@@ -1,7 +1,7 @@
 import { ScrollArea } from '@/components/ui/scroll-area'
 import Navbar from './_components/Navbar/Navbar'
 import Sidebar from './_components/Sidebar/Sidebar'
-import Slider from './_components/Slider'
+import Slider from './_components/Slider/Slider'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (

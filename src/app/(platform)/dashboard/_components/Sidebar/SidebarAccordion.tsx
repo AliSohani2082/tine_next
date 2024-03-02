@@ -32,7 +32,7 @@ const SidebarAccordion: React.FC<SidebarAccordionProps> = ({
     >
       <AccordionTrigger className="h-14 flex flex-row-reverse pl-4">
         <div className="font-medium text-xs transition group-data-[state=open]:text-primary flex items-center justify-end mb-1 w-full">
-          <span className="pr-2 font-mono text-lg">{title}</span>
+          <span className="pr-2 font-mono text-xl">{title}</span>
           {newIcon}
         </div>
       </AccordionTrigger>

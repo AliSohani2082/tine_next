@@ -26,7 +26,6 @@ const FilterItem: React.FC<FilterItemProps> = ({
 }) => {
   const { onOpen, onClose, isOpen, item: sliderItem } = useDownSlider()
   const [isActive, setIsActive] = useState(false)
-
   useEffect(() => {
     setIsActive(
       isOpen &&
@@ -36,10 +35,10 @@ const FilterItem: React.FC<FilterItemProps> = ({
   }, [isOpen, sliderItem, filter])
 
   return (
-    <CommandItem
-      key={filter.id}
+    <div
+      key={filter.dataId}
       className={cn(
-        'border-2 rounded-md  h-10 p-0 px-2 m-1',
+        'border-2 flex justify-between hover:cursor-pointer rounded-md  h-10 max-h-10 p-0 px-2 m-1',
         isActive ? 'bg-primary text-muted' : ''
       )}
     >
@@ -58,9 +57,11 @@ const FilterItem: React.FC<FilterItemProps> = ({
           }
         }}
       >
-        <div className="flex flex-row justify-center items-center gap-2">
+        <div className="flex w-full overflow-hidden flex-row justify-center items-center gap-2">
           {data?.icon}
-          {data?.title}
+          <p className="text-clip max-h-10 max-w-prose w-full h-full">
+            {data?.title}
+          </p>
         </div>
       </div>
       <Button
@@ -72,7 +73,7 @@ const FilterItem: React.FC<FilterItemProps> = ({
       >
         <X />
       </Button>
-    </CommandItem>
+    </div>
   )
 }
 

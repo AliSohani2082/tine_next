@@ -1,29 +1,29 @@
-import { redirect } from "next/navigation";
-import HtmlComponent from "@/components/shared/HtmlComp";
-import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
-import { Expand } from "lucide-react";
-import React from "react";
-import Link from "next/link";
-import RedirectLink from "./_components/redirectLink";
+import { Expand } from 'lucide-react'
+import React from 'react'
+import RedirectLink from './_components/redirectLink'
+// import HtmlComponent from './_components/htmlComponent'
+// var html = require('./Document.html');
+// var template = { __html: __html };
 
-type WordTreeProps = {
-  params: {
-    databaseId: string;
-  };
-}
+// type WordTreeProps = {
+//   params: {
+//     databaseId: string
+//   }
+// }
 
-const WordTree: React.FC<WordTreeProps> = () => {
-  
+const WordTree = () => {
   return (
     <div className="w-full h-full px-7 flex justify-center items-start overflow-hidden">
-      <HtmlComponent dir="src/app/Document.html" />
-      <RedirectLink link="/Document.html">
-        <Expand/>
+      {/* <div>
+        {html}
+      </div> */}
+      {/* <span dangerouslySetInnerHTML={template} /> */}
+      {/* <HtmlComponent htmlContent="/src/app/Document.html" /> */}
+      <RedirectLink link="/src/app/Document.html">
+        <Expand />
       </RedirectLink>
-
     </div>
   )
 }
 
-export default WordTree;
+export default WordTree

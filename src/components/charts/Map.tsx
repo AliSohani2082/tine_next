@@ -7,32 +7,30 @@ import {
   Geography,
   ZoomableGroup,
 } from 'react-simple-maps'
-
-const shadow_custom_world_map = 'shadow-md'
-
-// import "/node_modules/flag-icons/css/flag-icons.min.csss";
-
-const legends: { color: string; name: string; min: number; max?: number }[] = [
-  { color: '#451563', name: 'بیش از ۱۰۰۰', min: 1000, max: undefined }, // Red for the highest category
-  { color: '#AC92BC', name: '۵۰۰ - ۱۰۰۰', min: 500, max: 1000 }, // Orange
-  { color: '#DDC9EA', name: '۱۰۰ - ۵۰۰', min: 100, max: 500 }, // Yellow
-  { color: '#F7E9FF', name: '۵۰ - ۱۰۰', min: 50, max: 100 }, // Green
-  { color: '#e4e7ec', name: '۰ - ۵۰', min: 0, max: 50 }, // Blue for the lowest category
-]
-
 import geoUrl from './country.json'
 import { Plus, Minus, Target } from 'lucide-react'
 // import { TooltipProvider, Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { TooltipRefProps, Tooltip } from 'react-tooltip'
 import { Card } from '../ui/card'
+import { Country } from '@/types/items'
 import { Button } from '../ui/button'
-import { countries } from '@/data/tableData'
+import { countries } from '@/data/dataAdaptor'
 import { useDownSlider } from '@/hooks/use-downSlider'
+
+const shadow_custom_world_map = 'shadow-md'
+
+const legends: { color: string; name: string; min: number; max?: number }[] = [
+  { color: '#369b94', name: 'بیش از ۱۰۰۰', min: 1000, max: undefined },
+  { color: '#46beb5', name: '۵۰۰ - ۱۰۰۰', min: 500, max: 1000 },
+  { color: '#6cccc5', name: '۱۰۰ - ۵۰۰', min: 100, max: 500 },
+  { color: '#92d9d4', name: '۵۰ - ۱۰۰', min: 50, max: 100 },
+  { color: '#cdedeb', name: '۰ - ۵۰', min: 0, max: 50 },
+]
 
 interface WorldMapProps {
   width?: number
   height?: number
-  data: Record<string, number>
+  data: Country[]
 }
 
 const WorldMap: React.FC<WorldMapProps> = ({ data, width, height }) => {
@@ -47,10 +45,14 @@ const WorldMap: React.FC<WorldMapProps> = ({ data, width, height }) => {
             ...geo.properties,
             color: legends.find(
               (legend) =>
-                legend.min <= (data[geo.properties.name] ||0) &&
-                  (!legend.max
-                    ? true
-                    : legend.max > (data[geo.properties.name] || 0))
+                legend.min <=
+                  (data.find((d) => d.name === geo.properties.name)
+                    ?.documentPublished || 0) &&
+                (!legend.max
+                  ? true
+                  : legend.max >
+                    (data.find((d) => d.name === geo.properties.name)
+                      ?.documentPublished || 0))
             )?.color,
           },
         })),
@@ -76,7 +78,7 @@ const WorldMap: React.FC<WorldMapProps> = ({ data, width, height }) => {
   }
 
   const handleZoomOut = () => {
-    if (position.zoom <= 1) return 
+    if (position.zoom <= 1) return
     setPosition((prev) => ({ ...prev, zoom: prev.zoom - 1 }))
   }
 
@@ -93,16 +95,15 @@ const WorldMap: React.FC<WorldMapProps> = ({ data, width, height }) => {
 
   const id = useId()
   return (
-    <div className='relative h-[600px] overflow-clip'>
+    <div className="relative h-[600px] overflow-clip">
       {/* Map 🗺️ */}
       <ComposableMap
         // width={width}
         height={600}
-        className='overflow-hidden'
+        className="overflow-hidden"
         projection="geoMercator"
       >
         <ZoomableGroup
-
           zoom={position.zoom}
           center={position.coordinates}
           onMoveEnd={handleMoveEnd}
@@ -115,11 +116,13 @@ const WorldMap: React.FC<WorldMapProps> = ({ data, width, height }) => {
                     key={geo.rsmKey}
                     geography={geo}
                     onClick={() => {
-                      const id = countries.find((country) => country.name === geo.properties.name)?.id 
-                      if(id){
+                      const id = countries.find(
+                        (country) => country.name === geo.properties.name
+                      )?.id
+                      if (id) {
                         onOpen({
-                        id: id,
-                          type: "country" 
+                          id: id.toString(),
+                          type: 'country',
                         })
                       }
                     }}
@@ -160,7 +163,8 @@ const WorldMap: React.FC<WorldMapProps> = ({ data, width, height }) => {
             <div>
               <small className="font-primary-Regular">تعداد مقالات</small>
               <p className="text-sm font-primary-Regular">
-                {data[tooltipContent] || 0}
+                {data.find((d) => d.name === tooltipContent)
+                  ?.documentPublished || 0}
               </p>
             </div>
           </div>

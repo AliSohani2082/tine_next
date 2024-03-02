@@ -6,40 +6,18 @@ import { Book, Database, Filter, Globe2, User, X } from 'lucide-react'
 import { useLocalStorage } from 'usehooks-ts'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import * as z from 'zod'
-
 import { Accordion } from '@/components/ui/accordion'
-// import { FormField, FormItem, FormLabel, FormMessage, FormControl, Form } from "@/components/ui/form";
-// import { Input } from "@/components/ui/input";
-// import { cn } from "@/lib/utils";
 import { useDatabase } from '@/hooks/use-databases'
-// import { useDatabaseModal } from "@/hooks/use-database-modal";
 import { Separator } from '@/components/ui/separator'
 import { IDatabase, INewDatabase } from '@/types'
 import SidebarItem from './SidebarItem'
 import SidebarAccordion from './SidebarAccordion'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-// import { useTheme } from "@/hooks/use-theme";
 import { useFilters } from '@/hooks/use-filter'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from '@/components/ui/command'
-import { toast } from 'sonner'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import FilterList from './FilterList'
 
 interface SidebarProps {
   storageKey?: string
 }
-
-// const colorForm = z.object({
-//   primary: z.string(),
-// })
 
 const Sidebar: React.FC<SidebarProps> = ({
   storageKey = 't-sidebar-state',
@@ -50,9 +28,6 @@ const Sidebar: React.FC<SidebarProps> = ({
     : undefined
   console.log('databaseId: ', databaseId)
   const { databases } = useDatabase()
-  // const [ categories, setCategories ] = useState<string[]>([]);
-  const { filters, remove: removeFilter } = useFilters()
-  // const theme = useTheme()
 
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
     storageKey,
@@ -117,33 +92,6 @@ const Sidebar: React.FC<SidebarProps> = ({
           <div />
         </Accordion>
       </div>
-      {/* <div className="mb-6 border-2 border-green-700 p-4">
-        <Form {...form}>
-          <form 
-            className="flex flex-col justify-center items-stretch gap-3"
-            onSubmit={form.handleSubmit((data) => {
-              theme.add(data.primary) 
-            })}
-          >
-            <FormField
-              control={form.control}
-              name="primary"
-              render={({ field }) => {
-                return (
-                  <FormItem className="flex flex-col items-end">
-                    <FormLabel className="shad-form_label">رنگ اصلی</FormLabel>
-                    <FormControl>
-                      <Input type="text" className="shad-input" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )
-              }}
-            />
-            <Button type="submit">اعمال تغییر</Button>
-          </form>
-        </Form>
-      </div> */}
     </div>
   )
 }

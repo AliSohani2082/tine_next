@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { Button } from '@/components/ui/button'
 import React from 'react'
@@ -8,7 +8,7 @@ type RedirectLinkProps = {
   children?: React.ReactNode
 }
 
-const RedirectLink: React.FC<RedirectLinkProps> = ({link, children}) => {
+const RedirectLink: React.FC<RedirectLinkProps> = ({ link, children }) => {
   return (
     <Button variant="outline" onClick={() => window.open(link, '_blank')}>
       {children}

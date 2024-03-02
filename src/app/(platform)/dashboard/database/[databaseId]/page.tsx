@@ -8,9 +8,10 @@ import PieChart from '@/components/charts/pieChart'
 import { Card, CardContent } from '@/components/ui/card'
 import { cn, farsiNumber } from '@/lib/utils'
 import { Book, Globe2, User } from 'lucide-react'
-import countryData from 'public/country-paper.json'
-import papaerTypes from 'public/paper-type.json'
-import numbers from 'public/numbers.json'
+import { countries } from '@/data/dataAdaptor'
+import papaerTypes from '@/data/paper-type.json'
+import lengthoflists from '@/data/lengthoflists.json'
+import yearscount from '@/data/yearscount.json'
 
 const infoCards: {
   title: string
@@ -21,30 +22,58 @@ const infoCards: {
   {
     title: 'مقالات',
     icon: <Book size={40} />,
-    number: numbers["articles"],
+    number: lengthoflists['documents'] || 0,
     color: 'text-blue-400',
   },
   {
     title: 'نویسندگان',
     icon: <User size={40} />,
-    number: numbers["authors"],
+    number: lengthoflists['authors'] || 0,
     color: 'text-green-400',
   },
   {
     title: 'کشور ها',
     icon: <Globe2 size={40} />,
-    number: numbers["documents"],
+    number: lengthoflists['countries'] || 0,
     color: 'text-red-400',
   },
 ]
+const colors: { [key: string]: string } = {
+  paleCoral: '#f78da7',
+  softApricot: '#fbb072',
+  sandyBeige: '#f5e4ca',
+  paleLemon: '#f2f5b3',
+  buttercream: '#f2f2e5',
+  lightSkyBlue: '#d0f4f9',
+  lavender: '#e6e6fa',
+  paleMauve: '#d9b3e2',
+  softLilac: '#c9c3d0',
+  paleMintGreen: '#dcedc8',
+  sageGreen: '#c2d6b4',
+  lightOlive: '#dfaa8c',
+  wheat: '#f2e8cf',
+  cream: '#ffffdd',
+  blushPink: '#f7cac9',
+  honeydew: '#f0fff0',
+  ivory: '#fefcff',
+  lightSalmon: '#ffa07a',
+  paleTurquoise: '#afeeee',
+  lightPeriwinkle: '#c5d0e0',
+  lavenderGray: '#d8d8d8',
+  taupe: '#ccc5b9',
+  lightKhaki: '#f0e68c',
+  paleSand: '#e5d7bd',
+  oatmeal: '#e2c9b3',
+  eggshell: '#f5f3f1',
+  champagne: '#f7ece6',
+  lightTaupe: '#dcdcdc',
+}
 
-const lineChartData = [12, 19, 3, 5, 2, 3];
-const lineChartLabels = ['۱۳۹۷','۱۳۹۸', '۱۳۹۹', '۱۴۰۰', '۱۴۰۱', '۱۴۰۲'];
-
-
-const pieChartData = Object.values(papaerTypes);
-const pieChartLabels = Object.keys(papaerTypes);
-
+const pieChartData = Object.keys(papaerTypes).map((key, index) => ({
+  label: key,
+  value: Object.values(papaerTypes)[index],
+  color: Object.values(colors)[index],
+}))
 
 const OraganizationPage = ({ params }: { params: { databaseId: string } }) => {
   return (
@@ -66,19 +95,22 @@ const OraganizationPage = ({ params }: { params: { databaseId: string } }) => {
       </div>
       <div className="flex flex-col m-4 gap-4">
         <div className="flex flex-row justify-stretch items-stretch gap-4">
-          <ChartCard className='w-3/4'>
+          <ChartCard title="تعداد مقالات در طول سال ها" className="w-3/4">
             {/* <div>1</div> */}
-            <LineChart data={lineChartData} labels={lineChartLabels}/>
+            <LineChart
+              data={Object.values(yearscount)}
+              labels={Object.keys(yearscount)}
+            />
           </ChartCard>
-          <ChartCard className="flex-1">
+          <ChartCard title="انواع مقالات" className="flex-1">
             {/* <div>2</div> */}
-            <PieChart data={pieChartData} labels={pieChartLabels}/>
+            <PieChart data={pieChartData} />
           </ChartCard>
         </div>
         <div className="flex flex-row gap-4">
-          <ChartCard className="w-full">
+          <ChartCard title="نقشه" className="w-full">
             {/* <div>3</div> */}
-            <Map data={countryData} width={400} height={180} />
+            <Map data={countries} width={400} height={180} />
           </ChartCard>
         </div>
       </div>

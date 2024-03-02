@@ -18,7 +18,6 @@ const Account = () => {
       href="/dashboard"
       className="flex flex-row justify-between items-center"
     >
-      <h2 className="text-lg mx-2">علی سوهانی</h2>
       <Avatar className="w-12 h-12">
         <AvatarFallback>AS</AvatarFallback>
       </Avatar>

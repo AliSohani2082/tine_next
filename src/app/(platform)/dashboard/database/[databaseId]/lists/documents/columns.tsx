@@ -1,17 +1,16 @@
 'use client'
 
 import { ColumnDef } from '@tanstack/react-table'
-import { Copy, Eye, Filter } from 'lucide-react'
+import { Copy } from 'lucide-react'
 
 import { ActionMenu, BaseItem } from '../_components/action-menu'
 import SortingButton from '../_components/sortingButton'
 import { ActionItemProp } from '../_components/action_item'
-import ShowMoreDrawer from '../_components/showMoreDrawer'
 import { toast } from 'sonner'
 
 export interface DocumentTable extends BaseItem {
   title: string
-  publisher: string
+  citation: number
   author: string
 }
 
@@ -24,19 +23,21 @@ const Content = () => {
 export const columns: ColumnDef<DocumentTable>[] = [
   {
     accessorKey: 'title',
-    id: 'Title',
+    id: 'عنوان',
     enableHiding: false,
-    header: ({ column }) => <SortingButton column={column} title="Title" />,
-  },
-  {
-    accessorKey: 'publisher',
-    id: 'Publisher',
-    header: ({ column }) => <SortingButton column={column} title="Publisher" />,
+    header: ({ column }) => <SortingButton column={column} title="عنوان" />,
   },
   {
     accessorKey: 'author',
-    id: 'Author',
-    header: ({ column }) => <SortingButton column={column} title="Author" />,
+    id: 'نویسنده',
+    header: ({ column }) => <SortingButton column={column} title="نویسنده" />,
+  },
+  {
+    accessorKey: 'citation',
+    id: 'تعداد ارجاعات',
+    header: ({ column }) => (
+      <SortingButton column={column} title="تعداد ارجاعات" />
+    ),
   },
   {
     id: 'Actions',
@@ -48,11 +49,11 @@ export const columns: ColumnDef<DocumentTable>[] = [
         {
           item: document,
           isActive: false,
-          label: 'کپی کردن لینک',
+          label: 'کپی کردن نام',
           icon: <Copy />,
           onClick: (document: DocumentTable) => {
             navigator.clipboard.writeText(document.title)
-            toast.success('لینک کپی شد')
+            toast.success('نام مقاله کپی شد')
           },
         },
       ]

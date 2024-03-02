@@ -27,11 +27,11 @@ export function mockAPI<TData extends BaseItem>({
 }): PromiseResult<TData> {
   const episodes = [
     ...data
-      .sort((a: TData, b: TData) => {
+      .sort((aa: TData, b: TData) => {
         const [first, second] =
           order === 'ASC'
-            ? [a[sortField], b[sortField]]
-            : [b[sortField], a[sortField]]
+            ? [aa[sortField], b[sortField]]
+            : [b[sortField], aa[sortField]]
         if (typeof first === 'string' && typeof second === 'string') {
           return (first as string).localeCompare(second as string)
         }

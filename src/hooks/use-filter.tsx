@@ -15,7 +15,7 @@ const filterOrder = {
 
 export const useFilters = create<useFiltersProps>((set) => ({
   filters: [],
-  add: (filter) =>
+  add: (filter: IFilter) =>
     set((state) => {
       const isFilterExist = state.filters.some(
         (f) => f.type === filter.type && f.dataId === filter.dataId

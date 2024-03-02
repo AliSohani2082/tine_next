@@ -35,6 +35,7 @@ const InformationForm = forwardRef(
       resolver: zodResolver(createDatabaseValidation),
       defaultValues: {
         name: '',
+        query: '',
       },
     })
 

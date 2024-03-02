@@ -1,6 +1,5 @@
 import React from 'react'
 import TagTabs from '@/components/shared/TagTabs'
-import { TabsContent } from '@/components/ui/tabs'
 
 const lists: { title: string; to: string }[] = [
   {

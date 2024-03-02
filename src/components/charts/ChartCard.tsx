@@ -14,14 +14,27 @@ import { cn } from '@/lib/utils'
 
 export type ChartCardProps = {
   children: React.ReactNode
+  title: string
   className?: string
 }
 
-const ChartCard: React.FC<ChartCardProps> = ({ children, className }) => {
+const ChartCard: React.FC<ChartCardProps> = ({
+  children,
+  className,
+  title,
+}) => {
   const [open, setOpen] = useState(false)
 
   return (
-    <Card className={cn(className)}>
+    <Card
+      className={cn(
+        'flex flex-col justify-start items-stretch w-full h-full',
+        className
+      )}
+    >
+      <CardHeader className="w-ful flex justify-center items-center text-3xl font-semibold">
+        {title}
+      </CardHeader>
       {/* <CardHeader className="flex flex-row justify-end items-center">
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger>
@@ -32,7 +45,7 @@ const ChartCard: React.FC<ChartCardProps> = ({ children, className }) => {
           <DialogContent className="p-10 pt-14">{children}</DialogContent>
         </Dialog>
       </CardHeader> */}
-      <CardContent className='m-5'>{children}</CardContent>
+      <CardContent className="m-0 mt-5 h-full">{children}</CardContent>
     </Card>
   )
 }

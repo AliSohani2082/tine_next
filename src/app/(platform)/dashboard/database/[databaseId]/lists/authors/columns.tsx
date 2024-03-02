@@ -11,14 +11,23 @@ import { toast } from 'sonner'
 
 export interface AuthorTable extends BaseItem {
   name: string
+  organization: string
 }
 
 export const columns: ColumnDef<AuthorTable>[] = [
   {
     accessorKey: 'name',
-    id: 'Full Name',
+    id: 'نام',
     enableHiding: false,
-    header: ({ column }) => <SortingButton column={column} title="Full Name" />,
+    header: ({ column }) => <SortingButton column={column} title="نام" />,
+  },
+  {
+    accessorKey: 'organization',
+    id: 'نام سازمان',
+    enableHiding: false,
+    header: ({ column }) => (
+      <SortingButton column={column} title="نام سازمان" />
+    ),
   },
   {
     id: 'Actions',

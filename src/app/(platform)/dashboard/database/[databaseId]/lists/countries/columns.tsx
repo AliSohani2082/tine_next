@@ -13,15 +13,15 @@ export interface CountryTable extends BaseItem {
 export const columns: ColumnDef<CountryTable>[] = [
   {
     accessorKey: 'name',
-    id: 'Name',
+    id: 'نام',
     enableHiding: false,
-    header: ({ column }) => <SortingButton column={column} title="Name" />,
+    header: ({ column }) => <SortingButton column={column} title="نام" />,
   },
   {
     accessorKey: 'documentPublished',
-    id: 'Published documents',
+    id: 'تعداد مقالات',
     header: ({ column }) => (
-      <SortingButton column={column} title="Published Documents" />
+      <SortingButton column={column} title="تعداد مقالات" />
     ),
   },
   {

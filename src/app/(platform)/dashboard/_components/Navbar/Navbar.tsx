@@ -28,12 +28,12 @@ const Navbar = () => {
       >
         <Plus className="h-4 w-4" />
       </Button> */}
-      <Menu />
       <div className="flex flex-row justify-center items-center gap-4">
         {/* <DatabaseSelection databaseId={databaseId}/> */}
         {/* { databaseId !== undefined && <Navigation databaseId={databaseId} />} */}
         <Account />
       </div>
+      <Menu />
     </nav>
   )
 }
