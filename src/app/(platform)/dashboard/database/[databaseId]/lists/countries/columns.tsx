@@ -15,7 +15,7 @@ export const columns: ColumnDef<CountryTable>[] = [
     accessorKey: 'name',
     id: 'نام',
     enableHiding: false,
-    header: ({ column }) => <SortingButton column={column} title="نام" />,
+    header: ({ column }) => <SortingButton hideOption={false} column={column} title="نام" />,
   },
   {
     accessorKey: 'documentPublished',

@@ -19,12 +19,11 @@ export const columns: ColumnDef<AuthorTable>[] = [
     accessorKey: 'name',
     id: 'نام',
     enableHiding: false,
-    header: ({ column }) => <SortingButton column={column} title="نام" />,
+    header: ({ column }) => <SortingButton hideOption={false} column={column} title="نام" />,
   },
   {
     accessorKey: 'organization',
     id: 'نام سازمان',
-    enableHiding: false,
     header: ({ column }) => (
       <SortingButton column={column} title="نام سازمان" />
     ),

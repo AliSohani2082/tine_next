@@ -9,7 +9,7 @@ type SelectDatabaseProps = {
 const SelectDatabaseLayout: React.FC<SelectDatabaseProps> = ({ children }) => {
   return (
     <div className="flex justify-center items-center h-screen">
-      <Card className="w-[600px] h-[600px] shadow-lg">{children}</Card>
+      {children}
     </div>
   )
 }

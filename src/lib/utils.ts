@@ -85,3 +85,24 @@ export function numberToLetter(num: number): string {
 
   return result
 }
+interface ItemInfo {
+  indexes: number[];
+  item: any;
+}
+
+export function getItemIndexes(arr: any[]): ItemInfo[] {
+  const itemMap: { [key: string]: ItemInfo } = {};
+
+  arr.forEach((item, index) => {
+      if (itemMap[item]) {
+          itemMap[item].indexes.push(index);
+      } else {
+          itemMap[item] = {
+              indexes: [index],
+              item: item
+          };
+      }
+  });
+
+  return Object.values(itemMap);
+}

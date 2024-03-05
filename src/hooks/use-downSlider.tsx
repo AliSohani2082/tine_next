@@ -1,11 +1,13 @@
 import { FilterType } from '@/types/items'
 import { Content } from 'next/font/google'
+import React from 'react'
 import { create } from 'zustand'
 
 type Item = {
   id: string
   type: FilterType
 } | null
+
 
 interface useDownSliderProps {
   item: Item

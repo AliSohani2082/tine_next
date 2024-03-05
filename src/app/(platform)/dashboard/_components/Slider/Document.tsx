@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { documents } from '@/data/dataAdaptor'
-import { cn, numberToLetter } from '@/lib/utils'
+import { cn, getItemIndexes, numberToLetter } from '@/lib/utils'
 import {
   ChevronDown,
   ChevronUp,
@@ -18,6 +18,7 @@ import { useDownSlider } from '@/hooks/use-downSlider'
 import { Separator } from '@/components/ui/separator'
 import { useFilters } from '@/hooks/use-filter'
 import { Badge } from '@/components/ui/badge'
+import { Card, CardContent } from '@/components/ui/card'
 
 type DocumentSliderProps = {
   id: string
@@ -40,106 +41,143 @@ const DocumentSlider: React.FC<DocumentSliderProps> = ({ id }) => {
   const isFilter = filters.some(
     (filter) => filter.dataId === document?.id && filter.type === 'document'
   )
-  const items = [
+  const items: {
+    key: string,
+    value: string | null
+  }[] = [
     {
-      key: 'عنوان اصلی',
-      value: document.title,
+      key: 'doi_index',
+      value: document.doi_index,
     },
     {
-      key: 'تعداد ارجاعات',
-      value: document.citation_count,
+      key: 'Document Type',
+      value: document.document_type,
     },
     {
-      key: 'نویسنده',
-      value: document.authors.map((author) => author.name).join(', '),
+      key: 'Citation Count',
+      value: document.citation_count.toString(),
+    },
+    {
+      key: 'Countries',
+      value: document.countries.join(', '),
     },
   ]
   return (
-    <div className="h-full w-full gap-8 flex justify-stretch items-stretch flex-row">
-      <ScrollArea>
-        <span className="text-3xl pb-4">{document.title}</span>
-        <div className="w-full flex flex-row flex-wrap justify-start items-center gap-1">
-          {document.authors.map((author, index) => (
-            <Button
-              key={index}
-              onClick={() => onOpen({ id: author.id, type: 'author' })}
-              variant="link"
-              className="m-0 p-0 h-auto"
-            >
-              <span>
-                {author.name}
-                <sup className="no-underline">{numberToLetter(index + 1)}</sup>
-                <span className="no-underline">,</span>
-              </span>
-            </Button>
-          ))}
-        </div>
-        <div className="flex flex-col justify-center items-center w-full">
-          <Button
-            onClick={() => setShowMore(!showMore)}
-            variant="ghost"
-            className="mb-2"
-          >
-            <span>مشاهده بیشتر</span>
-            {!showMore ? <ChevronUp /> : <ChevronDown />}
-          </Button>
-        </div>
-        <div className={cn('mx-3', !showMore ? 'hidden' : '')}>
-          <div className="w-full pb-4 flex flex-col justify-start itemx-start">
+    <div className="h-full w-full flex justify-stretch items-stretch flex-row-reverse">
+      <div className='flex justify-center items-center w-1/3 h-full'>
+        <Card className='w-full mx-2'>
+          <CardContent className='flex flex-col justify-items-stretch items-stretch'>
+              <div className='border-gray-300 flex justify-between items-center cursor-default w-full h-12 px-2'>
+                <span className='text-sm'>key</span>
+                <span className='text-sm'>value</span>
+              
+              </div>
+            {items.map((item) => (
+              <div key={item.key} className='border-t-2 transition-colors hover:bg-muted/50 cursor-default flex justify-between items-center w-full h-12 px-2'>
+                <span className='text-sm'>{item.key}</span>
+                <span className='text-sm'>{item.value}</span>
+              
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      </div>
+      <ScrollArea className='w-2/3'>
+        <div className='w-full'>
+
+          <span className="text-3xl py-4">{document.title}</span>
+          <div className="w-full flex flex-row flex-wrap justify-start items-center gap-1">
             {document.authors.map((author, index) => (
-              <span key={index} className="text-sm">
-                {numberToLetter(index + 1)}
-                {'. '}
-                {author.organization}
-              </span>
+              <Button
+                key={index}
+                onClick={() => onOpen({ id: author.id, type: 'author' })}
+                variant="link"
+                className="m-0 p-0 h-auto"
+              >
+                <span>
+                  {author.name}
+                  <sup className="no-underline">{numberToLetter(index + 1)}</sup>
+                  <span className="no-underline">,</span>
+                </span>
+              </Button>
             ))}
           </div>
-        </div>
-        <div className="pt-6 flex flex-row justify-start items-center gap-2 w-full">
-          <Button
-            className="flex flex-row justify-center items-center gap-1"
-            variant="ghost"
-          >
-            <MoreHorizontal />
-            مشاهده مقاله
-          </Button>
-          <Button
-            variant={isFilter ? 'default' : 'ghost'}
-            onClick={() => {
-              if (isFilter) {
-                removeFilter(
-                  filters.find(
-                    (filter) =>
-                      filter.dataId === document.id &&
-                      filter.type === 'document'
-                  )?.id || ''
-                )
-              } else {
-                addFilter({
-                  dataId: document.id,
-                  type: 'document',
-                  id: uuidv4(),
-                })
-              }
-            }}
-            className="flex flex-row justify-between items-center gap-1"
-          >
-            {isFilter ? <Minus /> : <Plus />}
-            <span>اضافه کردن به فلتر</span>
-          </Button>
-        </div>
-        <Separator className="mt-2" />
-        <article className="flex flex-col mx-4 items-start justify-center">
-          <h1 className="text-2xl my-6">Abstract</h1>
-          <p>{document?.abstract || lorem}</p>
-        </article>
-        <Separator className="my-6" />
-        <div className="flex flex-col justify-center items-end">
-          <span className="text-2xl mx-3">کلمات کلیدی</span>
-          <div className="flex flex-row justify-start items-center flex-wrap gap-1 m-5">
-            {document.keywords.map((keyword) => (
-              <Badge key={keyword}>{keyword}</Badge>
-            ))}
+          <div className="flex flex-col justify-center items-center w-full">
+            <Button
+              onClick={() => setShowMore(!showMore)}
+              variant="ghost"
+              className="mb-2"
+            >
+              <span>مشاهده بیشتر</span>
+              {!showMore ? <ChevronUp /> : <ChevronDown />}
+            </Button>
+          </div>
+          <div className={cn('mx-3 transition-all', !showMore ? 'h-0 overflow-clip' : 'h-auto')}>
+            <div className="w-full pb-4 flex flex-col justify-start itemx-start">
+              {/* {
+                document.authors.map((item, index) => (
+                  <span key={index}>{numberToLetter(index+1)},{item.organization}</span>
+                ))
+              } */}
+              {getItemIndexes(document.authors.map((author) => author.organization)).map((item, index) => (
+                <span key={index} className="text-sm">
+                  {item.indexes.map((ind, index) => (
+                    <span key={ind}>{numberToLetter(ind + 1)}{item.indexes.length !== index+1 && ","}</span>
+                  ))}
+                  {'. '}
+                  {item.item}
+                </span>
+              ))}
+            </div>
+          </div>
+          {/* <div className="pt-6 flex flex-row justify-start items-center gap-2 w-full">
+            <Button
+              className="flex flex-row justify-center items-center gap-1"
+              variant="ghost"
+            >
+              <MoreHorizontal />
+              مشاهده مقاله
+            </Button>
+            <Button
+              variant={isFilter ? 'default' : 'ghost'}
+              onClick={() => {
+                if (isFilter) {
+                  removeFilter(
+                    filters.find(
+                      (filter) =>
+                        filter.dataId === document.id &&
+                        filter.type === 'document'
+                    )?.id || ''
+                  )
+                } else {
+                  addFilter({
+                    dataId: document.id,
+                    type: 'document',
+                    id: uuidv4(),
+                  })
+                }
+              }}
+              className="flex flex-row justify-between items-center gap-1"
+            >
+              {isFilter ? <Minus /> : <Plus />}
+              <span>اضافه کردن به فلتر</span>
+            </Button>
+          </div>
+          <Separator className="mt-2" /> */}
+          <article className="flex flex-col mx-4 items-start justify-center">
+            <p className='text-justify'>
+              <span className='font-bold'>Abstract:{" "}</span>
+              {document?.abstract || lorem}
+            </p>
+          </article>
+          <Separator className="my-6" />
+          <div className="flex flex-col justify-center items-end">
+            <span className="text-2xl mx-3">کلمات کلیدی</span>
+            <div className="flex flex-row justify-start items-center flex-wrap gap-1 m-5">
+              {document.keywords.map((keyword) => (
+                <Badge key={keyword}>{keyword}</Badge>
+              ))}
+            </div>
           </div>
         </div>
       </ScrollArea>

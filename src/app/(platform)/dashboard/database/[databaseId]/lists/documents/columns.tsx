@@ -25,7 +25,7 @@ export const columns: ColumnDef<DocumentTable>[] = [
     accessorKey: 'title',
     id: 'عنوان',
     enableHiding: false,
-    header: ({ column }) => <SortingButton column={column} title="عنوان" />,
+    header: ({ column }) => <SortingButton hideOption={false} column={column} title="عنوان" />,
   },
   {
     accessorKey: 'author',

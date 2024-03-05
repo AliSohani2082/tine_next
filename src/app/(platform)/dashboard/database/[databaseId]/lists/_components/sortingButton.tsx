@@ -15,12 +15,14 @@ interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
   column: Column<TData, TValue>
   title: string
+  hideOption?: boolean
 }
 
 export default function SortingButton<TData, TValue>({
   column,
   title,
   className,
+  hideOption = true,
 }: DataTableColumnHeaderProps<TData, TValue>) {
   if (!column.getCanSort()) {
     return <div className={cn(className)}>{title}</div>
@@ -54,11 +56,15 @@ export default function SortingButton<TData, TValue>({
             <ArrowDown className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             کاهشی
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
-            <EyeOff className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-            پنهان
-          </DropdownMenuItem>
+          {hideOption && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
+                <EyeOff className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+                پنهان
+              </DropdownMenuItem>
+            </>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

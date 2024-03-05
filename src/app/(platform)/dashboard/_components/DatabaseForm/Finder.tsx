@@ -32,6 +32,7 @@ import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { FilterType } from '@/types/items'
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogHeader, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import FoundItem from './FoundItem'
@@ -41,12 +42,12 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 
 type State = 'starter' | 'loading' | 'done'
 
-const results: Document[] = documents.slice(1, 3)
-const filters = {
-  authors: 30,
-  documents: 20,
-  countries: 12,
-}
+const results: Document[] = documents.slice(1, 4)
+// const filters = {
+//   authors: 30,
+//   documents: 20,
+//   countries: 12,
+// }
 
 const description = `بهترین روش برای جستجو و بازیابی اطلاعات از یک دیتابیس، استفاده از کوئری‌های ساخته شده با زبان SQL است. SQL که مخفف Structured Query Language به معنای "زبان پرس و جوی ساختار یافته" است، اجازه می‌دهد تا با استفاده از دستورات متعدد، اطلاعات مورد نیاز را از دیتابیس بازیابی کرده و با آن‌ها برخورد کرد. این دستورات شامل دستور SELECT برای انتخاب اطلاعات، دستور INSERT برای درج اطلاعات جدید، دستور UPDATE برای به روزرسانی اطلاعات موجود، و دستور DELETE برای حذف اطلاعات می‌شوند. برای مثال:
 
@@ -58,6 +59,9 @@ WHERE شهر = 'تهران'
 
 const Finder = () => {
   const [state, setState] = useState<State>('starter')
+  const [open, onOpen] = useState(false)
+  const [title, setTitle] = useState("")
+  const [abstract, setAbstract] = useState("")
 
   function startSearching() {
     setState('loading')
@@ -85,45 +89,37 @@ const Finder = () => {
   return (
     <CardContent className="flex flex-row justify-stretch items-stretch w-full h-full ">
       <div className="flex flex-col justify-start items-stretch w-[50%] h-full">
-        <Card className="h-full">
+        <Card className="h-full flex flex-col overflow-auto justify-stretch items-stretch">
           {state !== 'starter' ? (
             <>
-              <CardHeader className="text-xl py-2 flex justify-end w-full text-right">
+              <CardHeader className="text-xl h-full py-2 flex justify-center font-bold w-full text-right">
                 نتایج جستجو
+                <div className='mt-2'>تعداد مقالات: {results.length}</div>
               </CardHeader>
-              <CardContent className="flex h-[500px] flex-row justify-between items-center w-full px-2">
-                <div className="flex flex-col justify-stretch items-stretch w-full h-full overflow-hidden">
-                  <div className="flex flex-row justify-center items-center gap-2 my-2 mr-2">
-                    {Object.entries(filters).map(([key, value]) => (
-                      <Button
-                        key={key}
-                        className="rounded-full px-4 py-2 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring shadow-mds focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border hover:opacity-80 bg-primary-foreground text-muted-foreground border-muted-foreground"
-                      >
-                        {key}:{' '}
-                        {state === 'done' ? (
-                          value
-                        ) : (
-                          <Lottie
-                            options={{ animationData: dots, loop: true }}
-                            width={80}
-                            height={820}
-                          />
-                        )}
-                      </Button>
-                    ))}
-                  </div>
-                  <div className="mb-4 flex-1 flex">
-                    {state !== 'loading' && (
-                      <TooltipProvider>
-                        <ScrollArea className="flex-1 overflow-auto w-full h-full flex flex-col justify-between items-center">
-                          {results.map((item, index) => (
-                            <FoundItem key={index} data={item} />
-                          ))}
-                        </ScrollArea>
-                      </TooltipProvider>
-                    )}
-                  </div>
-                </div>
+              <CardContent className="flex flex-col justify-between items-center flex-1 w-full h-full px-2">
+                {state !== 'loading' && (
+                  <TooltipProvider>
+                    {/* <ScrollArea className="flex-1 w-full h-full flex flex-col justify-between items-center"> */}
+                      {results.map((item, index) => (
+                        <Dialog key={index}>
+                          <DialogTrigger>
+                            <FoundItem key={index} data={item}/>
+                          </DialogTrigger>
+                          <DialogContent className='max-h-[600px] max-w-[800px] overflow-auto'>
+                            <DialogHeader className='pt-6'>
+                              <DialogTitle>
+                                {item.title}
+                              </DialogTitle>
+                            </DialogHeader>
+                            <div className='text-justify'>
+                              {item.abstract}
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                      ))}
+                    {/* </ScrollArea> */}
+                  </TooltipProvider>
+                )}
               </CardContent>
             </>
           ) : (

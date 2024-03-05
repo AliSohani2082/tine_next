@@ -1,31 +1,47 @@
 'use client'
 
 import React from 'react'
-import { Minus, Plus, X } from 'lucide-react'
+import { Filter, MoreHorizontal, X } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { useDownSlider } from '@/hooks/use-downSlider'
+import { useFilters } from '@/hooks/use-filter'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 // import { useFilters } from '@/hooks/use-filter'
-// import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 import CountrySlider from './Country'
 import AuthorSlider from './Author'
 import DocumentSlider from './Document'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 type SliderProps = {}
 
 const Slider: React.FC<SliderProps> = (props) => {
   const { isOpen, onClose, item } = useDownSlider()
-  // const { filters, add: addFilter, remove: removeFilter } = useFilters()
+  const { add: addFilter, remove: removeFilter, filters } = useFilters()
 
   if (!item) {
     return null
   }
-  // const filterId = uuidv4()
-  // const isFilter = filters.some(
-  //   (filter) => filter.dataId === item.id && filter.type === item.type
-  // )
+  const filterId = uuidv4()
+  const isFilter = filters.some(
+    (filter) => filter.dataId === item.id && filter.type === item.type
+  )
+
+  const toggleFilter = () => {
+    if (isFilter) {
+      removeFilter(
+        filters.find(
+          (filter) =>
+            filter.dataId === item.id && filter.type === item.type
+        )?.id || ''
+      )
+    } else {
+      addFilter({ dataId: item.id, type: item.type, id: uuidv4() })
+    }
+  }
+
   return (
     <Card
       className={cn(
@@ -33,7 +49,36 @@ const Slider: React.FC<SliderProps> = (props) => {
         isOpen ? 'h-[280px] hover:h-[500px]' : 'h-0'
       )}
     >
-      <CardHeader className="w-full flex flex-row justify-end h-4 items-center">
+      <CardHeader className="w-full flex flex-row justify-end h-4 mb-2 items-center gap-2">
+        <TooltipProvider>
+          {item.type === "document" && (
+            <>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button variant="ghost">
+                    <MoreHorizontal/>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  مشاهده بیشتر سند
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button
+                    variant={isFilter ? 'default' : 'ghost'}
+                    onClick={() => toggleFilter()}
+                  >
+                    <Filter/>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  اضافه کردن سند به فیلتر
+                </TooltipContent>
+              </Tooltip>
+            </>
+          )}
+        </TooltipProvider>
         <Button variant="ghost" onClick={onClose}>
           <X />
         </Button>

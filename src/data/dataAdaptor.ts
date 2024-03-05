@@ -25,9 +25,13 @@ export const documents: Document[] = rawDocuments.map((document) => ({
   id: document.id.toString(),
   publication_stage: document.publication_stage as PublicationStage,
   document_type: document.document_type as DocumentType,
-  authors: document.authors.map((author) => ({
-    id: author.auid.toString(),
-    name: author.name,
-    organization: author.organization,
-  })),
+  authors: document.authors
+    .map((author) => ({
+      id: author.auid.toString(),
+      name: author.name,
+      organization: author.organization,
+    }))
+    .filter((item, index) => {
+      return document.authors.map((author) => author.name).indexOf(item.name) === index;
+    }), // this filter should be done in backend
 }))
