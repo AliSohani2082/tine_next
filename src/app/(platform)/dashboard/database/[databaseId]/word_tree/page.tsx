@@ -1,29 +1,37 @@
-import { Expand } from 'lucide-react'
-import React from 'react'
-import RedirectLink from './_components/redirectLink'
-// import HtmlComponent from './_components/htmlComponent'
-// var html = require('./Document.html');
-// var template = { __html: __html };
-
-// type WordTreeProps = {
-//   params: {
-//     databaseId: string
-//   }
-// }
+import { Expand } from "lucide-react";
+import React from "react";
+import RedirectLink from "./_components/redirectLink";
+import HtmlComponent from "./_components/htmlComponent";
+// import Loading from '@/components/shared/Loading'
+const data = require("./Document.html");
 
 const WordTree = () => {
-  return (
-    <div className="w-full h-full px-7 flex justify-center items-start overflow-hidden">
-      {/* <div>
-        {html}
-      </div> */}
-      {/* <span dangerouslySetInnerHTML={template} /> */}
-      {/* <HtmlComponent htmlContent="/src/app/Document.html" /> */}
-      <RedirectLink link="/src/app/Document.html">
-        <Expand />
-      </RedirectLink>
-    </div>
-  )
-}
+	// const [htmlContent, setHtmlContent] = useState<string | null>(null);
+	// const [loading, setLoading] = useState<boolean>(true);
 
-export default WordTree
+	// useEffect(() => {
+	//   fetch('./Document.html')
+	//     .then(response => response.text())
+	//     .then(data => {
+	//       setHtmlContent(data);
+	//       setLoading(false); // Set loading to false once the content is fetched
+	//     })
+	//     .catch(error => {
+	//       console.error('Error fetching HTML:', error);
+	//       setLoading(false); // Set loading to false in case of an error
+	//     });
+	// }, []);
+
+	return (
+		<div className="w-full h-full px-7 flex justify-center items-start overflow-hidden">
+			<HtmlComponent html={data} />
+			<RedirectLink link="/src/docs/Document.html">
+				<Expand />
+			</RedirectLink>
+			{/* <Suspense fallback={<Loading/>}>
+      </Suspense> */}
+		</div>
+	);
+};
+
+export default WordTree;

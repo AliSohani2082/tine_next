@@ -1,8 +1,8 @@
-import React from 'react'
-import Authors from './authors'
+import React from "react";
+import Authors from "./authors";
 
 const AuthorPage = () => {
-  return <Authors />
-}
+	return <Authors />;
+};
 
-export default AuthorPage
+export default AuthorPage;

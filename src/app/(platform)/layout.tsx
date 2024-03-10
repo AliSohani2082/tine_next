@@ -1,16 +1,16 @@
-import { ModalProvider } from '@/providers/modal-provider'
+import { ModalProvider } from "@/providers/modal-provider";
 
 type PlatformLayoutProps = {
-  children: React.ReactNode
-}
+	children: React.ReactNode;
+};
 
 const Platformlayout = ({ children }: PlatformLayoutProps) => {
-  return (
-    <>
-      <ModalProvider />
-      {children}
-    </>
-  )
-}
+	return (
+		<>
+			<ModalProvider />
+			{children}
+		</>
+	);
+};
 
-export default Platformlayout
+export default Platformlayout;

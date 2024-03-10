@@ -1,12 +1,12 @@
-import React from 'react'
-import SigninForm from '../_components/Signin'
+import React from "react";
+import SigninForm from "../_components/Signin";
 
 const loginPage = () => {
-  return (
-    <>
-      <SigninForm />
-    </>
-  )
-}
+	return (
+		<>
+			<SigninForm />
+		</>
+	);
+};
 
-export default loginPage
+export default loginPage;

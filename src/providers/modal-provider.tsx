@@ -1,23 +1,23 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-import { DatabaseModal } from '@/components/modals/database-modal'
+import { DatabaseModal } from "@/components/modals/database-modal";
 
 export const ModalProvider = () => {
-  const [isMounted, setIsMounted] = useState(false)
+	const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+	useEffect(() => {
+		setIsMounted(true);
+	}, []);
 
-  if (!isMounted) {
-    return null
-  }
+	if (!isMounted) {
+		return null;
+	}
 
-  return (
-    <>
-      <DatabaseModal />
-    </>
-  )
-}
+	return (
+		<>
+			<DatabaseModal />
+		</>
+	);
+};

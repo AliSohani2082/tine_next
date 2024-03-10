@@ -1,114 +1,114 @@
-'use client'
+"use client";
 
-import React from 'react'
+import React from "react";
 import {
-  BarChart,
-  Bar,
-  Rectangle,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts'
+	BarChart,
+	Bar,
+	Rectangle,
+	XAxis,
+	YAxis,
+	CartesianGrid,
+	Tooltip,
+	Legend,
+	ResponsiveContainer,
+} from "recharts";
 
 const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-]
+	{
+		name: "Page A",
+		uv: 4000,
+		pv: 2400,
+		amt: 2400,
+	},
+	{
+		name: "Page B",
+		uv: 3000,
+		pv: 1398,
+		amt: 2210,
+	},
+	{
+		name: "Page C",
+		uv: 2000,
+		pv: 9800,
+		amt: 2290,
+	},
+	{
+		name: "Page D",
+		uv: 2780,
+		pv: 3908,
+		amt: 2000,
+	},
+	{
+		name: "Page E",
+		uv: 1890,
+		pv: 4800,
+		amt: 2181,
+	},
+	{
+		name: "Page F",
+		uv: 2390,
+		pv: 3800,
+		amt: 2500,
+	},
+	{
+		name: "Page G",
+		uv: 3490,
+		pv: 4300,
+		amt: 2100,
+	},
+];
 
 const paperType: {
-  [key: string]: number
+	[key: string]: number;
 } = {
-  Article: 21406,
-  Book: 21,
-  'Book chapter': 223,
-  'Book Chapter': 43,
-  'Conference paper': 329,
-  'Conference Paper': 471,
-  'Data paper': 135,
-  'Data Paper': 12,
-  Editorial: 231,
-  // "Erratum": 71,
-  Letter: 151,
-  // "Note": 125,
-  // "Retracted": 1,
-  // "Review": 2116,
-  // "Short survey": 68,
-  // "Short Survey": 28
-}
+	Article: 21406,
+	Book: 21,
+	"Book chapter": 223,
+	"Book Chapter": 43,
+	"Conference paper": 329,
+	"Conference Paper": 471,
+	"Data paper": 135,
+	"Data Paper": 12,
+	Editorial: 231,
+	// "Erratum": 71,
+	Letter: 151,
+	// "Note": 125,
+	// "Retracted": 1,
+	// "Review": 2116,
+	// "Short survey": 68,
+	// "Short Survey": 28
+};
 
 const paperData = Object.keys(paperType).map((key) => ({
-  name: key,
-  number: paperType[key],
-}))
+	name: key,
+	number: paperType[key],
+}));
 
 const Bar2 = () => {
-  return (
-    <BarChart
-      width={1000}
-      height={300}
-      data={paperData}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar
-        dataKey="number"
-        fill="#82ca9d"
-        activeBar={<Rectangle fill="gold" stroke="purple" />}
-      />
-    </BarChart>
-  )
-}
+	return (
+		<BarChart
+			width={1000}
+			height={300}
+			data={paperData}
+			margin={{
+				top: 5,
+				right: 30,
+				left: 20,
+				bottom: 5,
+			}}
+		>
+			<CartesianGrid strokeDasharray="3 3" />
+			<XAxis dataKey="name" />
+			<YAxis />
+			<Tooltip />
+			<Legend />
+			<Bar
+				dataKey="number"
+				fill="#82ca9d"
+				activeBar={<Rectangle fill="gold" stroke="purple" />}
+			/>
+		</BarChart>
+	);
+};
 
-export default Bar2
+export default Bar2;

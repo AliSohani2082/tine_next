@@ -1,44 +1,44 @@
-import React from 'react'
-import TagTabs from '@/components/shared/TagTabs'
-import { TabsContent } from '@/components/ui/tabs'
+import React from "react";
+import TagTabs from "@/components/shared/TagTabs";
+import { TabsContent } from "@/components/ui/tabs";
 
 const lists: { title: string; to: string }[] = [
-  {
-    title: 'اسناد',
-    to: 'documents',
-  },
-  {
-    title: 'نویسنده',
-    to: 'authors',
-  },
-  {
-    title: 'سازمان',
-    to: 'organizations',
-  },
-  {
-    title: 'کشور',
-    to: 'countries',
-  },
-  {
-    title: 'مجله',
-    to: 'journals',
-  },
-]
+	{
+		title: "اسناد",
+		to: "documents",
+	},
+	{
+		title: "نویسنده",
+		to: "authors",
+	},
+	{
+		title: "سازمان",
+		to: "organizations",
+	},
+	{
+		title: "کشور",
+		to: "countries",
+	},
+	{
+		title: "مجله",
+		to: "journals",
+	},
+];
 const ReferentialGraphLayout = ({
-  params,
-  children,
+	params,
+	children,
 }: {
-  children: React.ReactNode
-  params: { databaseId: string }
+	children: React.ReactNode;
+	params: { databaseId: string };
 }) => {
-  return (
-    <TagTabs
-      baseUrl={`/dashboard/database/${params.databaseId}/referential_graph`}
-      lists={lists}
-    >
-      {children}
-    </TagTabs>
-  )
-}
+	return (
+		<TagTabs
+			baseUrl={`/dashboard/database/${params.databaseId}/referential_graph`}
+			lists={lists}
+		>
+			{children}
+		</TagTabs>
+	);
+};
 
-export default ReferentialGraphLayout
+export default ReferentialGraphLayout;

@@ -1,39 +1,39 @@
-import React from 'react'
-import TagTabs from '@/components/shared/TagTabs'
-import { TabsContent } from '@/components/ui/tabs'
+import React from "react";
+import TagTabs from "@/components/shared/TagTabs";
+import { TabsContent } from "@/components/ui/tabs";
 
 const lists: { title: string; to: string }[] = [
-  {
-    title: 'اسناد',
-    to: 'documents',
-  },
-  {
-    title: 'نویسنده ها',
-    to: 'authors',
-  },
-  {
-    title: 'کشور ها',
-    to: 'countries',
-  },
-]
+	{
+		title: "اسناد",
+		to: "documents",
+	},
+	{
+		title: "نویسنده ها",
+		to: "authors",
+	},
+	{
+		title: "کشور ها",
+		to: "countries",
+	},
+];
 
 const ListsPage = ({
-  params,
-  children,
+	params,
+	children,
 }: {
-  children: React.ReactNode
-  params: { databaseId: string }
+	children: React.ReactNode;
+	params: { databaseId: string };
 }) => {
-  return (
-    <>
-      <TagTabs
-        baseUrl={`/dashboard/database/${params.databaseId}/lists`}
-        lists={lists}
-      >
-        {children}
-      </TagTabs>
-    </>
-  )
-}
+	return (
+		<>
+			<TagTabs
+				baseUrl={`/dashboard/database/${params.databaseId}/lists`}
+				lists={lists}
+			>
+				{children}
+			</TagTabs>
+		</>
+	);
+};
 
-export default ListsPage
+export default ListsPage;

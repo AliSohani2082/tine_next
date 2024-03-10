@@ -1,13 +1,13 @@
-import { countries } from '@/data/dataAdaptor'
+import { countries } from "@/data/dataAdaptor";
 
 type CountrySliderProps = {
-  id: string
-}
+	id: string;
+};
 
 const CountrySlider: React.FC<CountrySliderProps> = ({ id }) => {
-  const country = countries.find((country) => country.id === id)
+	const country = countries.find((country) => country.id === id);
 
-  return <div>{country?.name}</div>
-}
+	return <div>{country?.name}</div>;
+};
 
-export default CountrySlider
+export default CountrySlider;

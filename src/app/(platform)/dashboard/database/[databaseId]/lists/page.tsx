@@ -1,17 +1,17 @@
-import React from 'react'
-import Lottie from 'react-lottie'
-import dots from 'public/assets/animation/dots.json'
+import React from "react";
+import Lottie from "react-lottie";
+import dots from "public/assets/animation/dots.json";
 
 const ListsPage = () => {
-  return (
-    <div className="w-full h-full flex justify-center items-center">
-      {/* <Lottie
+	return (
+		<div className="w-full h-full flex justify-center items-center">
+			{/* <Lottie
         options={{ animationData: dots, loop: true }}
         width={272}
         height={272}
       /> */}
-    </div>
-  )
-}
+		</div>
+	);
+};
 
-export default ListsPage
+export default ListsPage;

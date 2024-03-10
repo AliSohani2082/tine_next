@@ -1,7 +1,7 @@
-import Countries from './countries'
+import Countries from "./countries";
 
 const CountriesPage = () => {
-  return <Countries />
-}
+	return <Countries />;
+};
 
-export default CountriesPage
+export default CountriesPage;

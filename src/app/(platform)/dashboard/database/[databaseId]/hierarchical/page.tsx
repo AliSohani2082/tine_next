@@ -1,34 +1,18 @@
-import { redirect } from 'next/navigation'
-import HtmlComponent from '@/components/shared/HtmlComp'
-import { Button } from '@/components/ui/button'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-  TooltipProvider,
-} from '@/components/ui/tooltip'
-import { Expand } from 'lucide-react'
-import React from 'react'
-import Link from 'next/link'
-import RedirectLink from './_components/redirectLink'
-const html = require('./html.ts')
+import { Expand } from "lucide-react";
+import React from "react";
+const hierarchical = require("./hierarchical.html");
+import RedirectLink from "./_components/redirectLink";
+import HtmlComponent from "./_components/htmlComponent";
 
-type WordTreeProps = {
-  params: {
-    databaseId: string
-  }
-}
+const Hierarchical = () => {
+	return (
+		<div className="w-full h-full px-7 flex justify-center items-start overflow-hidden">
+			<HtmlComponent html={hierarchical} />
+			<RedirectLink link="/src/docs/hierarchical.html">
+				<Expand />
+			</RedirectLink>
+		</div>
+	);
+};
 
-const WordTree: React.FC<WordTreeProps> = () => {
-  return (
-    <div className="w-full h-full px-7 flex justify-center items-start overflow-hidden">
-      <p dangerouslySetInnerHTML={{ __html: html }}></p>
-      {/* <HtmlComponent htmlContent="src/app/hierarchical.html" /> */}
-      <RedirectLink link="../hierarchical.html">
-        <Expand />
-      </RedirectLink>
-    </div>
-  )
-}
-
-export default WordTree
+export default Hierarchical;

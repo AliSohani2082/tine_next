@@ -1,8 +1,8 @@
-import React from 'react'
-import Documents from './documents'
+import React from "react";
+import Documents from "./documents";
 
 const documentsPage = () => {
-  return <Documents />
-}
+	return <Documents />;
+};
 
-export default documentsPage
+export default documentsPage;

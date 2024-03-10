@@ -1,4 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
-
-module.exports = nextConfig
+const withHtml = require("@blunck/next-html")();
+const nextConfig = withHtml();
+module.exports = nextConfig;
