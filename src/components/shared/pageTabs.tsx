@@ -67,6 +67,7 @@ const PageTabs = ({ databaseId, pages, baseUrl, children }: TabsProps) => {
 							href={`${baseUrl}/${page.to}`}
 							onClick={() => {
 								setActiveTab(page);
+								localStorage.setItem('isFirstVisit', 'false');
 							}}
 						>
 							<h1 className="font-bold text-base">{page.title}</h1>

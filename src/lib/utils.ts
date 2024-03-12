@@ -11,13 +11,12 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function translate(key: string) {
-	switch (key) {
-		case "country":
-			return "کشور";
-		case "document":
-			("مقاله");
-		case "author":
-			("نویسنده");
+	if(key === "document") {
+		return "مقاله"
+	} else if(key === "country") {
+		return "کشور"
+	} else if(key === "author") {
+		return "نویسنده"
 	}
 }
 

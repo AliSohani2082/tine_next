@@ -19,6 +19,7 @@ import { Separator } from "@/components/ui/separator";
 import { useFilters } from "@/hooks/use-filter";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 
 type DocumentSliderProps = {
 	id: string;
@@ -64,7 +65,7 @@ const DocumentSlider: React.FC<DocumentSliderProps> = ({ id }) => {
 	];
 	return (
 		<div className="h-full w-full flex justify-stretch items-stretch flex-row-reverse">
-			<div className="flex justify-center items-center w-1/3 h-full">
+			<ScrollArea className="flex flex-col justify-center items-center w-1/3 h-full">
 				<Card className="w-full mx-2">
 					<CardContent className="flex flex-col justify-items-stretch items-stretch">
 						<div className="border-gray-300 flex border-b-2 justify-between items-center cursor-default w-full h-12 px-2">
@@ -82,10 +83,26 @@ const DocumentSlider: React.FC<DocumentSliderProps> = ({ id }) => {
 						))}
 					</CardContent>
 				</Card>
-			</div>
+				<div className="flex flex-col justify-center items-end">
+					<div className="flex flex-row justify-start items-center flex-wrap gap-1 m-5">
+						{document.keywords.map((keyword) => (
+							<Badge key={keyword}>{keyword}</Badge>
+						))}
+					</div>
+				</div>
+			</ScrollArea>
 			<ScrollArea className="w-2/3">
 				<div className="w-full">
-					<span className="text-3xl py-4">{document.title}</span>
+					<TooltipProvider>
+						<Tooltip>
+							<TooltipTrigger className="w-[900px] flex">
+								<span className="text-3xl w-full truncate">{document.title}</span>	
+							</TooltipTrigger>
+							<TooltipContent className="max-w-[700px]">
+								<span className="text-xl w-full">{document.title}</span>
+							</TooltipContent>
+						</Tooltip>
+					</TooltipProvider>
 					<div className="w-full flex flex-row flex-wrap justify-start items-center gap-1">
 						{document.authors.map((author, index) => (
 							<Button
@@ -110,8 +127,8 @@ const DocumentSlider: React.FC<DocumentSliderProps> = ({ id }) => {
 							variant="ghost"
 							className="mb-2"
 						>
-							<span>مشاهده بیشتر</span>
-							{!showMore ? <ChevronUp /> : <ChevronDown />}
+							<span>مشاهده {!showMore? "بیشتر" : "کمتر"}</span>
+							{!showMore ? <ChevronDown /> : <ChevronUp />}
 						</Button>
 					</div>
 					<div
@@ -142,58 +159,15 @@ const DocumentSlider: React.FC<DocumentSliderProps> = ({ id }) => {
 							))}
 						</div>
 					</div>
-					{/* <div className="pt-6 flex flex-row justify-start items-center gap-2 w-full">
-            <Button
-              className="flex flex-row justify-center items-center gap-1"
-              variant="ghost"
-            >
-              <MoreHorizontal />
-              مشاهده مقاله
-            </Button>
-            <Button
-              variant={isFilter ? 'default' : 'ghost'}
-              onClick={() => {
-                if (isFilter) {
-                  removeFilter(
-                    filters.find(
-                      (filter) =>
-                        filter.dataId === document.id &&
-                        filter.type === 'document'
-                    )?.id || ''
-                  )
-                } else {
-                  addFilter({
-                    dataId: document.id,
-                    type: 'document',
-                    id: uuidv4(),
-                  })
-                }
-              }}
-              className="flex flex-row justify-between items-center gap-1"
-            >
-              {isFilter ? <Minus /> : <Plus />}
-              <span>اضافه کردن به فلتر</span>
-            </Button>
-          </div>
-          <Separator className="mt-2" /> */}
 					<article className="flex flex-col mx-4 items-start justify-center">
 						<p className="text-justify">
 							<span className="font-bold">Abstract: </span>
 							{document?.abstract || lorem}
 						</p>
 					</article>
-					<Separator className="my-6" />
-					<div className="flex flex-col justify-center items-end">
-						<span className="text-2xl mx-3">کلمات کلیدی</span>
-						<div className="flex flex-row justify-start items-center flex-wrap gap-1 m-5">
-							{document.keywords.map((keyword) => (
-								<Badge key={keyword}>{keyword}</Badge>
-							))}
-						</div>
-					</div>
+					
 				</div>
 			</ScrollArea>
-			{/* <div className='w-1/3'></div> */}
 		</div>
 	);
 };

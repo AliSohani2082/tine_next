@@ -32,7 +32,7 @@ export function MoreAction<DataT>({
 			item={item}
 			isActive={isActive}
 			icon={<Eye />}
-			label={`اضافه کردن ${translate(type)} به فیلتر ها`}
+			label={`مشاهده بیشتر ${translate(type)}`}
 			onClick={() => {
 				if (isActive) {
 					setIsActive(false);

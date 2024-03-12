@@ -31,46 +31,53 @@ const CustomChart: React.FC<ChartProps> = ({ data }) => {
 	);
 
 	useEffect(() => {
-		if (chartRef.current && data.length && data.length) {
-			const ctx = chartRef.current.getContext("2d");
-			if (ctx) {
-				chartInstance.current = new Chart(ctx, {
-					type: "pie",
-					data: {
-						labels: data.map((d) => d.label),
-						datasets: [
-							{
-								data: data.map((d) => d.value),
-								backgroundColor: data.map((d) => d.color),
-							},
-						],
-					},
-					options: {
-						responsive: true,
-						plugins: {
-							legend: {
-								display: false,
-							},
-							title: {
-								display: false,
-							},
-						},
-					},
-				});
-			}
-		}
+    if (chartRef.current && data.length && data.length) {
+        const ctx = chartRef.current.getContext("2d");
+        if (ctx) {
+            chartInstance.current = new Chart(ctx, {
+                type: "pie",
+                data: {
+                    labels: data.map((d) => d.label),
+                    datasets: [
+                        {
+                            data: data.map((d) => d.value),
+                            backgroundColor: data.map((d) => d.color),
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true, // Set to true to display legend
+                            position: 'bottom', // Customize legend position
+                            labels: {
+                                font: {
+                                    size: 12 // Customize font size
+                                },
+                                padding: 20 // Customize padding between labels
+                            }
+                        },
+                        title: {
+                            display: false,
+                        },
+                    },
+                },
+            });
+        }
+    }
 
-		return () => {
-			if (chartInstance.current) {
-				chartInstance.current.destroy();
-			}
-		};
-	}, [data]);
+    return () => {
+        if (chartInstance.current) {
+            chartInstance.current.destroy();
+        }
+    };
+}, [data]);
+
 
 	return (
-		<div className="w-full h-full relative flex flex-col justify-center items-center">
-			<div className="w-full flex flex-col justify-center items-center"></div>
-			<Card className="rounded-2xl p-2 m-3 flex flex-row flex-wrap">
+		<div className="w-full h-full relative flex flex-col justify-start items-center">
+			{/* <Card className="rounded-2xl p-2 m-3 flex flex-row flex-wrap">
 				<TooltipProvider>
 					{data.map(({ label, color, value }) => (
 						<Tooltip key={label}>
@@ -88,8 +95,8 @@ const CustomChart: React.FC<ChartProps> = ({ data }) => {
 						</Tooltip>
 					))}
 				</TooltipProvider>
-			</Card>
-			<canvas ref={chartRef} className="font-mono" />
+			</Card> */}
+			<canvas ref={chartRef} className="font-mono h-[400px]" />
 			{tooltipModel && <ChartTooltip tooltipModel={tooltipModel} />}
 		</div>
 	);

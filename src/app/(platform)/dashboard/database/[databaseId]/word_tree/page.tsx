@@ -21,7 +21,6 @@ const WordTree = () => {
 	//       setLoading(false); // Set loading to false in case of an error
 	//     });
 	// }, []);
-
 	return (
 		<div className="w-full h-full px-7 flex justify-center items-start overflow-hidden">
 			<HtmlComponent html={data} />

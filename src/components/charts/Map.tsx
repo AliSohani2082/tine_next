@@ -215,7 +215,7 @@ const WorldMap: React.FC<WorldMapProps> = ({ data, width, height }) => {
 							key={color}
 							className="font-primary-Regular flex justify-end items-center my-1.5 gap-x-3"
 						>
-							<span className="text-sm">{name}</span>
+							<span className="text-base">{name}</span>
 							<div
 								className="w-4 h-4 rounded-sm"
 								style={{ background: color }}
