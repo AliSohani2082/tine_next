@@ -7,8 +7,8 @@ import { countries } from "@/data/dataAdaptor";
 import Lottie from "react-lottie";
 import dots from "public/assets/animation/dots.json";
 
-async function getData(): Promise<CountryTable[]> {
-	const countriesTable = countries.map(
+async function getData(id: string): Promise<CountryTable[]> {
+	const countriesTable = countries(id).map(
 		(country): CountryTable => ({
 			id: country.id.toString(),
 			name: country.name,
@@ -18,19 +18,23 @@ async function getData(): Promise<CountryTable[]> {
 	return countriesTable;
 }
 
-export default function Countries() {
+interface CountriesProps {
+	databaseId: string;
+}
+
+export const Countries: React.FC<CountriesProps> = ({ databaseId }) => {
 	const [loading, setLoading] = useState(true);
 	const [data, setData] = useState<CountryTable[]>([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const fetchedData = await getData();
+			const fetchedData = await getData(databaseId);
 			setData(fetchedData);
 			setLoading(false);
 		};
 
 		fetchData();
-	}, []);
+	}, [databaseId]);
 
 	return (
 		<div className="container mx-auto py-10">
@@ -48,3 +52,5 @@ export default function Countries() {
 		</div>
 	);
 }
+
+export default Countries;

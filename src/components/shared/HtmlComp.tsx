@@ -1,31 +1,26 @@
-import React from "react";
-import fs from "fs";
+// "use client"
 
+// import { useState, useEffect } from "react";
+const html = require("@/docs/Document.html")
 interface HtmlComponentProps {
 	htmlContent: string;
 }
 
-export async function getServerSideProps({
-	params,
-}: {
-	params: { htmlFile: string };
-}) {
-	const { htmlFile } = params;
-
-	// Validate the file name (optional)
-	if (!htmlFile || !htmlFile.endsWith(".html")) {
-		return { notFound: true }; // Handle invalid file requests
-	}
-
-	const htmlContent = fs.readFileSync(`./src/app/Document.html`, "utf-8");
-
-	return { props: { htmlContent } };
-}
-
 const HtmlComponent: React.FC<HtmlComponentProps> = ({ htmlContent }) => {
+	// const [htmlFileString, setHtmlFileString] = useState<string>("");
+
+  // async function fetchHtml() {
+  //   setHtmlFileString(await (await fetch(htmlContent)).text());
+	// 	console.log(htmlContent)
+  // }
+  // useEffect(() => {
+  //   fetchHtml();
+  // }, []);
+
 	return (
 		<div className="w-full h-full relative">
-			<iframe srcDoc={htmlContent} className="w-full h-full fixed left-20" />
+			<div dangerouslySetInnerHTML={{ __html: html }}></div>
+			{/* <div dangerouslySetInnerHTML={{ __html: htmlFileString || "" }}></div> */}
 		</div>
 	);
 };

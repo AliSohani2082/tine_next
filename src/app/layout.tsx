@@ -45,21 +45,21 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en">
-			{/* <ThemeProvider
-				attribute="class"
-				defaultTheme="system"
-				enableSystem
-				disableTransitionOnChange
-			> */}
-				<body
-					className={`${inter.variable} ${persian.variable} font-mono bg-background`}
+		<html lang="en" suppressContentEditableWarning>
+			<body
+				className={`${inter.variable} ${persian.variable} font-mono bg-background`}
+			>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
 				>
 					{children}
 					<SpeedInsights />
 					<Toaster />
-				</body>
-			{/* </ThemeProvider> */}
+				</ThemeProvider>
+			</body>
 		</html>
 	);
 }

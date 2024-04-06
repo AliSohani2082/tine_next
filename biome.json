@@ -6,9 +6,23 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"a11y": {
+				"useKeyWithClickEvents": "off"
+			},
+			"style": {
+				"useImportType": "off"
+			},
+			"suspicious": {
+				"noShadowRestrictedNames": "off",
+				"noArrayIndexKey": "off",
+				"noExplicitAny": "off"
+			}
 		}
 	},
+	"files": {
+    "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx", "src/**/*.jsx"]
+  },
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",

@@ -25,9 +25,7 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-type SliderProps = {};
-
-const Slider: React.FC<SliderProps> = (props) => {
+const Slider = () => {
 	const { isOpen, onClose, item } = useDownSlider();
 	const { add: addFilter, remove: removeFilter, filters } = useFilters();
 

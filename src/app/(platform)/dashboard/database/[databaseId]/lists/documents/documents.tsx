@@ -6,8 +6,8 @@ import { DataTable } from "../_components/data-table";
 import { documents } from "@/data/dataAdaptor";
 import Loading from "@/components/shared/Loading";
 
-async function getData(): Promise<DocumentTable[]> {
-	const documentsTable = documents.map(
+async function getData(id: string): Promise<DocumentTable[]> {
+	const documentsTable = documents(id).map(
 		(document): DocumentTable => ({
 			id: document.id.toString(),
 			title: document.title,
@@ -18,19 +18,23 @@ async function getData(): Promise<DocumentTable[]> {
 	return documentsTable;
 }
 
-export default function Documents() {
+interface DocumentsProps {
+	databaseId: string;
+}
+
+export const Documents: React.FC<DocumentsProps> = ({ databaseId }) => {
 	const [loading, setLoading] = useState(true);
 	const [data, setData] = useState<DocumentTable[]>([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const fetchedData = await getData();
+			const fetchedData = await getData(databaseId);
 			setData(fetchedData);
 			setLoading(false);
 		};
 
 		fetchData();
-	}, []);
+	}, [databaseId]);
 
 	return (
 		<div className="container mx-auto py-10">
@@ -42,3 +46,5 @@ export default function Documents() {
 		</div>
 	);
 }
+
+export default Documents;

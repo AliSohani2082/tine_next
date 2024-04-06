@@ -1,26 +1,35 @@
-"use client";
-import { useEffect } from "react";
+// pages/example.tsx
 
-type htmlCompProps = {
-	html: any;
-};
+import fs from 'fs';
+import path from 'path';
+import { GetStaticProps } from 'next';
+var __html = require("@/docs/hierarchical.html")
+var template = { __html: __html }
 
-const HtmlComp: React.FC<htmlCompProps> = ({ html }) => {
-	useEffect(() => {
-    // Check if the page has been refreshed before
-    const isFirstVisit = localStorage.getItem('isFirstVisit');
+interface ExampleProps {
+  htmlContent: string;
+}
 
-    if (!isFirstVisit) {
-      // If it's the first visit, refresh the page
-      window.location.reload();
+const Example: React.FC<ExampleProps> = ({ htmlContent }) => {
+  // Function to render HTML content safely
+  const createMarkup = (htmlContent: string) => {
+    return { __html: htmlContent };
+  };
 
-      // Set the flag in localStorage to indicate that the page has been refreshed
-      localStorage.setItem('isFirstVisit', 'true');
-    }
-  }, []); // Empty dependency array ensures the effect runs only once on component mount
+  return (
+    <div dangerouslySetInnerHTML={createMarkup(htmlContent)} />
+  );
+}
 
-	
-	return <div dangerouslySetInnerHTML={{ __html: html }} />;
-};
+export const getStaticProps: GetStaticProps<ExampleProps> = async () => {
+  const filePath = path.join(process.cwd(), 'public', 'example.html');
+  const htmlContent = fs.readFileSync(filePath, 'utf-8');
 
-export default HtmlComp;
+  return {
+    props: {
+      htmlContent,
+    },
+  };
+}
+
+export default Example;

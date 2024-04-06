@@ -48,7 +48,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 type State = "starter" | "loading" | "done";
 
-const results: Document[] = documents.slice(1, 4);
+const results: Document[] = documents("1").slice(1, 4);
 // const filters = {
 //   authors: 30,
 //   documents: 20,

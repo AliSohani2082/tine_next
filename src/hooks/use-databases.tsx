@@ -17,10 +17,6 @@ export const useDatabase = create<useDatabasesProps>((set) => ({
 			id: "2",
 			name: "database2",
 		},
-		{
-			id: "3",
-			name: "database3",
-		},
 	],
 	add: (database) =>
 		set((state) => {

@@ -8,36 +8,8 @@ import PieChart from "@/components/charts/pieChart";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn, farsiNumber } from "@/lib/utils";
 import { Book, Globe2, User } from "lucide-react";
-import { countries } from "@/data/dataAdaptor";
-import papaerTypes from "@/data/paper-type.json";
-import lengthoflists from "@/data/lengthoflists.json";
-import yearscount from "@/data/yearscount.json";
+import { paperTypes, length, yearCount, countries } from "@/data/dataAdaptor";
 
-const infoCards: {
-	title: string;
-	icon: React.ReactNode;
-	number: number;
-	color: string;
-}[] = [
-	{
-		title: "مقالات",
-		icon: <Book size={40} />,
-		number: lengthoflists["documents"] || 0,
-		color: "text-blue-400",
-	},
-	{
-		title: "نویسندگان",
-		icon: <User size={40} />,
-		number: lengthoflists["authors"] || 0,
-		color: "text-green-400",
-	},
-	{
-		title: "کشور ها",
-		icon: <Globe2 size={40} />,
-		number: lengthoflists["countries"] || 0,
-		color: "text-red-400",
-	},
-];
 const colors: { [key: string]: string } = {
 	paleCoral: "#f78da7",
 	softApricot: "#fbb072",
@@ -69,13 +41,41 @@ const colors: { [key: string]: string } = {
 	lightTaupe: "#dcdcdc",
 };
 
-const pieChartData = Object.keys(papaerTypes).map((key, index) => ({
-	label: key,
-	value: Object.values(papaerTypes)[index],
-	color: Object.values(colors)[index],
-}));
-
 const OraganizationPage = ({ params }: { params: { databaseId: string } }) => {
+
+	const pieChartData = Object.keys(paperTypes(params.databaseId)).map((key, index) => ({
+		label: key,
+		value: Object.values(paperTypes(params.databaseId))[index],
+		color: Object.values(colors)[index],
+	}));
+	
+
+	const infoCards: {
+		title: string;
+		icon: React.ReactNode;
+		number: number;
+		color: string;
+	}[] = [
+		{
+			title: "مقالات",
+			icon: <Book size={40} />,
+			number: length(params.databaseId).documents || 0,
+			color: "text-blue-400",
+		},
+		{
+			title: "نویسندگان",
+			icon: <User size={40} />,
+			number: length(params.databaseId).authors || 0,
+			color: "text-green-400",
+		},
+		{
+			title: "کشور ها",
+			icon: <Globe2 size={40} />,
+			number: length(params.databaseId).countries || 0,
+			color: "text-red-400",
+		},
+	];
+	
 	return (
 		<div className="flex w-full h-full px-16 overflow-auto flex-col">
 			<div className="w-full flex py-5 justify-around items-center">
@@ -98,8 +98,8 @@ const OraganizationPage = ({ params }: { params: { databaseId: string } }) => {
 					<ChartCard title="تعداد مقالات در طول سال ها" className="w-3/4">
 						{/* <div>1</div> */}
 						<LineChart
-							data={Object.values(yearscount)}
-							labels={Object.keys(yearscount)}
+							data={Object.values(yearCount(params.databaseId))}
+							labels={Object.keys(yearCount(params.databaseId))}
 						/>
 					</ChartCard>
 					<ChartCard title="انواع مقالات" className="flex-1">
@@ -110,7 +110,7 @@ const OraganizationPage = ({ params }: { params: { databaseId: string } }) => {
 				<div className="flex flex-row gap-4">
 					<ChartCard title="نقشه" className="w-full">
 						{/* <div>3</div> */}
-						<Map data={countries} width={400} height={180} />
+						<Map data={countries(params.databaseId)} width={400} height={180} />
 					</ChartCard>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useId, useRef, useState } from "react";
+import { type FC, useRef, useState, useId} from "react";
 import {
 	ComposableMap,
 	Geographies,
@@ -10,11 +10,10 @@ import {
 import geoUrl from "./country.json";
 import { Plus, Minus, Target } from "lucide-react";
 // import { TooltipProvider, Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { TooltipRefProps, Tooltip } from "react-tooltip";
+import { type TooltipRefProps, Tooltip } from "react-tooltip";
 import { Card } from "../ui/card";
-import { Country } from "@/types/items";
+import type { Country } from "@/types/items";
 import { Button } from "../ui/button";
-import { countries } from "@/data/dataAdaptor";
 import { useDownSlider } from "@/hooks/use-downSlider";
 
 const shadow_custom_world_map = "shadow-md";
@@ -33,7 +32,7 @@ interface WorldMapProps {
 	data: Country[];
 }
 
-const WorldMap: React.FC<WorldMapProps> = ({ data, width, height }) => {
+const WorldMap: FC<WorldMapProps> = ({ data, width, height }) => {
 	const newGeoUrl = {
 		...geoUrl,
 		objects: {
@@ -61,7 +60,7 @@ const WorldMap: React.FC<WorldMapProps> = ({ data, width, height }) => {
 	};
 
 	const { onOpen, onClose } = useDownSlider();
-	let tooltip = useRef<TooltipRefProps>(null);
+	const tooltip = useRef<TooltipRefProps>(null);
 
 	const [tooltipContent, setTooltipContent] = useState<string>();
 	const [position, setPosition] = useState<{
@@ -116,7 +115,7 @@ const WorldMap: React.FC<WorldMapProps> = ({ data, width, height }) => {
 										key={geo.rsmKey}
 										geography={geo}
 										onClick={() => {
-											const id = countries.find(
+											const id = data.find(
 												(country) => country.name === geo.properties.name,
 											)?.id;
 											if (id) {

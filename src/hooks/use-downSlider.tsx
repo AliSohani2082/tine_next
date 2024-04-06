@@ -10,16 +10,22 @@ type Item = {
 
 interface useDownSliderProps {
 	item: Item;
+	databaseId: string;
+	setDatabaseId: (databaseId: string) => void;
 	isOpen: boolean;
 	onOpen: (item: Item) => void;
 	onClose: () => void;
 }
 
 export const useDownSlider = create<useDownSliderProps>((set) => ({
+	databaseId: "1",
 	item: null,
 	isOpen: false,
+	setDatabaseId: (databaseId) =>
+		set({ databaseId: databaseId }),
 	onOpen: (item) =>
 		set((state) => ({
+			...state,
 			item: item,
 			isOpen: true,
 		})),

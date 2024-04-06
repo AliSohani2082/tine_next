@@ -8,8 +8,10 @@ import { X } from "lucide-react";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { useDatabase } from "@/hooks/use-databases";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export type SidebarItemProps = {
+	onClick?: MouseEventHandler<HTMLButtonElement>,
 	title: string;
 	icon?: React.ReactNode;
 	to: string;
@@ -18,6 +20,7 @@ export type SidebarItemProps = {
 };
 
 const SidebarItem: React.FC<SidebarItemProps> = ({
+	onClick,
 	title,
 	to,
 	selected,
@@ -25,15 +28,14 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 	id,
 }) => {
 	let StyledIcon = undefined;
-
+	const router = useRouter();
 	const [open, setOpen] = React.useState(false);
 	const { remove: removeDatabase } = useDatabase();
 
 	if (icon) {
 		StyledIcon = cloneElement(icon as ReactElement, {
 			className:
-				(icon as ReactElement)?.props.className +
-				"h-6 w-6 rounded-sm m-4 flex items-center justify-center font-bold text-2xl",
+				`${(icon as ReactElement)?.props.className} h-6 w-6 rounded-sm m-4 flex items-center justify-center font-bold text-2xl`,
 		});
 	}
 
@@ -51,8 +53,12 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 				}}
 				loading={false}
 			/>
-			<Link
-				href={to}
+			<button
+				type="button"
+				onClick={(e) => {
+					if (onClick) onClick(e);
+					router.push(to);
+				}}
 				className={cn(
 					"w-full group flex flex-row items-center justify-between whitespace-nowrap rounded-xl hover:bg-muted transition ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 pl-2 mb-1 h-14 text-3xl active:text-sm",
 					!id && "justify-end",
@@ -89,7 +95,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 						</span>
 					)}
 				</div>
-			</Link>
+			</button>
 		</ol>
 	);
 };

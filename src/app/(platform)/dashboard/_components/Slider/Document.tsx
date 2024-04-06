@@ -29,10 +29,10 @@ const lorem =
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pulvinar massa eget nisi rutrum fermentum. Phasellus ultricies tortor et libero convallis, quis auctor risus egestas. Integer neque mi, mattis nec tortor a, imperdiet euismod ipsum. Nam id dolor a diam pretium tincidunt a nec velit. Phasellus fermentum, ante vitae pellentesque semper, justo lacus gravida sem, a luctus nulla orci a enim. Quisque accumsan tellus odio, ut pharetra mauris faucibus a. Fusce tempus fermentum odio, vitae placerat justo pulvinar at. Etiam facilisis orci imperdiet metus tempus, vitae condimentum lectus volutpat. Ut suscipit, metus eu vestibulum ullamcorper, sem lorem molestie ex, non luctus arcu est porttitor quam. Aliquam erat volutpat. Vivamus consectetur euismod lacinia. ";
 
 const DocumentSlider: React.FC<DocumentSliderProps> = ({ id }) => {
-	const document = documents.find((document) => document.id.toString() === id);
+	const { onOpen, databaseId } = useDownSlider();
+	const document = documents(databaseId).find((document) => document.id.toString() === id);
 	// console.log(document?.authors)
 
-	const { onOpen } = useDownSlider();
 	const { add: addFilter, remove: removeFilter, filters } = useFilters();
 	const [showMore, setShowMore] = useState(false);
 
@@ -86,7 +86,7 @@ const DocumentSlider: React.FC<DocumentSliderProps> = ({ id }) => {
 				<div className="flex flex-col justify-center items-end">
 					<div className="flex flex-row justify-start items-center flex-wrap gap-1 m-5">
 						{document.keywords.map((keyword) => (
-							<Badge key={keyword}>{keyword}</Badge>
+							<Badge key={keyword} className="cursor-default">{keyword}</Badge>
 						))}
 					</div>
 				</div>

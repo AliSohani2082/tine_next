@@ -5,9 +5,12 @@ import SidebarAccordion from "./SidebarAccordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useFilters } from "@/hooks/use-filter";
 import { documents, countries, authors } from "@/data/dataAdaptor";
+import { useDownSlider } from "@/hooks/use-downSlider";
 import FilterItem from "./FilterItem";
 
+
 const FilterList = () => {
+	const { databaseId } = useDownSlider()
 	const { filters, remove: removeFilter } = useFilters();
 	return (
 		<SidebarAccordion value="filter" icon={<Filter />} title="فیلتر ها">
@@ -20,9 +23,12 @@ const FilterList = () => {
 					</span>
 				) : (
 					filters.map((filter) => {
-						var data;
+						let data : {
+							title: string,
+							icon: React.ReactNode
+						} | null = null;
 						if (filter.type === "author") {
-							const author = authors.find(
+							const author = authors(databaseId).find(
 								(author) => author.id === filter.dataId,
 							);
 							if (author === undefined) return null;
@@ -31,7 +37,7 @@ const FilterList = () => {
 								icon: <User />,
 							};
 						} else if (filter.type === "document") {
-							const document = documents.find(
+							const document = documents(databaseId).find(
 								(document) => document.id === filter.dataId,
 							);
 							if (document === undefined) return null;
@@ -40,7 +46,7 @@ const FilterList = () => {
 								icon: <Book />,
 							};
 						} else if (filter.type === "country") {
-							const country = countries.find(
+							const country = countries(databaseId).find(
 								(country) => country.id === filter.dataId,
 							);
 							if (country === undefined) return null;
@@ -49,15 +55,15 @@ const FilterList = () => {
 								icon: <Globe2 />,
 							};
 						}
-						if (data)
-							return (
-								<FilterItem
-									data={data}
-									filter={filter}
-									removeFilter={removeFilter}
-									key={filter.id}
-								/>
-							);
+						if (!data) return null;
+						return (
+							<FilterItem
+								data={data}
+								filter={filter}
+								removeFilter={removeFilter}
+								key={filter.id}
+							/>
+						);
 					})
 				)}
 			</ScrollArea>

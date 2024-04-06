@@ -7,9 +7,9 @@ import { authors } from "@/data/dataAdaptor";
 import Lottie from "react-lottie";
 import dots from "public/assets/animation/dots.json";
 
-async function getData(): Promise<AuthorTable[]> {
+async function getData(id: string): Promise<AuthorTable[]> {
 	// Fetch data from your API here.
-	const authorTable = authors.map(
+	const authorTable = authors(id).map(
 		(author): AuthorTable => ({
 			id: author.id.toString(),
 			name: author.name,
@@ -19,19 +19,23 @@ async function getData(): Promise<AuthorTable[]> {
 	return authorTable;
 }
 
-export default function Authors() {
+interface AuthorsProps {
+	databaseId: string;
+}
+
+export const Authors: React.FC<AuthorsProps> = ({ databaseId }) => {
 	const [loading, setLoading] = useState(true);
 	const [data, setData] = useState<AuthorTable[]>([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const fetchedData = await getData();
+			const fetchedData = await getData(databaseId);
 			setData(fetchedData);
 			setLoading(false);
 		};
 
 		fetchData();
-	}, []);
+	}, [databaseId]);
 
 	return (
 		<div className="container mx-auto py-10">

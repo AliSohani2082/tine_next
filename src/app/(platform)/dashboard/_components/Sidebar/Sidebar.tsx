@@ -14,6 +14,7 @@ import SidebarItem from "./SidebarItem";
 import SidebarAccordion from "./SidebarAccordion";
 import { useFilters } from "@/hooks/use-filter";
 import FilterList from "./FilterList";
+import { useDownSlider } from "@/hooks/use-downSlider";
 
 interface SidebarProps {
 	storageKey?: string;
@@ -22,7 +23,8 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({
 	storageKey = "t-sidebar-state",
 }) => {
-	let pathname = usePathname();
+	const { onClose, setDatabaseId } = useDownSlider()
+	const pathname = usePathname();
 	const databaseId = pathname.startsWith("/dashboard/database")
 		? pathname.split("/")[3]
 		: undefined;
@@ -73,17 +75,24 @@ const Sidebar: React.FC<SidebarProps> = ({
 					>
 						{[
 							{
+								onClick: () => {
+									onClose();
+								},
 								title: "ایجاد دیتابیس جدید",
 								to: "/dashboard",
 								selected: true,
 								id: null,
 							},
 							...databases?.map((database: IDatabase) => ({
+								onClick: () => {
+									setDatabaseId(database.id);
+									onClose();
+								},
 								title: database.name,
 								to: `/dashboard/database/${database.id}`,
 								selected: databaseId === database.id,
 								id: database.id,
-							})),
+							})) || [],
 						].map((item, index) => (
 							<SidebarItem key={index} {...item} />
 						))}
