@@ -22,7 +22,7 @@ interface CountriesProps {
 	databaseId: string;
 }
 
-export const Countries: React.FC<CountriesProps> = ({ databaseId }) => {
+const Countries: React.FC<CountriesProps> = ({ databaseId }) => {
 	const [loading, setLoading] = useState(true);
 	const [data, setData] = useState<CountryTable[]>([]);
 

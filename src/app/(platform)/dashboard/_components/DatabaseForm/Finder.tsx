@@ -7,44 +7,43 @@ import React, {
 	useImperativeHandle,
 } from "react";
 import Lottie from "react-lottie";
-import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
-import { Book, Globe2, User, Info } from "lucide-react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+// import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
+// import { Book, Globe2, User, Info } from "lucide-react";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import * as z from "zod";
 
-import {
-	Form,
-	FormField,
-	FormItem,
-	FormControl,
-	FormMessage,
-	FormLabel,
-} from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
-import {
-	CreateDatabase as CreateDatabaseValidation,
-	Query,
-} from "@/lib/validation";
-import search from "public/assets/animation/search.json";
-import dots from "public/assets/animation/dots.json";
+// import {
+// 	Form,
+// 	FormField,
+// 	FormItem,
+// 	FormControl,
+// 	FormMessage,
+// 	FormLabel,
+// } from "@/components/ui/form";
+// import { Textarea } from "@/components/ui/textarea";
+// import {
+// 	CreateDatabase as CreateDatabaseValidation,
+// 	SimpleQuery,
+// } from "@/lib/validation";
+// import search from "public/assets/animation/search.json";
 import tick from "public/assets/animation/tick.json";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { FilterType } from "@/types/items";
-import { Button } from "@/components/ui/button";
-import {
-	Dialog,
-	DialogHeader,
-	DialogContent,
-	DialogTitle,
-	DialogTrigger,
-} from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import FoundItem from "./FoundItem";
+// import { Input } from "@/components/ui/input";
+// import { FilterType } from "@/types/items";
+// import { Button } from "@/components/ui/button";
+// import {
+// 	Dialog,
+// 	DialogHeader,
+// 	DialogContent,
+// 	DialogTitle,
+// 	DialogTrigger,
+// } from "@/components/ui/dialog";
+// import { cn } from "@/lib/utils";
+// import { ScrollArea } from "@/components/ui/scroll-area";
+// import FoundItem from "./FoundItem";
 import { documents } from "@/data/dataAdaptor";
 import { Document } from "@/types/items";
-import { TooltipProvider } from "@/components/ui/tooltip";
+// import { Label } from "@/components/ui/label";
 
 type State = "starter" | "loading" | "done";
 
@@ -63,39 +62,40 @@ WHERE شهر = 'تهران'
 
 این دستور از جدول کاربران تمام ردیف‌هایی که شهر آن‌ها برابر با "تهران" است را بازیابی می‌کند و اطلاعات نام، نام خانوادگی و ایمیل آن‌ها را نمایش می‌دهد.`;
 
+const complexSearchItems = ["title", "abstract", "keyword"]
+
 const Finder = () => {
 	const [state, setState] = useState<State>("starter");
-	const [open, onOpen] = useState(false);
-	const [title, setTitle] = useState("");
-	const [abstract, setAbstract] = useState("");
 
-	function startSearching() {
-		setState("loading");
-		const timer = setTimeout(() => setState("done"), 4000);
-		return () => {
-			clearTimeout(timer);
-		};
-	}
-	const onScan = async (values: z.infer<typeof CreateDatabaseValidation>) => {
-		console.log(values);
-		startSearching();
-	};
+	// function startSearching() {
+	// 	setState("loading");
+	// 	const timer = setTimeout(() => setState("done"), 4000);
+	// 	return () => {
+	// 		clearTimeout(timer);
+	// 	};
+	// }
+	// const onScan = async (values: z.infer<typeof CreateDatabaseValidation>) => {
+	// 	console.log(values);
+	// 	startSearching();
+	// };
 
-	const onSubmitFinder = async () => {
-		console.log("done!!");
-	};
+	// const onSubmitFinder = async () => {
+	// 	console.log("done!!");
+	// };
 
-	const form = useForm<z.infer<typeof CreateDatabaseValidation>>({
-		resolver: zodResolver(Query),
-		defaultValues: {
-			query: "",
-		},
-	});
+	// const form = useForm<z.infer<typeof CreateDatabaseValidation>>({
+	// 	resolver: zodResolver(SimpleQuery),
+	// 	defaultValues: {
+	// 		query: "",
+	// 	},
+	// });
+
+	// return null
 
 	return (
 		<CardContent className="flex flex-row justify-stretch items-stretch w-full h-full ">
 			<div className="flex flex-col justify-start items-stretch w-[50%] h-full">
-				<Card className="h-full flex flex-col overflow-auto justify-stretch items-stretch">
+				{/* <Card className="h-full flex flex-col overflow-auto justify-stretch items-stretch">
 					{state !== "starter" ? (
 						<>
 							<CardHeader className="text-xl h-full py-2 flex justify-center font-bold w-full text-right">
@@ -105,7 +105,6 @@ const Finder = () => {
 							<CardContent className="flex flex-col justify-between items-center flex-1 w-full h-full px-2">
 								{state !== "loading" && (
 									<TooltipProvider>
-										{/* <ScrollArea className="flex-1 w-full h-full flex flex-col justify-between items-center"> */}
 										{results.map((item, index) => (
 											<Dialog key={index}>
 												<DialogTrigger>
@@ -119,7 +118,6 @@ const Finder = () => {
 												</DialogContent>
 											</Dialog>
 										))}
-										{/* </ScrollArea> */}
 									</TooltipProvider>
 								)}
 							</CardContent>
@@ -132,16 +130,16 @@ const Finder = () => {
 							</p>
 						</div>
 					)}
-				</Card>
+				</Card> */}
 			</div>
 			{state === "loading" ? (
 				<div className="flex flex-col px-5 justify-center items-center w-[50%]">
-					<Lottie
+					{/* <Lottie
 						options={{ animationData: search, loop: true }}
 						width={272}
 						height={272}
 					/>
-					<span className="text-xl mt-2">درحال جست و جو مقالات</span>
+					<span className="text-xl mt-2">درحال جست و جو مقالات</span> */}
 					{/* <span className="mt-2">searching through datas....</span> */}
 				</div>
 			) : (
@@ -156,7 +154,7 @@ const Finder = () => {
 								/>
 							</div>
 						)}
-						<Form {...form}>
+						{/* <Form {...form}>
 							<form
 								onSubmit={form.handleSubmit(onSubmitFinder)}
 								className="flex flex-col items-stretch justify-start gap-2 w-full"
@@ -179,24 +177,81 @@ const Finder = () => {
 										</FormItem>
 									)}
 								/>
-								<FormField
-									control={form.control}
-									name="query"
-									render={({ field }) => (
-										<FormItem className="flex flex-col items-end w-full">
-											<FormLabel>کوئری</FormLabel>
-											<FormControl>
-												<Textarea
-													// disabled={loading}
-													placeholder="Database"
-													className="shad-input"
-													{...field}
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
+								<Tabs className="w-full" defaultValue="simple">
+									<TabsList className="justify-end w-full">
+										<TabsTrigger value="complex">
+											پیشرفته
+										</TabsTrigger>
+										<TabsTrigger value="simple">
+											ساده
+										</TabsTrigger>
+									</TabsList>
+									<TabsContent value="simple">
+										<FormField
+											control={form.control}
+											name="query"
+											render={({ field }) => (
+												<FormItem className="flex flex-col items-end w-full">
+													<FormLabel>کوئری</FormLabel>
+													<FormControl>
+														<Textarea
+															// disabled={loading}
+															placeholder="Database"
+															className="shad-input"
+															{...field}
+														/>
+													</FormControl>
+													<FormMessage />
+												</FormItem>
+											)}
+										/>
+									</TabsContent>
+									<TabsContent value="complex">
+										<div className="flex flex-col w-full gap-2">
+											{complexSearchItems.map((field, index) => (
+												<div key={index} className="flex flex-col justify-center items-center">
+													<div className="flex flex-row justify-center items-center">
+														<div className="bg-green-600">
+															{field}:
+														</div>
+														<FormField
+															// control={form.control}
+															name={field}
+															render={({ field }) => (
+																<FormItem className="flex flex-col items-end w-full">
+																	<FormControl>
+																		<Textarea
+																			placeholder="Database"
+																			className="shad-input"
+																			{...field}
+																		/>
+																	</FormControl>
+																	<FormMessage />
+																</FormItem>
+															)}
+														/>
+														{index + 1 !== complexSearchItems.length && (
+															<RadioGroup defaultValue="and" className="flex flex-row justify-center items-center">
+																<div className="flex items-center space-x-2">
+																	<RadioGroupItem value="and" id="r1" />
+																	<Label htmlFor="r1">and</Label>
+																</div>
+																<div className="flex items-center space-x-2">
+																	<RadioGroupItem value="or" id="r2" />
+																	<Label htmlFor="r2">or</Label>
+																</div>
+															</RadioGroup>
+														)}
+													</div>
+													<Button
+													>
+														Swap
+													</Button>
+												</div>
+											))}
+										</div>
+									</TabsContent>
+								</Tabs>
 								<div className="flex flex-row justify-end items-center gap-2 w-full">
 									<Button
 										variant="outline"
@@ -213,7 +268,7 @@ const Finder = () => {
 									</Button>
 								</div>
 							</form>
-						</Form>
+						</Form> */}
 					</div>
 				</div>
 			)}
@@ -221,6 +276,6 @@ const Finder = () => {
 	);
 };
 
-Finder.displayName = "Finder";
+// Finder.displayName = "Finder";
 
-export default Finder;
+export default Finder

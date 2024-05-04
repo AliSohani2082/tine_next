@@ -8,7 +8,6 @@ import Lottie from "react-lottie";
 import dots from "public/assets/animation/dots.json";
 
 async function getData(id: string): Promise<AuthorTable[]> {
-	// Fetch data from your API here.
 	const authorTable = authors(id).map(
 		(author): AuthorTable => ({
 			id: author.id.toString(),
@@ -23,7 +22,7 @@ interface AuthorsProps {
 	databaseId: string;
 }
 
-export const Authors: React.FC<AuthorsProps> = ({ databaseId }) => {
+const Authors: React.FC<AuthorsProps> = ({ databaseId }) => {
 	const [loading, setLoading] = useState(true);
 	const [data, setData] = useState<AuthorTable[]>([]);
 
@@ -53,3 +52,5 @@ export const Authors: React.FC<AuthorsProps> = ({ databaseId }) => {
 		</div>
 	);
 }
+
+export default Authors;

@@ -22,7 +22,7 @@ interface DocumentsProps {
 	databaseId: string;
 }
 
-export const Documents: React.FC<DocumentsProps> = ({ databaseId }) => {
+const Documents: React.FC<DocumentsProps> = ({ databaseId }) => {
 	const [loading, setLoading] = useState(true);
 	const [data, setData] = useState<DocumentTable[]>([]);
 

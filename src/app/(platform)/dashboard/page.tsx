@@ -5,7 +5,7 @@ const DashboardPage = () => {
 	return (
 		<div className="w-full h-full p-16">
 			<Card className="w-full h-full p-4">
-				<Finder />
+				{/* <Finder /> */}
 			</Card>
 		</div>
 	);

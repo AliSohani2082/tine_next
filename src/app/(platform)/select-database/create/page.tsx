@@ -7,7 +7,7 @@ const CreatePage = () => {
 		<div className="h-full w-full flex justify-center items-center px-32 py-20">
 			<Card className="shadow-lg h-full w-full">
 				<CardContent className="flex flex-col justify-center items-center h-full p-4">
-					<Finder />
+					{/* <Finder /> */}
 				</CardContent>
 			</Card>
 		</div>
